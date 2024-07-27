@@ -260,14 +260,19 @@
 
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
-function checkLiveSession () {
-		let liveSession = "http://remotepixels.app/_live.txt?123";
-		var http = new XMLHttpRequest();
+function checkLiveSession() {
+		let liveSession = "http://remotepixels.app/_live?123";
+		var checkLive = new XMLHttpRequest();
 		http.open('HEAD', liveSession, false);
+		checkLive.setRequestHeader('Cache-Control', 'no-cache');
 		http.send();
 
-		if (http.status != "404") { 
+		if (http.status === 200) { 
 			livesession.style.display = "inline";
+			}
+
+		if (http.status === 404) { 
+			livesession.style.display = "none";
 			}
 		}
 //popup live session window
@@ -326,7 +331,7 @@ function checkLiveSession () {
 			xhr.send();
 
 //if there is no session file display error
-			if (xhr.status == "404") {
+			if (xhr.status === 404) {
 				rpcode.style.animation = "shake 500ms";
 				setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
 				return false;
