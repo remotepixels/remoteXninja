@@ -1,12 +1,12 @@
 <html>
 <head>
 	<title>remotepixels.app</title>
-	<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-	<link rel="manifest" href="site.webmanifest">
-	<link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="https://remotepixels.app/icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://remotepixels.app/icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://remotepixels.app/icons/favicon-16x16.png">
+	<link rel="manifest" href="https://remotepixels.app/icons/site.webmanifest">
+	<link rel="mask-icon" href="https://remotepixels.app/icons/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="https://remotepixels.app/icons/favicon.ico">
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
 	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -219,7 +219,7 @@
 </style>
 
 
-<body style="background-color: #fefefe; overflow: hidden;"  onload="checkLiveSession()">
+<body style="background-color: #fefefe; overflow: hidden;">
 	<div class="topnav">
 		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
 		<div class="navbar">
@@ -233,7 +233,7 @@
 	</div>
 		
 
-	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe>
+	<iframe src="http://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe>
 
 	<div class="blackout" id="blackout">
 
@@ -262,50 +262,15 @@
 
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
-function checkLiveSession() {
-fetch('/Alive.json')
-  .then(
-  function(response) {
-    if (response.status !== 200) {
-      console.log('Looks like there was a problem. Status Code: ' +
-        response.status);
-livesession.style.display = "none";
+	checkLive("https://remotepixels.app/Alive.txt");
 
+	async function checkLive(file) {
+		let liveObject = await fetch(file);
+		let liveText = await liveObject.text();
 
-      return;
-    }
-
-    // Examine the text in the response
-    response.json().then(function(data) {
-      console.log(data);
-    });
-  }
-  )
-  .catch(function(err) {
-    console.log('Fetch Error :-S', err);
-  });
-}
-
-
-/*function checkLiveSession() {
-		let liveSession = "/Alive.txt";
-		var checkLive = new XMLHttpRequest();
-		checkLive.open('HEAD', liveSession, false);
-		checkLive.setRequestHeader('Cache-Control', 'no-cache');
-		checkLive.send();
-
-		if (checkLive.send.status === 404) { 
-			livesession.style.display = "none";
-			return false;
-			}
-			else {
-				livesession.style.display = "inline";
-				return true;
-			}
-	
+		if (liveText == 0) {livesession.style.display = "inline";};
 		}
 
-*/
 //popup live session window
 	livesession.onclick = function() {
 		blackout.style.animation = "fadeIn 500ms ease-out";
@@ -356,7 +321,7 @@ livesession.style.display = "none";
 		else { 
 
 //check to see if the session file exists
-			let urlToFile = "http://remotepixels.app/_live"+v1+v2+v3+v4+v5+v6+".txt";
+			let urlToFile = "http://remotepixels.app/Alive"+v1+v2+v3+v4+v5+v6+".txt";
    			var xhr = new XMLHttpRequest();
 			xhr.open('HEAD', urlToFile, false);
 			xhr.send();
@@ -382,6 +347,9 @@ livesession.style.display = "none";
 </script>
 
 
+
+
+</html>
 
 
 </html>
