@@ -172,7 +172,7 @@
 	}
 
 	.livesession {
-		display: inline;
+		display: none;
 		position: absolute;
 		width: 45px;
 		height: 15px;
@@ -216,20 +216,6 @@
 
 </style>
 
-<script type="text/javascript">
-//check if there is a live session otherwise hide live session button
-function checkLiveSession () {
-		let liveSession = "http://remotepixels.app/_live.txt";
-		var http = new XMLHttpRequest();
-		http.open('HEAD', liveSession, false);
-		http.send();
-
-		if (http.status == "404") { 
-			livesession.style.display = "none";
-			return false;
-			}
-		}
-</script>
 
 <body style="background-color: #fefefe; overflow: hidden;"  onload="checkLiveSession()">
 	<div class="topnav">
@@ -273,6 +259,17 @@ function checkLiveSession () {
 </body>
 
 <script type="text/javascript">
+//check if there is a live session otherwise hide live session button
+function checkLiveSession () {
+		let liveSession = "http://remotepixels.app/_live.txt?123";
+		var http = new XMLHttpRequest();
+		http.open('HEAD', liveSession, false);
+		http.send();
+
+		if (http.status != "404") { 
+			livesession.style.display = "inline";
+			}
+		}
 //popup live session window
 	livesession.onclick = function() {
 		blackout.style.animation = "fadeIn 500ms ease-out";
