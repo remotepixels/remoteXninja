@@ -265,7 +265,7 @@
 function checkLiveSession() {
 		let liveSession = "/Alive.txt";
 		var checkLive = new XMLHttpRequest();
-		checkLive.open('HEAD', liveSession, false);
+		checkLive.open('GET', liveSession, false);
 		checkLive.setRequestHeader('Cache-Control', 'no-cache');
 		checkLive.send();
 
