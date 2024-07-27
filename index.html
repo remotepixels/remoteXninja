@@ -21,7 +21,7 @@
 	<meta name="robots" content="index, follow">
 </head>
 
-<style onload = "checkLiveSession()">
+<style>
 
 	.topnav {
 		position: fixed;
@@ -216,7 +216,7 @@
 
 </style>
 
-<body style="background-color: #fefefe; overflow: hidden;">
+<body style="background-color: #fefefe; overflow: hidden;"  onload = "checkLiveSession()">
 	<div class="topnav">
 		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
 		<div class="navbar">
@@ -260,7 +260,7 @@
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
 function checkLiveSession () {
-		let liveSession = "/_live";
+		let liveSession = "http://remotepixels.app/_live";
 		var http = new XMLHttpRequest();
 		http.open('HEAD', liveSession, false);
 		http.send();
