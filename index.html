@@ -260,8 +260,9 @@
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
 function checkLiveSession () {
+		let liveSession = "https://remotepixels.app/_live";
 		var http = new XMLHttpRequest();
-		http.open('HEAD', 'https://remotepixels.app/_live', false);
+		http.open('HEAD', liveSession, false);
 		http.send();
 
 		if (http.status == "404") { 
