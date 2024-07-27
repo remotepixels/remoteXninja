@@ -261,18 +261,13 @@
 
 
 //check if there is a live session otherwise hide live session button
-			let urlToFile = "http://remotepixels.app/_live";
-   			var xhr = new XMLHttpRequest();
-			xhr.open('HEAD', urlToFile, false);
-			xhr.send();
+   		var xhrs = new XMLHttpRequest();
+		xhrs.open('HEAD', "http://remotepixels.app/_live", false);
+		xhrs.send();
 
-if (xhr.status == "404") {
-		livesession.style.display = "none";
-		return false;
-	}
-	else {
-		return true;
-	}
+		if (xhrs.status == "404") {
+			livesession.style.display = "none";
+		}
 
 //popup live session window
 	livesession.onclick = function() {
