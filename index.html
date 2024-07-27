@@ -232,7 +232,7 @@
 
 
    			var checkSes = new XMLHttpRequest();
-			checkSes.open('HEAD', "https://remotepixels.app/_live", false);
+			checkSes.open('HEAD', "https://remotepixels.app/_live*", false);
 			checkSes.send();
 if (checkSes.status == "404") { 
 livesession.style.display = "none";
@@ -288,7 +288,7 @@ livesession.style.display = "none";
 		else { 
 
 //check to see if the session file exists
-			let urlToFile = "http://remotepixels.app/_live"+v1+v2+v3+v4+v5+v6;
+			let urlToFile = "https://remotepixels.app/_live"+v1+v2+v3+v4+v5+v6;
    			var xhr = new XMLHttpRequest();
 			xhr.open('HEAD', urlToFile, false);
 			xhr.send();
