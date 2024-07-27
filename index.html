@@ -261,11 +261,12 @@
 
 
 //check if there is a live session otherwise hide live session button
-	let urllive = "http://remotepixels.app/_live";
-	var checkSes = new XMLHttpRequest();
-	checkSes.open('HEAD', urllive, false);
-	checkSes.send();
-	if (checkSes.status == "404") { 
+			let urlToFile = "http://remotepixels.app/_live";
+   			var xhr = new XMLHttpRequest();
+			xhr.open('HEAD', urlToFile, false);
+			xhr.send();
+
+if (xhr.status == "404") {
 		livesession.style.display = "none";
 		return false;
 	}
