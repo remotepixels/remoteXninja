@@ -263,11 +263,11 @@
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
 function checkLiveSession() {
-		let liveSession = "http://remotepixels.app/_live?123";
+		let liveSession = "http://remotepixels.app/_live";
 		var checkLive = new XMLHttpRequest();
-		http.open('HEAD', liveSession, false);
+		checkLive.open('HEAD', liveSession, false);
 		checkLive.setRequestHeader('Cache-Control', 'no-cache');
-		http.send();
+		checkLive.send();
 
 		if (http.status === 200) { 
 			livesession.style.display = "inline";
