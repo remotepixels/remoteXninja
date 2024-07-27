@@ -52,7 +52,7 @@
 		color: #bebebe;
 	}
 
-	a:hover{
+	a:hover {
 		color: black;
 		Cursor: pointer;
 	}
@@ -80,7 +80,7 @@
 		overflow: off;
 		background-color: #2f2f2f;
 		background-color: rgba(0,0,0,0.1);
-		animation: fadeIn 0.6s, linear;
+	//	animation: fadeIn 0.6s, linear;
  	}
 
 	.rppopup {
@@ -88,7 +88,7 @@
 		animation: slideIn .3s linear;
 	}
 
-	.rpcode{
+	.rpcode {
 		position: relative;
 		background-color: #fefefe;
 		margin: 30px auto; /* 15% from the top and centered */
@@ -101,7 +101,7 @@
 		
 	}
 
-	.title{
+	.title {
 		font: 40px Arial; 
 		font-weight: regular; 
 		color: black;
@@ -111,14 +111,14 @@
 
 	}
 
-	.otp{
+	.otp {
 		font: 60px Arial; 
 		font-weight: regular; 
 		color: black;
 
 	}
 
-	.button{
+	.button {
 		position: relative;
 		left: 120px;
 		Width: 240px;
@@ -137,12 +137,12 @@
 		Cursor: pointer;
 	}
 
-	.button:hover{
+	.button:hover {
 		background-color: #6633ff;
 		color: white;
 	}
 
-	form input{
+	form input {
 		position: relative;
 		width:60px;
 		height:80px;
@@ -152,22 +152,15 @@
 
 	}
 
-	.icon{
+	.icon {
 		position: relative;
 		left: 70px;
 		top: -20px;
 		Scale: .75;
 	}
 
+	.livesession {
 
-	.shake {
-		  animation: shake 0.25s ease-in-out;
-	}
-	.fadeIn {
-		  animation: fadeIn 0.25s ease-in-out;
-	}
-	.fadeOut {
-		  animation: fadeOut 0.25s ease-in-out;
 	}
 
 	@keyframes shake {
@@ -184,6 +177,10 @@
 		100% { opacity: 1; }
 	}
 
+	@keyframes fadeOut {
+		0% { opacity: 1; }
+		100% { opacity: 0; }
+	}
 	@keyframes slideIn {
 		0% { transform: translateY(-50px); animation-timing-function: linear; }
 		100% { transform: translateY(0px); animation-timing-function: ease-in; }
@@ -198,56 +195,63 @@
 			<a href="https://remotepixels.myportfolio.com" target="inset_window" style="margin-right: 30px;"> PORTFOLIO </a>  
 			<a href="https://remotepixels.myportfolio.com/copy-of-work" target="inset_window" style="margin-right: 30px;"> BEFORE / AFTER </a> 
 			<a href="https://remotepixels.myportfolio.com/contact" target="inset_window" style="margin-right: 50px;"> CONTACT </a> 
-			<a style="margin-right: 50px;" id="livesession"> LIVE </a> 
+			<a style="margin-right: 50px;" id="livesession" class="livesession"> LIVE </a> 
 		</div>
 	</div>
 		
 
-	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe>
+<!--	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe> -->
 
 	<div class="blackout" id="blackout">
 
-		<div class="rpcode" id="rpcode"><div class="rppopup" id="rpopup">
-			<div class="icon"><img src=images/icon.png></div>
-			<div class="title">Enter live session ID :</div>
+		<div class="rpcode" id="rpcode">
+			<div class="rppopup" id="rpopup">
+				<div class="icon"><img src=images/icon.png></div>
+				<div class="title">Enter live session ID :</div>
 	
-			<form id="room_name" name="room_name" action="" onsubmit="return validateForm()" method="post" required>
-				&emsp;&nbsp;
-				<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(1)' maxlength=1 name=v1 autofocus>
-				<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(2)' maxlength=1 name=v2>
-				<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(3)' maxlength=1 name=v3>
-				&emsp;
-				<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(4)' maxlength=1 name=v4>
-				<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(5)' maxlength=1 name=v5>
-				<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(6)' maxlength=1 name=v6>
-				<br>
-				<input type="submit" value="Join" class=button>
+				<form id="room_name" name="room_name" action="" onsubmit="return validateForm()" method="post" required>
+					&emsp;&nbsp;
+					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(1)' maxlength=1 name=v1 autofocus>
+					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(2)' maxlength=1 name=v2>
+					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(3)' maxlength=1 name=v3>
+					&emsp;
+					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(4)' maxlength=1 name=v4>
+					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(5)' maxlength=1 name=v5>
+					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(6)' maxlength=1 name=v6>
+					<br>
+					<input type="submit" value="Join" class=button>
 				</form>
+			</div>
 		</div>
-	</div>
 	</div>
 
 </body>
 
 <script type="text/javascript">
-// Get the modal
-var modal = document.getElementById("blackout");
 
-// Get the button that opens the modal
-var btn = document.getElementById("livesession");
 
-btn.onclick = function() {
-  modal.style.display = "block";
-modal.style.animation = 'fadeIn 500ms ease-out';
+
+   			var checkSes = new XMLHttpRequest();
+			checkSes.open('HEAD', "http://remotepixels.app/_live*", false);
+			checkSes.send();
+if (checkSes.status == "404") { 
+livesession.style.display = "none";
 }
+
+//popup live session window
+	livesession.onclick = function() {
+		blackout.style.animation = "fadeIn 500ms ease-out";
+		blackout.style.display = "block";
+		setTimeout(function () { blackout.style.animation = "none"; }, 500);
+		}
   			
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-  modal.style.display = "none";
-  }
-}
-
+// hide live session window
+	window.onclick = function(event) {
+		if (event.target == blackout) {
+		blackout.style.animation = "fadeOut 500ms ease-out";  	
+		setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 500);
+			}
+		}
 
 //replace lowercase letters with uppercase, make sure no funny characters
 	let digitValidate = function(ele){
@@ -277,24 +281,22 @@ window.onclick = function(event) {
 
 //if there are empty fields shake the box and clear it
 		if (!v1 || !v2 || !v3 || !v4 || !v5 || !v6) {
-  			rpcode.classList.add("shake");
-			setTimeout(function () {rpcode.classList.remove("shake");
-				document.getElementById("room_name").reset();}, 500);
+  			rpcode.style.animation = "shake 500ms";
+			setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
 			return false;
 			}
 		else { 
 
 //check to see if the session file exists
-			let urlToFile = "http://remotepixels.app/"+v1+v2+v3+v4+v5+v6;
+			let urlToFile = "http://remotepixels.app/_live"+v1+v2+v3+v4+v5+v6;
    			var xhr = new XMLHttpRequest();
 			xhr.open('HEAD', urlToFile, false);
 			xhr.send();
 
 //if there is no session file are and display error
 			if (xhr.status == "404") {
-				rpcode.classList.add("shake");
-				setTimeout(function () {rpcode.classList.remove("shake"); 
-					document.getElementById("room_name").reset();}, 500);
+				rpcode.style.animation = "shake 500ms";
+				setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
 				return false;
 				} 
 			else {
@@ -303,10 +305,12 @@ window.onclick = function(event) {
 				alert("Valid session ID");
 				return true;
 				}
-			return false;
+			//return false;
 			}
 
+
 		}
+
 </script>
 
 
