@@ -260,7 +260,7 @@
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
 function checkLiveSession () {
-		let liveSession = "https://remotepixels.app/_live";
+		let liveSession = "/_live";
 		var http = new XMLHttpRequest();
 		http.open('HEAD', liveSession, false);
 		http.send();
@@ -321,7 +321,7 @@ function checkLiveSession () {
 		else { 
 
 //check to see if the session file exists
-			let urlToFile = "https://remotepixels.app/_live"+v1+v2+v3+v4+v5+v6;
+			let urlToFile = "/_live"+v1+v2+v3+v4+v5+v6;
    			var xhr = new XMLHttpRequest();
 			xhr.open('HEAD', urlToFile, false);
 			xhr.send();
