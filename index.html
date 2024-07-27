@@ -21,7 +21,7 @@
 	<meta name="robots" content="index, follow">
 </head>
 
-<style>
+<style onload = "checkLiveSession()">
 
 	.topnav {
 		position: fixed;
@@ -258,15 +258,16 @@
 </body>
 
 <script type="text/javascript">
-
-
 //check if there is a live session otherwise hide live session button
-   		var xhrs = new XMLHttpRequest();
-		xhrs.open('HEAD', "http://remotepixels.app/_live", false);
-		xhrs.send();
+function checkLiveSession () {
+		var http = new XMLHttpRequest();
+		http.open('HEAD', 'https://remotepixels.app/_live', false);
+		http.send();
 
-		if (xhrs.status == "404") {
+		if (http.status == "404") { 
 			livesession.style.display = "none";
+			return false;
+			}
 		}
 
 //popup live session window
@@ -319,12 +320,12 @@
 		else { 
 
 //check to see if the session file exists
-			let urlToFile = "http://remotepixels.app/_live"+v1+v2+v3+v4+v5+v6;
+			let urlToFile = "https://remotepixels.app/_live"+v1+v2+v3+v4+v5+v6;
    			var xhr = new XMLHttpRequest();
 			xhr.open('HEAD', urlToFile, false);
 			xhr.send();
 
-//if there is no session file are and display error
+//if there is no session file display error
 			if (xhr.status == "404") {
 				rpcode.style.animation = "shake 500ms";
 				setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
