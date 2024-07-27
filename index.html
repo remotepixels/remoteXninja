@@ -1,31 +1,79 @@
 <html>
-	<head>
-		<title>remotepixels.app</title>
-	</head>
+<head>
+	<title>remotepixels.app</title>
 
-	<style>
-	.title{
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+
+<style>
+	.topnav {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 60px;
+		margin-bottom: 0px;
+		margin-right: 0px;
+		margin-top: 0px;
+		margin-left: 0px;
+		Background-color: #fefefe;
+ 	 	overflow: hidden;
+		box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
+	}
+
+	.navbar {
+		position: relative;
+		float: right;
+		top: 25px;
+	}
+
+	a {
+		text-decoration: none;
 		position: relative;
 		font: 14px Arial; 
-		font-weight: regular; 
-		color: grey;
-		margin-bottom: 00px;
-		margin-left: 40px;
-		margin-top: 5px;
-		margin-right 75px;
-
-
+		font-weight: 200; 
+		color: #bebebe;
 	}
-	</style>
-	<body style="background-color: #fefefe;">
-			
-		<image src="images/icon.png" height="24" width="24" />
-			<font class="title">
-			<a href="https://remotepixels.myportfolio.com" target="inset_window"> Portfolio </a>  |
-			<a href="https://live.myportfolio.com" target="inset_window"> Live </a>  |
-			</font>
-		<image src="images/capybara_summer.png" height="365" width="500" style="position: absolute; right: 0px; bottom: 0px;" />
-	<iframe src="https://remotepixels.myportfolio.com" style="border:none;" title="inset_window" width=100% height=97%></iframe>
 
-	</body>
+	a:hover{
+		color: black;
+	}
+
+	.portfolio {
+		top: 0px;
+		left: 0px;
+		width: 100%;
+		height: 100%;
+		border: 0px;
+		margin-bottom: 0px;
+		margin-right: 0px;
+		margin-top: 0px;
+		margin-left: 0px;
+	}
+
+
+</style>
+
+<body style="background-color: #fefefe; overflow: hidden;">
+	<div class="topnav">
+		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
+		<div class="navbar">
+			<a href="https://remotepixels.myportfolio.com" target="inset_window" style="margin-right: 30px;"> PORTFOLIO </a>  
+			<a href="https://remotepixels.myportfolio.com/copy-of-work" target="inset_window" style="margin-right: 30px;"> BEFORE / AFTER </a> 
+			<a href="https://remotepixels.myportfolio.com/contact" target="inset_window" style="margin-right: 50px;"> CONTACT </a> 
+			<a href="https://remotepixels.myportfolio.com/contact" target="inset_window" style="margin-right: 50px;"> LIVE </a> 
+		</div>
+	</div>
+		
+<!--	<image src="images/capybara_summer.png" height="365" width="500" style="position: absolute; right: 0px; bottom: 0px;" />    -->
+
+	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe>
+
+</body>
 </html>
