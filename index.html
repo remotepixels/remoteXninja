@@ -172,7 +172,7 @@
 	}
 
 	.livesession {
-display: inline;
+		display: inline;
 		position: absolute;
 		width: 45px;
 		height: 15px;
@@ -261,8 +261,9 @@ display: inline;
 
 
 //check if there is a live session otherwise hide live session button
+	let urllive = "http://remotepixels.app/_live";
 	var checkSes = new XMLHttpRequest();
-	checkSes.open('HEAD', "http://remotepixels.app/_live", false);
+	checkSes.open('HEAD', urllive, false);
 	checkSes.send();
 	if (checkSes.status == "404") { 
 		livesession.style.display = "none";
