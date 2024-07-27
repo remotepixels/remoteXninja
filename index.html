@@ -263,17 +263,19 @@
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
 function checkLiveSession() {
-		let liveSession = "/live.txt";
+		let liveSession = "/Alive.txt";
 		var checkLive = new XMLHttpRequest();
-		checkLive.open('GET', liveSession, false);
+		checkLive.open('HEAD', liveSession, false);
 		checkLive.setRequestHeader('Cache-Control', 'no-cache');
 		checkLive.send();
 
 		if (checkLive.send.status === 404) { 
 			livesession.style.display = "none";
+return false;
 			}
 			else {
 				livesession.style.display = "inline";
+return true;
 			}
 		}
 //popup live session window
