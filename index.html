@@ -263,21 +263,49 @@
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
 function checkLiveSession() {
+fetch('/Alive.json')
+  .then(
+  function(response) {
+    if (response.status !== 200) {
+      console.log('Looks like there was a problem. Status Code: ' +
+        response.status);
+livesession.style.display = "none";
+
+
+      return;
+    }
+
+    // Examine the text in the response
+    response.json().then(function(data) {
+      console.log(data);
+    });
+  }
+  )
+  .catch(function(err) {
+    console.log('Fetch Error :-S', err);
+  });
+}
+
+
+/*function checkLiveSession() {
 		let liveSession = "/Alive.txt";
 		var checkLive = new XMLHttpRequest();
-		checkLive.open('GET', liveSession, false);
+		checkLive.open('HEAD', liveSession, false);
 		checkLive.setRequestHeader('Cache-Control', 'no-cache');
 		checkLive.send();
 
 		if (checkLive.send.status === 404) { 
 			livesession.style.display = "none";
-return false;
+			return false;
 			}
 			else {
 				livesession.style.display = "inline";
-return true;
+				return true;
 			}
+	
 		}
+
+*/
 //popup live session window
 	livesession.onclick = function() {
 		blackout.style.animation = "fadeIn 500ms ease-out";
