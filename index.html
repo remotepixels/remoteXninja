@@ -216,7 +216,7 @@
 
 </style>
 
-<body style="background-color: #fefefe; overflow: hidden;"  onload = "checkLiveSession()">
+<body style="background-color: #fefefe; overflow: hidden;"  onload="checkLiveSession()">
 	<div class="topnav">
 		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
 		<div class="navbar">
@@ -260,7 +260,7 @@
 <script type="text/javascript">
 //check if there is a live session otherwise hide live session button
 function checkLiveSession () {
-		let liveSession = "http://remotepixels.app/_live";
+		let liveSession = "http://remotepixels.app/_live.txt";
 		var http = new XMLHttpRequest();
 		http.open('HEAD', liveSession, false);
 		http.send();
@@ -321,7 +321,7 @@ function checkLiveSession () {
 		else { 
 
 //check to see if the session file exists
-			let urlToFile = "/_live"+v1+v2+v3+v4+v5+v6;
+			let urlToFile = "http://remotepixels.app/_live"+v1+v2+v3+v4+v5+v6+".txt";
    			var xhr = new XMLHttpRequest();
 			xhr.open('HEAD', urlToFile, false);
 			xhr.send();
