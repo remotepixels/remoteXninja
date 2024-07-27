@@ -57,6 +57,19 @@
 		Cursor: pointer;
 	}
 
+	font {
+		text-decoration: none;
+		position: relative;
+		font: 14px Arial; 
+		font-weight: 200; 
+		color: #C94326;
+	}
+	
+	font:hover {
+		color: white;
+		Cursor: pointer;
+	}
+
 	.portfolio {
 		top: 0px;
 		left: 0px;
@@ -80,7 +93,6 @@
 		overflow: off;
 		background-color: #2f2f2f;
 		background-color: rgba(0,0,0,0.1);
-	//	animation: fadeIn 0.6s, linear;
  	}
 
 	.rppopup {
@@ -95,19 +107,19 @@
 		padding: 20px;
 		border: 1px solid #eeeeee;
 		width: 444px; /* Could be more or less, depending on screen size */
-		Height: 580px;
-		border-radius:40px;
+		Height: 500px;
+		border-radius:60px;
 		box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
 		
 	}
 
 	.title {
 		font: 40px Arial; 
-		font-weight: regular; 
-		color: black;
-		margin-bottom: 40px;
+		font-weight: 1000; 
+		color: #afafaf;
+		margin-bottom: 20px;
 		margin-left: 30px;
-		margin-top: -10px;
+		margin-top: -20px;
 
 	}
 
@@ -120,11 +132,11 @@
 
 	.button {
 		position: relative;
-		left: 120px;
-		Width: 240px;
+		left: 100px;
+		Width: 250px;
 		height: 60px;
-		margin-top: 50px;
-		background-color: #grey;
+		margin-top: 30px;
+		background-color: #efefef;
 		border: 1px;
 		color: black;
 		text-align: center;
@@ -152,24 +164,39 @@
 
 	}
 
-	.icon {
+	.otpicon {
 		position: relative;
 		left: 70px;
-		top: -20px;
-		Scale: .75;
+		top: -10px;
+		Scale: .65;
 	}
 
 	.livesession {
-
+		position: absolute;
+		width: 45px;
+		height: 15px;
+		top: -5px;
+		right: 35px;
+		text-decoration: none;
+		border-radius:12px;
+		padding: 5px;
+		border: 1px solid #C94326;
+		transition-duration: 0.2s;
+		Cursor: pointer;
 	}
+	.livesession:hover {
+		background-color: #C94326;
+		color: white;
+	}	
 
 	@keyframes shake {
-		0% {transform: translateX(0);}
-		20% {transform: translateX(5);}
-		40% {transform: translateX(-10px);}
-		60% {transform: translateX(10px);}
-		80% {transform: translateX(-10px);}
-		100% {transform: translateX(10);}
+		0% {transform: translateX(0px);}
+		15% {transform: translateX(-25px);}
+		30% {transform: translateX(25px);}
+		45% {transform: translateX(-25px);}
+		60% {transform: translateX(25px);}
+		75% {transform: translateX(-25px);}
+		100% {transform: translateX(0px); animation-timing-function: ease-in;}
 	}
 
 	@keyframes fadeIn {
@@ -194,20 +221,22 @@
 		<div class="navbar">
 			<a href="https://remotepixels.myportfolio.com" target="inset_window" style="margin-right: 30px;"> PORTFOLIO </a>  
 			<a href="https://remotepixels.myportfolio.com/copy-of-work" target="inset_window" style="margin-right: 30px;"> BEFORE / AFTER </a> 
-			<a href="https://remotepixels.myportfolio.com/contact" target="inset_window" style="margin-right: 50px;"> CONTACT </a> 
-			<a style="margin-right: 50px;" id="livesession" class="livesession"> LIVE </a> 
+			<a href="https://remotepixels.myportfolio.com/contact" target="inset_window" style="margin-right: 120px;"> CONTACT </a> 
+			<div class="livesession" id="livesession">
+				<font style="margin-left: 3px; font-weight: bold;">&nbsp;LIVE </font> 
+			</div>
 		</div>
 	</div>
 		
 
-<!--	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe> -->
+	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe> -->
 
 	<div class="blackout" id="blackout">
 
 		<div class="rpcode" id="rpcode">
 			<div class="rppopup" id="rpopup">
-				<div class="icon"><img src=images/icon.png></div>
-				<div class="title">Enter live session ID :</div>
+				<div class="otpicon"><img src=images/icon_round.png width=276 height=276></div>
+				<div class="title">Enter live session ID</div>
 	
 				<form id="room_name" name="room_name" action="" onsubmit="return validateForm()" method="post" required>
 					&emsp;&nbsp;
@@ -230,13 +259,13 @@
 <script type="text/javascript">
 
 
-
-   			var checkSes = new XMLHttpRequest();
-			checkSes.open('HEAD', "http://remotepixels.app/_live", false);
-			checkSes.send();
-if (checkSes.status == "404") { 
-livesession.style.display = "none";
-}
+//check if there is a live session otherwise hide live session button
+	var checkSes = new XMLHttpRequest();
+	checkSes.open('HEAD', "http://remotepixels.app/_live", false);
+	checkSes.send();
+	if (checkSes.status == "404") { 
+		livesession.style.display = "none";
+	}
 
 //popup live session window
 	livesession.onclick = function() {
