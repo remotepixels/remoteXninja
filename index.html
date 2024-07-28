@@ -21,203 +21,8 @@
 		surprises me every day as I still enjoy the process and the work.">
 	<meta name="keywords" content="Gui Felix, Advertising, Visual Effects, Motion Graphics, Remote Pixels">
 	<meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="https://remotepixels.app/style.css">
 </head>
-
-<style>
-
-	.topnav {
-		position: fixed;
-		top: 0px;
-		left: 0px;
-		width: 100%;
-		height: 60px;
-		margin-bottom: 0px;
-		margin-right: 0px;
-		margin-top: 0px;
-		margin-left: 0px;
-		Background-color: #fefefe;
- 	 	overflow: hidden;
-		box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
-	}
-
-	.navbar {
-		position: relative;
-		float: right;
-		top: 25px;
-	}
-
-	a {
-		text-decoration: none;
-		position: relative;
-		font: 14px Arial; 
-		font-weight: 200; 
-		color: #bebebe;
-	}
-
-	a:hover {
-		color: black;
-		Cursor: pointer;
-	}
-
-	font {
-		text-decoration: none;
-		position: relative;
-		font: 14px Arial; 
-		font-weight: 200; 
-		color: #C94326;
-	}
-	
-	font:hover {
-		color: white;
-		Cursor: pointer;
-	}
-
-	.portfolio {
-		top: 0px;
-		left: 0px;
-		width: 100%;
-		height: 100%;
-		border: 0px;
-		margin-bottom: 0px;
-		margin-right: 0px;
-		margin-top: 0px;
-		margin-left: 0px;
-	}
-
-	.blackout {
-		display: none;
-		z-index: 1;
-		position: fixed;
-		left: 0px;
-		top: 00px;
-		width: 100%;
-		height: 100%;
-		overflow: off;
-		background-color: #2f2f2f;
-		background-color: rgba(0,0,0,0.1);
- 	}
-
-	.rppopup {
-		position: relative;
-		animation: slideIn .3s linear;
-	}
-
-	.rpcode {
-		position: relative;
-		background-color: #fefefe;
-		margin: 30px auto; /* 15% from the top and centered */
-		padding: 20px;
-		border: 1px solid #eeeeee;
-		width: 444px; /* Could be more or less, depending on screen size */
-		Height: 500px;
-		border-radius:60px;
-		box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
-		
-	}
-
-	.title {
-		font: 40px Arial; 
-		font-weight: 1000; 
-		color: #afafaf;
-		margin-bottom: 20px;
-		margin-left: 30px;
-		margin-top: -20px;
-
-	}
-
-	.otp {
-		font: 60px Arial; 
-		font-weight: regular; 
-		color: black;
-
-	}
-
-	.button {
-		position: relative;
-		left: 100px;
-		Width: 250px;
-		height: 60px;
-		margin-top: 30px;
-		background-color: #efefef;
-		border: 1px;
-		color: black;
-		text-align: center;
-		text-decoration: none;
-		border-radius:24px;
-		padding: 10px;
-		font: 20px Arial; 
-		font-weight: regular;
-		transition-duration: 0.2s;
-		Cursor: pointer;
-	}
-
-	.button:hover {
-		background-color: #6633ff;
-		color: white;
-	}
-
-	form input {
-		position: relative;
-		width:60px;
-		height:80px;
-		text-align:center;
-  		border: 1px solid #888;
-		border-radius:0px;
-
-	}
-
-	.otpicon {
-		position: relative;
-		left: 70px;
-		top: -10px;
-		Scale: .65;
-	}
-
-	.livesession {
-		display: none;
-		position: absolute;
-		width: 45px;
-		height: 15px;
-		top: -5px;
-		right: 35px;
-		text-decoration: none;
-		border-radius:12px;
-		padding: 5px;
-		border: 1px solid #C94326;
-		transition-duration: 0.2s;
-		Cursor: pointer;
-	}
-	.livesession:hover {
-		background-color: #C94326;
-		color: white;
-	}	
-
-	@keyframes shake {
-		0% {transform: translateX(0px);}
-		15% {transform: translateX(-25px);}
-		30% {transform: translateX(25px);}
-		45% {transform: translateX(-25px);}
-		60% {transform: translateX(25px);}
-		75% {transform: translateX(-25px);}
-		100% {transform: translateX(0px); animation-timing-function: ease-in;}
-	}
-
-	@keyframes fadeIn {
-		0% { opacity: 0; }
-		100% { opacity: 1; }
-	}
-
-	@keyframes fadeOut {
-		0% { opacity: 1; }
-		100% { opacity: 0; }
-	}
-	@keyframes slideIn {
-		0% { transform: translateY(-50px); animation-timing-function: linear; }
-		100% { transform: translateY(0px); animation-timing-function: ease-in; }
-}
-
-</style>
-
 
 <body style="background-color: #fefefe; overflow: hidden;">
 	<div class="topnav">
@@ -233,7 +38,7 @@
 	</div>
 		
 
-	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe>
+	<iframe src="http://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe>
 
 	<div class="blackout" id="blackout">
 
@@ -261,15 +66,15 @@
 </body>
 
 <script type="text/javascript">
+
 //check if there is a live session otherwise hide live session button
-	checkLive("https://remotepixels.app/Alive.txt");
-
-	async function checkLive(file) {
-		let liveObject = await fetch(file);
-		let liveText = await liveObject.text();
-
-		if (liveText == 0) {livesession.style.display = "inline";};
-		}
+fetch("https://remotepixels.app/Alive.txt")
+  .then( response => {
+    if (response.ok) {
+      livesession.style.display = "inline";
+    }
+    return;
+  })
 
 //popup live session window
 	livesession.onclick = function() {
@@ -305,51 +110,40 @@
 
 //on submit, check their are no blank (no value) fields
 	function validateForm(){
+
 		let v1 = document.forms ["room_name"]["v1"].value;
 		let v2 = document.forms ["room_name"]["v2"].value;
 		let v3 = document.forms ["room_name"]["v3"].value;
 		let v4 = document.forms ["room_name"]["v4"].value;
 		let v5 = document.forms ["room_name"]["v5"].value;
 		let v6 = document.forms ["room_name"]["v6"].value;
-
+        
 //if there are empty fields shake the box and clear it
 		if (!v1 || !v2 || !v3 || !v4 || !v5 || !v6) {
   			rpcode.style.animation = "shake 500ms";
 			setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
 			return false;
-			}
-		else { 
+			    }
+            else {
+                var sessionFile = "Alivssse.txt";
+            }
 
-//check to see if the session file exists
-			let urlToFile = "http://remotepixels.app/Alive"+v1+v2+v3+v4+v5+v6+".txt";
-   			var xhr = new XMLHttpRequest();
-			xhr.open('HEAD', urlToFile, false);
-			xhr.send();
+            //check to see if the session file exists               
+            const request = new XMLHttpRequest();
+            request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
+            request.send(null);
 
-//if there is no session file display error
-			if (xhr.status === 404) {
-				rpcode.style.animation = "shake 500ms";
-				setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
-				return false;
-				} 
-			else {
-
-//if there is a valid session file then connect and launch
-				alert("Valid session ID");
-				return true;
-				}
-			//return false;
-			}
-
-
-		}
-
+            if (request.status === 200) {
+                alert ("session exists");
+                return true;
+                }
+            else {
+                rpcode.style.animation = "shake 500ms";
+			    setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
+                return false;
+                } 
+            
+    } 
 </script>
-
-
-
-
 </html>
-
-
 </html>
