@@ -1,0 +1,189 @@
+.topnav {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 60px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-left: 0px;
+	Background-color: #fefefe;
+ 	overflow: hidden;
+	box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
+	}
+
+.navbar {
+	position: relative;
+	float: right;
+	top: 25px;
+	}
+
+a {
+	text-decoration: none;
+	position: relative;
+	font: 14px Arial; 
+	font-weight: 200; 
+	color: #bebebe;
+	}
+
+a:hover {
+	color: black;
+	Cursor: pointer;
+	}
+
+font {
+	text-decoration: none;
+	position: relative;
+	font: 14px Arial; 
+	font-weight: 200; 
+	color: #C94326;
+	}
+	
+font:hover {
+	color: white;
+	Cursor: pointer;
+	}
+
+.portfolio {
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	border: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+	margin-left: 0px;
+	}
+
+.blackout {
+	display: none;
+	z-index: 1;
+	position: fixed;
+	left: 0px;
+	top: 00px;
+	width: 100%;
+	height: 100%;
+	overflow: off;
+	background-color: #2f2f2f;
+	background-color: rgba(0,0,0,0.1);
+ 	}
+
+.rppopup {
+	position: relative;
+	animation: slideIn .3s linear;
+	}
+
+.rpcode {
+	position: relative;
+	background-color: #fefefe;
+	margin: 30px auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #eeeeee;
+	width: 444px; /* Could be more or less, depending on screen size */
+	Height: 500px;
+	border-radius:60px;
+	box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);		
+	}
+
+.title {
+	font: 40px Arial; 
+	font-weight: 1000; 
+	color: #afafaf;
+	margin-bottom: 20px;
+	margin-left: 30px;
+	margin-top: -20px;
+	}
+
+.otp {
+	font: 60px Arial; 
+	font-weight: regular; 
+	color: black;
+	}
+
+.button {
+	position: relative;
+	left: 100px;
+	Width: 250px;
+	height: 60px;
+	margin-top: 30px;
+	background-color: #efefef;
+	border: 1px;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+	border-radius:24px;
+	padding: 10px;
+	font: 20px Arial; 
+	font-weight: regular;
+	transition-duration: 0.2s;
+	Cursor: pointer;
+	}
+
+.button:hover {
+	background-color: #6633ff;
+	color: white;
+	}
+
+form input {
+	position: relative;
+	width:60px;
+	height:80px;
+	text-align:center;
+  	border: 1px solid #888;
+	border-radius:0px;
+	}
+
+.otpicon {
+	position: relative;
+	left: 70px;
+	top: -10px;
+	Scale: .65;
+	}
+
+.livesession {
+	display: none;
+	position: absolute;
+	width: 45px;
+	height: 15px;
+	top: -5px;
+	right: 35px;
+	text-decoration: none;
+	border-radius:12px;
+	padding: 5px;
+	border: 1px solid #C94326;
+	transition-duration: 0.2s;
+	Cursor: pointer;
+	}
+	
+.livesession:hover {
+	background-color: #C94326;
+	color: white;
+	}	
+
+@keyframes shake {
+	0% {transform: translateX(0px);}
+	15% {transform: translateX(-25px);}
+	30% {transform: translateX(25px);}
+	45% {transform: translateX(-25px);}
+	60% {transform: translateX(25px);}
+	75% {transform: translateX(-25px);}
+	100% {transform: translateX(0px); animation-timing-function: ease-in;}
+	}
+
+@keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+	}
+
+@keyframes fadeOut {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+	}
+
+@keyframes slideIn {
+	0% { transform: translateY(-50px); animation-timing-function: linear; }
+	100% { transform: translateY(0px); animation-timing-function: ease-in; }
+}
+
