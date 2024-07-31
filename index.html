@@ -13,95 +13,118 @@
 	<link rel="shortcut icon" href="https://remotepixels.app/icons/favicon.ico">
 	<meta name="msapplication-TileColor" content="#da532c">
 	<meta name="theme-color" content="#ffffff">
-	<meta name="description" content="FX Artist and Online editor for Film and TV. 
-		Over twenty years working with directors and agencies to complete various Film, commercial and promotional projects. 
-		With solid photographic and technical knowledge allowing me to communicate clearly with other departments and clients. 
-		Experience with Film, tape and the Digital workflows including 4K, HDR and stereo, I can still work a patch panel and a Beta. 
-		Shoot supervision, to pipeline and workflow to finish, to delivery in various countries for differing markets and media 
-		IÃ¢â‚¬â„¢ve done it and probably messed it up at least once on every continent, and yet IÃ¢â‚¬â„¢m still in business which 
-		surprises me every day as I still enjoy the process and the work.">
+
 	<meta name="keywords" content="Gui Felix, Advertising, Visual Effects, Motion Graphics, Remote Pixels">
 	<meta name="robots" content="index, follow">
-    <link rel="stylesheet" href="https://remotepixels.app/style.css">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 
 
     
     
-<body style="background-color: #fefefe; overflow: hidden;">
-	<div class="topnav">
+<body>
+	<div class="topnav" id="topnav">
 		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
 		<div class="navbar">
 			<a href="https://remotepixels.myportfolio.com" target="inset_window" style="margin-right: 30px;"> PORTFOLIO </a>  
 			<a href="https://remotepixels.myportfolio.com/copy-of-work" target="inset_window" style="margin-right: 30px;"> BEFORE / AFTER </a> 
 			<a href="https://remotepixels.myportfolio.com/contact" target="inset_window" style="margin-right: 120px;"> CONTACT </a> 
-			<div class="livesession" id="livesession">
+			<div class="liveSessionIcon" id="liveSessionIcon">
 				<font style="margin-left: 3px; font-weight: bold;">&nbsp;LIVE </font> 
 			</div>
 		</div>
 	</div>
 		
+<!--load portfolio from behance-->
+	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window" id="inset_window"></iframe>
 
-	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window"></iframe>
+<!--darken screen even more for second-->
+    <div class="blackoutmore" id="blackoutMore"></div>
 
+<!--darken screen for popups-->
 	<div class="blackout" id="blackout">
 
-		<div class="rpcode" id="rpcode">
-			<div class="rppopup" id="rpopup">
-				<div class="otpicon"><img src=images/icon_round.png width=276 height=276></div>
-				<div class="title">Enter live session ID</div>
+<!--used to fade and slide in popup window-->
+		<div class="popupGroup" id="popupGroup"> 
+            
+<!--popup window, draws the wite popup window-->
+			<div class="popupWindow" id="popupWindow">
+                
+<!--popup window content : live session ID--> 
+               <div class="sessionIDpopupContent" id="sessionIDpopupContent")>
+                    <div class="popupIcon"><img src=images/icon_round_live.png></div>
+				    <div class="popupTitle">Enter live session ID</div>
 	
-				<form id="room_name" name="room_name" action="" onsubmit="return validateForm()" method="post" required>
+				    <form id="sessionIDCode" name="sessionIDCode" onsubmit="return validateSessionID()" method="post" required>
 					&emsp;&nbsp;
-					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(1)' maxlength=1 name=v1 autofocus>
-					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(2)' maxlength=1 name=v2>
-					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(3)' maxlength=1 name=v3>
+					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(1)' maxlength=1 name=v1>
+					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(2)' maxlength=1 name=v2>
+					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(3)' maxlength=1 name=v3>
 					&emsp;
-					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(4)' maxlength=1 name=v4>
-					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(5)' maxlength=1 name=v5>
-					<input class="otp" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(6)' maxlength=1 name=v6>
+					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(4)' maxlength=1 name=v4>
+					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(5)' maxlength=1 name=v5>
+					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(6)' maxlength=1 name=v6>
 					<br>
-					<input type="submit" value="Join" class=button>
-				</form>
-			</div>
-		</div>
-	</div>
-
+					    <input type="submit" value="Join" class=button>
+				    </form>
+			    </div>
+             
+<!--popup window content : ask for a username and warn about microphone--> 
+                <div class="askNamePopupContent" id="askNamePopupContent")>
+                    <div class="popupIcon"><img src=images/icon_round_user.png></div>
+				    <div class="popupTitle">Enter your stage name</div>
+	
+				    <form id="stageName" name="stageName" action="" onsubmit="return validateStageName()" method="post" required>
+					    <input class="enterStageName" type="text" maxlength=50 name=enterStageName>
+					    <div class="popupTitle" style="font-size: 14px; margin-top: 10px; color: grey;">
+                        This name will be visible to other users</br>
+                        </div>   
+					    <input type="submit" value="Join" class=button style="margin-top: 20px;">
+                                                       
+				    </form>
+			    </div>                    
+            </div>
+        </div>
 </body>
 
-<script type="text/javascript">
-
-//check if there is a live session otherwise hide live session button
-fetch("https://remotepixels.app/Alive.txt")
-  .then( response => {
-    if (response.ok) {
-      livesession.style.display = "inline";
-    }
-    return;
-  })
+<script type="text/javascript">    
+    var sessionFile;
+    
+    //check if there is a live session otherwise hide live session button
+    //using fetch so done asynchronously while loading page
+    fetch("https://remotepixels.app/Alive.txt")
+      .then( response => {
+        if (response.ok) {
+         liveSessionIcon.style.display = "inline";
+       }
+       return;
+      })
 
 //popup live session window
-	livesession.onclick = function() {
+	liveSessionIcon.onclick = function() {
 		blackout.style.animation = "fadeIn 500ms ease-out";
 		blackout.style.display = "block";
-		setTimeout(function () { blackout.style.animation = "none"; }, 500);
+		setTimeout(function () { blackout.style.animation = "none";}, 300);
+        document.forms["sessionIDCode"]["v1"].focus();
 		}
   			
-// hide live session window
+//hide live session window when user clicks off
 	window.onclick = function(event) {
-		if (event.target == blackout) {
-		blackout.style.animation = "fadeOut 500ms ease-out";  	
-		setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 500);
-			}
+		if (event.target == blackout || event.target == popupGroup) {
+		blackout.style.animation = "fadeOut 300ms ease-out";
+        blackoutMore.style.animation = "fadeOut 300ms ease-out";	
+		setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; blackoutMore.style.animation = "none"; blackoutMore.style.display = "none";}, 300);}
 		}
 
-//replace lowercase letters with uppercase, make sure no funny characters
+//Live Session ID check
+    //replace lowercase letters with uppercase, make sure no funny characters
 	let digitValidate = function(ele){
 		console.log(ele.value);
 		ele.value = ele.value.replace(/[^0-9a-zA-Z]/g,'');
 		}
 
-//if valid input move to next input box
+    //if valid input move to next input box
 	let tabChange = function(val){
 		let ele = document.querySelectorAll('input');
 		if (ele[val-1].value != '') {
@@ -112,42 +135,82 @@ fetch("https://remotepixels.app/Alive.txt")
 			}   
 		}
 
-//on submit, check their are no blank (no value) fields
-	function validateForm(){
 
-		let v1 = document.forms ["room_name"]["v1"].value;
-		let v2 = document.forms ["room_name"]["v2"].value;
-		let v3 = document.forms ["room_name"]["v3"].value;
-		let v4 = document.forms ["room_name"]["v4"].value;
-		let v5 = document.forms ["room_name"]["v5"].value;
-		let v6 = document.forms ["room_name"]["v6"].value;
+    
+    
+    
+//validates the session ID
+    //on submit, check there are no blank (no value) fields
+	function validateSessionID(){
+		let v1 = document.forms ["sessionIDCode"]["v1"].value;
+		let v2 = document.forms ["sessionIDCode"]["v2"].value;
+		let v3 = document.forms ["sessionIDCode"]["v3"].value;
+		let v4 = document.forms ["sessionIDCode"]["v4"].value;
+		let v5 = document.forms ["sessionIDCode"]["v5"].value;
+		let v6 = document.forms ["sessionIDCode"]["v6"].value;
         
-//if there are empty fields shake the box and clear it
+    //if there are empty fields shake the box and clear it
 		if (!v1 || !v2 || !v3 || !v4 || !v5 || !v6) {
-  			rpcode.style.animation = "shake 500ms";
-			setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
+  			popupWindow.style.animation = "shake 500ms";
+			setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
+            document.forms["sessionIDCode"]["v1"].focus();
 			return false;
 			    }
             else {
-                var sessionFile = v1+v2+v3+v4+v5+v6;
+                sessionFile = v1+v2+v3+v4+v5+v6;
             }
-
-            //check to see if the session file exists               
+        
+    //check to see if the session ID entered exists
+    //done synchronous to make sure we get the file before checking
             const request = new XMLHttpRequest();
             request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
             request.send(null);
-
+    //if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
             if (request.status === 200) {
-                alert ("session exists");
-                return true;
+    //          alert ("session exists");
+                sessionIDpopupContent.style.animation = "fadeOut 300ms";
+			    setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+
+                askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
+        		blackoutMore.style.animation = "fadeIn 500ms ease-out";	
+	        	setTimeout(function () { askNamePopupContent.style.display = "block"; blackoutMore.style.display = "inline"; document.forms["stageName"]["enterStageName"].focus();}, 300);
+                return false;
                 }
+    //and the sessionID does not match the file on server
             else {
-                rpcode.style.animation = "shake 500ms";
-			    setTimeout ( function () {rpcode.style.animation = "none"; document.getElementById("room_name").reset();}, 300);
+                popupWindow.style.animation = "shake 500ms";
+			    setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
+                document.forms["sessionIDCode"]["v1"].focus();
                 return false;
                 } 
-            
+            return false;
     } 
+        
+//make sure stage name isn't empty, then clean up the string so if any funny characters it doesn't screw up the rest
+    function validateStageName(){
+        let v1 = document.forms ["stageName"]["enterStageName"].value;
+        if (!v1) {
+            popupWindow.style.animation = "shake 500ms";
+			setTimeout ( function () {popupWindow.style.animation = "none"; document.forms["stageName"]["enterStageName"].focus(); }, 300);  
+            return false;
+            }
+        
+        let uri = document.forms ["stageName"]["enterStageName"].value;
+        let encodedStagename = encodeURIComponent(uri);
+        
+    //fade out popup, and hide top anvigation
+        blackout.style.animation = "fadeOut 500ms ease-out";
+        blackoutMore.style.animation = "fadeOut 500ms ease-out";	
+		setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; blackoutMore.style.animation = "none"; blackoutMore.style.display = "none";}, 500);        
+        document.getElementById("topnav").style.display = "none";
+      
+    //load session ninja   
+          document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+        document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label"+encodedStagename+"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&autostart&easyexit&videodevice=0&audiodevice=1&miconly&miconlyoption&nopreview&broadcast&quality=0&margin=10&chroma=2e2e2e&hiddenscenebitrate=10000&signalmeter&disablehotkeys&cleanviewer&hideplaybutton&controlbarspace&nosettings&novideobutton&nocontrols&chatbutton=0&nofileshare&fullscreenbutton&hands&clock24";       
+        return false;
+        }
+    
+    
 </script>
 </html>
 </html>

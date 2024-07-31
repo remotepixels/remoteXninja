@@ -1,3 +1,12 @@
+body {	
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-top: 10px;
+	margin-left: 0px;
+	background-color: ##2e2e2e;
+	overflow: hidden;
+	}
+
 .topnav {
 	position: fixed;
 	top: 0px;
@@ -59,47 +68,90 @@ font:hover {
 
 .blackout {
 	display: none;
-	z-index: 1;
+	z-index: 3;
 	position: fixed;
 	left: 0px;
 	top: 00px;
 	width: 100%;
 	height: 100%;
 	overflow: off;
-	background-color: #2f2f2f;
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0, 0, 0, 0.12);
  	}
 
-.rppopup {
+
+.blackoutMore {
+	display: none;
+	z-index: 2;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: off;
+	background-color: rgba(0, 0, 0, 0.5);
+ 	}
+
+.popupGroup {
 	position: relative;
 	animation: slideIn .3s linear;
 	}
 
-.rpcode {
+.popupWindow {
 	position: relative;
-	background-color: #fefefe;
-	margin: 30px auto; /* 15% from the top and centered */
+	background-color: white;
+	margin: 30px auto; /* 30px from the top and centered */
 	padding: 20px;
 	border: 1px solid #eeeeee;
 	width: 444px; /* Could be more or less, depending on screen size */
-	Height: 500px;
+	height: 500px;
 	border-radius:60px;
 	box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);		
 	}
 
-.title {
-	font: 40px Arial; 
-	font-weight: 1000; 
-	color: #afafaf;
-	margin-bottom: 20px;
-	margin-left: 30px;
-	margin-top: -20px;
+.sessionIDpopupContent {
+	
 	}
 
-.otp {
+.enterStageName {
+	text-align: center;
+	font: 20px Arial; 
+	font-weight: regular; 
+	color: black;
+	position: relative;
+	width:302px;
+	height:40px;
+	margin-left: 70px;
+	text-align: left;
+	padding-left: 10px;
+  	border: 1px solid black;
+	border-radius:0px;
+	}
+
+.askNamePopupContent {
+	margin: auto;
+	display: none;
+	}
+
+.popupTitle {
+    text-align: center;
+    font: 30px Arial;
+    font-weight: 100;
+    color: gainsboro;
+    margin-top: -50px;
+    margin-bottom: 25px;
+
+}
+
+.sessionOTP {
 	font: 60px Arial; 
 	font-weight: regular; 
 	color: black;
+	position: relative;
+	width:60px;
+	height:80px;
+	text-align:center;
+  	border: 1px solid black;
+	border-radius:0px;
 	}
 
 .button {
@@ -108,9 +160,9 @@ font:hover {
 	Width: 250px;
 	height: 60px;
 	margin-top: 30px;
-	background-color: #efefef;
+	background-color: gainsboro;
 	border: 1px;
-	color: black;
+	color: grey;
 	text-align: center;
 	text-decoration: none;
 	border-radius:24px;
@@ -126,23 +178,15 @@ font:hover {
 	color: white;
 	}
 
-form input {
+.popupIcon {
 	position: relative;
-	width:60px;
-	height:80px;
-	text-align:center;
-  	border: 1px solid #888;
-	border-radius:0px;
+	scale: 75%;
+	left: 55px;
+	top: -30px;
+	filter: drop-shadow(0px 0px 30px #ebebeb);		
 	}
 
-.otpicon {
-	position: relative;
-	left: 70px;
-	top: -10px;
-	Scale: .65;
-	}
-
-.livesession {
+.liveSessionIcon {
 	display: none;
 	position: absolute;
 	width: 45px;
@@ -157,7 +201,7 @@ form input {
 	Cursor: pointer;
 	}
 	
-.livesession:hover {
+.liveSessionIcon:hover {
 	background-color: #C94326;
 	color: white;
 	}	
