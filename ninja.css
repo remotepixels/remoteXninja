@@ -1,0 +1,39 @@
+.toggleSize {
+	font-size: 24px;
+	color: grey;
+
+#subControlButtons {
+	display: flex;
+	position: absolute;
+	background-color: var(--discord-grey-0);
+	box-shadow: 0px 0px 10px rgba(0,0,0,4);
+	pointer-events: auto;
+	border: #cccccc22 1px solid;
+	border-radius: 40px;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	bottom: 0px;
+	min-width: 230px;
+	cursor: grab;
+}
+
+#subControlButtons:empty{
+	display:none;
+}
+
+#subControlButtons div, #subControlButtons span button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--discord-grey-1);
+	opacity: unset;
+	border-radius: 40px;
+	transition: border-radius 200ms ease-in-out;
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.75);
+}
+
+#subControlButtons div:hover {
+	background-color: var(--discord-grey-3);
+	border-radius: 40px;
+}
