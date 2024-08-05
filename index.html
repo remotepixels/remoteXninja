@@ -157,10 +157,7 @@
 			ele[val-2].focus()
 			}   
 		}
-
-
-    
-    
+   
     
 //validates the session ID
     //on submit, check there are no blank (no value) fields
@@ -176,12 +173,12 @@
 		if (!v1 || !v2 || !v3 || !v4 || !v5 || !v6) {
   			popupWindow.style.animation = "shake 500ms";
 			setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
-            document.forms["sessionIDCode"]["v1"].focus();
+            		document.forms["sessionIDCode"]["v1"].focus();
 			return false;
 			    }
-            else {
-                sessionFile = v1+v2+v3+v4+v5+v6;
-            }
+            	else {
+               		sessionFile = v1+v2+v3+v4+v5+v6;
+           		 }
         
 //check to see if the session ID entered exists
     //done synchronous to make sure we get the file before checking
@@ -227,11 +224,13 @@
 		setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; blackoutMore.style.animation = "none"; blackoutMore.style.display = "none";}, 500);        
         document.getElementById("topnav").style.display = "none";
         document.getElementById("subNav").style.display = "block";
-        startTime ();
+
       
     //load session ninja   
-          document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+        document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
         document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label"+encodedStagename+"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&autostart&easyexit&videodevice=0&audiodevice=1&miconly&miconlyoption&nopreview&broadcast&quality=0&margin=10&chroma=2e2e2e&hiddenscenebitrate=10000&signalmeter&chatbutton=0&nofileshare&fullscreenbutton&hands&disablehotkeys&cleanviewer&hideplaybutton&nosettings&novideobutton&nocontrols&css=https://remotepixels.app/ninja.css";       
+
+        startTime ();
         return false;
         }
     
