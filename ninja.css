@@ -102,3 +102,10 @@ body.darktheme{
 	background-color:#0007;
 	width:4vh;
 }
+
+
+u {
+	text-decoration-line: underline;
+	font-display: none;
+	
+}
