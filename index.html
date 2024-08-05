@@ -20,9 +20,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+<script type="text/javascript">  
 
+</script>
+    
 <body style="background-color: #2e2e2e;">
-	<div class="topnav" id="topnav">
+    
+    <div class="topnav" id="topnav">
 		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
 		<div class="navbar">
 			<a href="https://remotepixels.myportfolio.com" target="inset_window" style="margin-right: 30px;"> PORTFOLIO </a>  
@@ -43,7 +47,7 @@
     </div>
 		
 <!--load portfolio from behance-->
-	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window" id="inset_window"></iframe>
+	<iframe src="blank.html" class="portfolio" name="inset_window" id="inset_window"></iframe>
 
 <!--darken screen even more for second-->
     <div class="blackoutmore" id="blackoutMore"></div>
@@ -96,6 +100,42 @@
 
 <script type="text/javascript">    
     var sessionFile;
+ 
+    
+    //check if an URL parameter is sent and process accordingly
+        let query = location.search;
+    if  (query != 0) {
+        let sessionID = query.slice(1);
+        const request = new XMLHttpRequest();
+        request.open("GET", "https://remotepixels.app/Alive"+sessionID+".txt", false); // `false` makes the request synchronous
+        request.send(null);
+            if (request.status === 200) {
+    //          alert ("session exists");
+                		blackout.style.display = "block";
+                sessionIDpopupContent.style.animation = "fadeOut 300ms";
+			    setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+
+                askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
+        		blackoutMore.style.animation = "fadeIn 500ms ease-out";	
+	        	setTimeout(function () { askNamePopupContent.style.display = "block"; blackoutMore.style.display = "inline"; document.forms["stageName"]["enterStageName"].focus();}, 300);
+                sessionFile = sessionID
+        //        return false;
+                }
+    //and the sessionID does not match the file on server
+            else {
+//                		blackout.style.animation = "fadeIn 500ms ease-out";
+//		blackout.style.display = "block";
+//		setTimeout(function () { blackout.style.animation = "none";}, 300);
+//        document.forms["sessionIDCode"]["v1"].focus();
+            //    popupWindow.style.animation = "shake 500ms";
+			 //   setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
+             //   document.forms["sessionIDCode"]["v1"].focus();
+          //      return false;
+                } 
+        //    return false;
+    }         
+ //   }
+    
     
 //clock
     function startTime() {
@@ -111,7 +151,6 @@
         if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
         return i;
         }    
-    
     
     
 //check if there is a live session otherwise hide live session button
