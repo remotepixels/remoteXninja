@@ -1,4 +1,4 @@
-@font-face {
+/*@font-face {
 	font-family: 'Line Awesome Free';
 	font-style: normal;
 	font-weight: 900;
@@ -10,7 +10,7 @@
 
 .la-theater-masks:before {
 	content: "f2bd;"; }
-
+*/
 body.darktheme{
 	background-color: #2e2e2e;
 }
@@ -59,7 +59,7 @@ body.darktheme{
 	border-radius: 30px;
 	scale: 110%;
 }
-
+/*
 .signal-meter {
 	width: 50;
 	height: 50px;
@@ -69,7 +69,7 @@ body.darktheme{
 	font-size: 1.5em;
 	z-index: 4;
 }
-
+*/
 #connectUsers {
 	float: right;
 	position: absolute;

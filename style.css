@@ -206,6 +206,29 @@ font:hover {
 	color: white;
 	}	
 
+
+.endSessionIcon {
+    display: inline;
+    position: absolute;
+    width: 110px;
+    height: 20px;
+    top: 13px;
+    right: 30px;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 5px;
+    padding-top: 9px;
+    border: 1px solid #C94326;
+    transition-duration: 0.2s;
+    cursor: pointer;
+
+}
+	
+.endSessionIcon:hover {
+	background-color: #C94326;
+	color: white;
+	}
+
 @keyframes shake {
 	0% {transform: translateX(0px);}
 	15% {transform: translateX(-25px);}
