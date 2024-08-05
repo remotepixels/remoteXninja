@@ -1,6 +1,11 @@
+body.darktheme{
+	background-color: #2e2e2e;
+}
+
 .toggleSize {
 	font-size: 24px;
-	color: grey;
+	color:var(--lighttheme-3);
+}
 
 #subControlButtons {
 	display: flex;
@@ -8,14 +13,16 @@
 	background-color: var(--discord-grey-0);
 	box-shadow: 0px 0px 10px rgba(0,0,0,4);
 	pointer-events: auto;
-	border: #cccccc22 1px solid;
+	border: #cccccc4f 1px solid;
 	border-radius: 40px;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	bottom: 0px;
-	min-width: 230px;
+	bottom: 10px;
+	min-width: 280px;
 	cursor: grab;
+	scale: 100%;
+	padding: 2px;
 }
 
 #subControlButtons:empty{
@@ -28,12 +35,69 @@
 	justify-content: center;
 	background-color: var(--discord-grey-1);
 	opacity: unset;
-	border-radius: 40px;
+	border-radius: 30px;
 	transition: border-radius 200ms ease-in-out;
 	box-shadow: 1px 1px 3px rgba(0,0,0,0.75);
+	scale: 100%;
 }
 
 #subControlButtons div:hover {
 	background-color: var(--discord-grey-3);
-	border-radius: 40px;
+	border-radius: 30px;
+	scale: 110%;
+}
+
+.signal-meter {
+	width: 50;
+	height: 50px;
+	position: fixed;
+	right: 0px;
+	bottom: 00px;
+	font-size: 1.5em;
+	z-index: 1;
+}
+
+#connectUsers {
+	float: right;
+	position: absolute;
+	max-width: 300px;
+	min-width: 300px;
+	max-height: 80%;
+	background-color: rgba(8, 9, 14, 0.53);
+	z-index: 5;
+	padding: 10px;
+	right: 20px;
+	bottom: 10px;
+	box-shadow: 2px 2px #313131;
+	border-radius: 12px;
+	border: 1px solid #707070;
+	opacity: 0.7;
+	color: white;
+	}
+
+.volume-control-userlist {
+	display: none;
+}
+
+
+.fullwindowButton {
+	transition: opacity 0.3s;
+	width: 4vh;
+	height: 4vh;
+	max-width: 30px;
+	max-height: 30px;
+	min-width: 15px;
+	min-height: 15px;
+	position: absolute;
+	display: none;
+	z-index: 6;
+	right: 4vh;
+	top : 4vh;
+	color: white;
+	cursor: pointer;
+}
+.fullwindowButtonimg {
+	user-select: none;
+	background-color:#0007;
+	width:4vh;
 }

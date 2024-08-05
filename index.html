@@ -21,9 +21,7 @@
 </head>
 
 
-    
-    
-<body>
+<body style="background-color: #2e2e2e;">
 	<div class="topnav" id="topnav">
 		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
 		<div class="navbar">
@@ -35,6 +33,14 @@
 			</div>
 		</div>
 	</div>
+    
+    <div class="topnav" id="subNav" style="display: none;">
+		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
+		<div class="navbar" style="top: 20px" onmouseover="ninjaIcon.style.opacity = 1;" onmouseleave="ninjaIcon.style.opacity = 0.4;"/> 
+            <a href="https://vdo.ninja" target="_blank"\> POWERED BY VDO.NINJA <img src="images/ninja.png" width="26" height="26" style="vertical-align: middle; margin-right:145px; opacity: 0.4; margin-bottom: 10px;" id="ninjaIcon"/></a> 
+            <div id="clock" style="position: absolute; right: 0px; margin-right:40px; margin-top: -38px; font: 30px Arial; font-weight: 200;"></div>		
+        </div>
+    </div>
 		
 <!--load portfolio from behance-->
 	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window" id="inset_window"></iframe>
@@ -66,7 +72,7 @@
 					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(5)' maxlength=1 name=v5>
 					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(6)' maxlength=1 name=v6>
 					<br>
-					    <input type="submit" value="Join" class=button>
+					    <input type="submit" value="Next" class=button>
 				    </form>
 			    </div>
              
@@ -91,7 +97,24 @@
 <script type="text/javascript">    
     var sessionFile;
     
-    //check if there is a live session otherwise hide live session button
+//clock
+    function startTime() {
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        m = checkTime(m);
+        document.getElementById('clock').innerHTML =  h + ":" + m ;
+        setTimeout(startTime, 1000);
+    }
+
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+        }    
+    
+    
+    
+//check if there is a live session otherwise hide live session button
     //using fetch so done asynchronously while loading page
     fetch("https://remotepixels.app/Alive.txt")
       .then( response => {
@@ -160,7 +183,7 @@
                 sessionFile = v1+v2+v3+v4+v5+v6;
             }
         
-    //check to see if the session ID entered exists
+//check to see if the session ID entered exists
     //done synchronous to make sure we get the file before checking
             const request = new XMLHttpRequest();
             request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
@@ -203,10 +226,12 @@
         blackoutMore.style.animation = "fadeOut 500ms ease-out";	
 		setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; blackoutMore.style.animation = "none"; blackoutMore.style.display = "none";}, 500);        
         document.getElementById("topnav").style.display = "none";
+        document.getElementById("subNav").style.display = "block";
+        startTime ();
       
     //load session ninja   
           document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-        document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label"+encodedStagename+"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&autostart&easyexit&videodevice=0&audiodevice=1&miconly&miconlyoption&nopreview&broadcast&quality=0&margin=10&chroma=2e2e2e&hiddenscenebitrate=10000&signalmeter&disablehotkeys&cleanviewer&hideplaybutton&controlbarspace&nosettings&novideobutton&nocontrols&chatbutton=0&nofileshare&fullscreenbutton&hands&clock24";       
+        document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label"+encodedStagename+"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&autostart&easyexit&videodevice=0&audiodevice=1&miconly&miconlyoption&nopreview&broadcast&quality=0&margin=10&chroma=2e2e2e&hiddenscenebitrate=10000&signalmeter&chatbutton=0&nofileshare&fullscreenbutton&hands&disablehotkeys&cleanviewer&hideplaybutton&nosettings&novideobutton&nocontrols&css=https://remotepixels.app/ninja.css";       
         return false;
         }
     
