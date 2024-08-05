@@ -1,16 +1,29 @@
+@font-face {
+	font-family: 'Line Awesome Free';
+	font-style: normal;
+	font-weight: 900;
+	font-display: auto;
+	src: url("https://remotepixels.github.io/remotepixels.app/css/lineawesome/fonts/la-solid-900.eot");
+	src: url("https://remotepixels.github.io/remotepixels.app/css/lineawesome/fonts/la-solid-900.eot?#iefix") format("embedded-opentype"), url("https://remotepixels.github.io/remotepixels.app/css/lineawesome/fonts/la-solid-900.woff2") format("woff2"), url("https://remotepixels.github.io/remotepixels.app/css/lineawesome/fonts/la-solid-900.woff") format("woff"), url("https://remotepixels.github.io/remotepixels.app/css/lineawesome/fonts/la-solid-900.ttf") format("truetype"), url("https://remotepixels.github.io/remotepixels.app/css/lineawesome/fonts/la-solid-900.svg#lineawesome") format("svg"); 
+}
+
+
+.la-theater-masks:before {
+	content: "f2bd;"; }
+
 body.darktheme{
 	background-color: #2e2e2e;
 }
 
 .toggleSize {
 	font-size: 24px;
-	color:var(--lighttheme-3);
+	color: #a4a4a4;
 }
 
 #subControlButtons {
 	display: flex;
 	position: absolute;
-	background-color: var(--discord-grey-0);
+	background-color: rgba(18, 18, 18, 0.65);
 	box-shadow: 0px 0px 10px rgba(0,0,0,4);
 	pointer-events: auto;
 	border: #cccccc4f 1px solid;
@@ -19,7 +32,7 @@ body.darktheme{
 	justify-content: center;
 	flex-wrap: wrap;
 	bottom: 10px;
-	min-width: 280px;
+	min-width: 200px;
 	cursor: grab;
 	scale: 100%;
 	padding: 2px;
@@ -52,9 +65,9 @@ body.darktheme{
 	height: 50px;
 	position: fixed;
 	right: 0px;
-	bottom: 00px;
+	bottom: 0px;
 	font-size: 1.5em;
-	z-index: 1;
+	z-index: 4;
 }
 
 #connectUsers {
@@ -101,4 +114,17 @@ body.darktheme{
 	user-select: none;
 	background-color:#0007;
 	width:4vh;
+}
+
+#closedList_connectUsers {
+	cursor: pointer;
+	color: #9d9d9d;
+	padding: 25;
+	margin: 2px 2px 0 0;
+	font-size: 200%;
+}
+
+
+.la-theater-masks:before {
+	content: "\f630";
 }
