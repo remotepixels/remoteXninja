@@ -16,7 +16,7 @@ body.darktheme{
 }
 
 .toggleSize {
-	font-size: 24px;
+	font-size: 28px;
 	color: #a4a4a4;
 }
 
@@ -24,17 +24,17 @@ body.darktheme{
 	display: flex;
 	position: absolute;
 	background-color: rgba(18, 18, 18, 0.65);
-	box-shadow: 0px 0px 10px rgba(0,0,0,4);
+	box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
 	pointer-events: auto;
 	border: #cccccc4f 1px solid;
 	border-radius: 40px;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	bottom: 10px;
-	min-width: 100px;
+	bottom: 20px;
+	min-width: 50px;
 	cursor: grab;
-	scale: 200%;
+	scale: 125%;
 	padding: 2px;
 }
 
@@ -50,14 +50,14 @@ body.darktheme{
 	opacity: unset;
 	border-radius: 30px;
 	transition: border-radius 200ms ease-in-out;
-	box-shadow: 1px 1px 3px rgba(0,0,0,0.75);
+	box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
 	scale: 100%;
 }
 
 #subControlButtons div:hover {
 	background-color: var(--discord-grey-3);
-	border-radius: 30px;
-	scale: 110%;
+	border-radius: 40px;
+	scale: 120%;
 }
 /*
 .signal-meter {
