@@ -99,9 +99,15 @@ font:hover {
 .popupWindow {
 	position: relative;
 	background-color: white;
+//    background-image: url("images/bg_bars.png");
+//    background-size: 500px 500px;
+//    background-repeat: no-repeat;
+//    background-origin: content-box;
+//    background-position-x: -20px;
+//    background-position-y: -20px;
 	margin: 30px auto; /* 30px from the top and centered */
 	padding: 20px;
-	border: 1px solid #eeeeee;
+	border: 0px solid #eeeeee;
 	width: 444px; /* Could be more or less, depending on screen size */
 	height: 500px;
 	border-radius:60px;
