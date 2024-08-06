@@ -32,9 +32,9 @@ body.darktheme{
 	justify-content: center;
 	flex-wrap: wrap;
 	bottom: 10px;
-	min-width: 200px;
+	min-width: 100px;
 	cursor: grab;
-	scale: 100%;
+	scale: 200%;
 	padding: 2px;
 }
 
