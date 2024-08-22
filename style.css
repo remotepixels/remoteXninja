@@ -30,9 +30,8 @@ body {
 
 a {
 	text-decoration: none;
-	position: relative;
-	font: 14px Arial; 
-	font-weight: 200; 
+	font: 14px Arial;
+	font-weight: 400;
 	color: #bebebe;
 	}
 
@@ -66,6 +65,18 @@ font:hover {
 	margin-left: 0px;
 	}
 
+.directorroom {
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	border: 0px;
+	margin-bottom: 0px;
+	margin-right: 0px;
+	margin-top: 60px;
+	margin-left: 0px;
+	}
+
 .blackout {
 	display: none;
 	z-index: 3;
@@ -79,17 +90,7 @@ font:hover {
  	}
 
 
-.blackoutMore {
-	display: none;
-	z-index: 2;
-	position: fixed;
-	left: 0px;
-	top: 0px;
-	width: 100%;
-	height: 100%;
-	overflow: off;
-	background-color: rgba(0, 0, 0, 0.5);
- 	}
+
 
 .popupGroup {
 	position: relative;
@@ -99,12 +100,6 @@ font:hover {
 .popupWindow {
 	position: relative;
 	background-color: white;
-//    background-image: url("images/bg_bars.png");
-//    background-size: 500px 500px;
-//    background-repeat: no-repeat;
-//    background-origin: content-box;
-//    background-position-x: -20px;
-//    background-position-y: -20px;
 	margin: 30px auto; /* 30px from the top and centered */
 	padding: 20px;
 	border: 0px solid #eeeeee;
@@ -138,13 +133,18 @@ font:hover {
 	display: none;
 	}
 
+.confirmEndSession {
+	margin: auto;
+	display: none;
+	}
+
 .popupTitle {
-    text-align: center;
-    font: 30px Arial;
-    font-weight: 100;
-    color: gainsboro;
-    margin-top: -50px;
-    margin-bottom: 25px;
+	text-align: center;
+	font: 30px Arial;
+	font-weight: 100;
+	color: gainsboro;
+	margin-top: -50px;
+	margin-bottom: 5px;
 
 }
 
@@ -162,7 +162,8 @@ font:hover {
 
 .button {
 	position: relative;
-	left: 100px;
+	text-align: center;
+	left: 90px;
 	Width: 250px;
 	height: 60px;
 	margin-top: 30px;
@@ -197,8 +198,9 @@ font:hover {
 	position: absolute;
 	width: 45px;
 	height: 15px;
-	top: -5px;
+	top: -6px;
 	right: 35px;
+	color: #C94326;
 	text-decoration: none;
 	border-radius:12px;
 	padding: 5px;
@@ -216,10 +218,11 @@ font:hover {
 .endSessionIcon {
     	display: inline;
     	position: absolute;
-    	width: 110px;
+    	width: 150px;
 	height: 15px;
-	top: 18px;
-	right: 35px;
+	top: 20px;
+	right: 45px;
+	color: #C94326;
 	text-decoration: none;
 	border-radius:12px;
 	padding: 5px;
@@ -227,12 +230,27 @@ font:hover {
 	transition-duration: 0.2s;
 	Cursor: pointer;
 
-}
+	}
 	
 .endSessionIcon:hover {
 	background-color: #C94326;
 	color: white;
 	}
+
+.ninjaIcon {
+	position: relative;
+	float: right;
+	top: 20px;
+	text-decoration: none;
+	transition-duration: 0.2s;
+	Cursor: pointer;
+	opacity: 0.4;
+	}	
+	
+.ninjaIcon:hover {
+	opacity: 1;
+	}
+
 
 @keyframes shake {
 	0% {transform: translateX(0px);}
@@ -257,5 +275,5 @@ font:hover {
 @keyframes slideIn {
 	0% { transform: translateY(-50px); animation-timing-function: linear; }
 	100% { transform: translateY(0px); animation-timing-function: ease-in; }
-}
+	}
 
