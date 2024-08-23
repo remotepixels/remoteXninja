@@ -49,38 +49,25 @@
 			<div class="popupWindow" id="popupWindow">
                 
 <!--popup window content : live session ID--> 
-               <div class="sessionIDpopupContent" id="sessionIDpopupContent")>
-                    <div class="popupIcon"><img src=../images/icon_round_live.png></div>
-				    <div class="popupTitle">Enter live session ID</div>
+				<div class="sessionIDpopupContent" id="sessionIDpopupContent")>
+                    			<div class="popupIcon"><img src=../images/icon_round_live.png></div>
+				    	<div class="popupTitle">Enter live session ID</div>
 	
-				    <form id="sessionIDCode" name="sessionIDCode" onsubmit="return validateSessionID()" method="post" required>
-					&emsp;&nbsp;
-					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(1)' maxlength=1 name=v1>
-					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(2)' maxlength=1 name=v2>
-					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(3)' maxlength=1 name=v3>
-					&emsp;
-					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(4)' maxlength=1 name=v4>
-					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(5)' maxlength=1 name=v5>
-					    <input class="sessionOTP" type="text" oninput='digitValidate(this)' onkeyup='this.value = this.value.toUpperCase(); tabChange(6)' maxlength=1 name=v6>
+				    	<form id="sessionIDCode" name="sessionIDCode" onsubmit="return validateSessionID()" method="post" required>
+ 					<input name=sessionIDInput id=sessionIDInput type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="6" style="margin-left:28px;" onkeypress="return onlyAlphabets(event,this);" oninput="this.value = this.value.toUpperCase()" tabindex="1">
 					<br>
-					    <input type="submit" value="Start" class=button>
-				    </form>
-			    </div>
+					<input type="submit" id="submitSessionID" value="Next" class=button tabindex="2">
+				    	</form>
+			   	 </div>
                 
-                
-                
-                 <div class="confirmEndSession" id="confirmEndSession")>
-                    <div class="popupIcon"><img src=../images/icon_round_live.png></div>
-				    <div class="popupTitle" style="font-size:24px; color: black;"><p>Are you sure you wish to<br>end the session?</p><p style="font-size:18px; color: red;">This will disconnect all clients.</p></div>
-	
-                     <div value="End session" class=button style="margin-top: 30px;	height: 40px; font-size:20px; font-weight: 800;" onClick="location.replace('https://remotepixels.app')"><p style="position:relative; top:-10px;">End Session</p></div>
-			    </div>
-                              
-                
-                
-                
-                
-                
+				<div class="confirmEndSession" id="confirmEndSession")>
+                   			<div class="popupIcon"><img src=../images/icon_round_live.png></div>
+					<div class="popupTitle" style="font-size:24px; color: black;"><p>Are you sure you wish to<br>end the session?</p><p style="font-size:18px; color: red;">This will disconnect all clients.</p></div>
+					<div value="End session" class=button style="margin-top: 30px;	height: 40px; font-size:20px; font-weight: 800;" onClick="location.replace('https://remotepixels.app')"><p style="position:relative; top:-10px;">End Session</p></div>
+				</div>
+                         </div>     
+                </div>
+	</div>
 </body>
 
 <script type="text/javascript"> 
@@ -91,31 +78,30 @@ document.forms["sessionIDCode"]["v1"].focus();
 //check if an URL parameter is sent and process accordingly, skipping the session ID screen
 var sessionFile;
 let query = location.search;
-    
-    if  (query != 0) {
-        let sessionID = query.slice(1);
+
+if  (query != 0) {
+	let sessionID = query.slice(1);
         const request = new XMLHttpRequest();
         request.open("GET", "https://remotepixels.app/Alive"+sessionID+".txt", false); // `false` makes the request synchronous
         request.send(null);
-        //if file and session ID match then geet rid of popup and start direcotr session and duration counter
-            if (request.status === 200) {                
-                blackout.style.display = "none";
+        
+	if (request.status === 200) {                //if file and session ID match then geet rid of popup and start direcotr session and duration counter
+		blackout.style.display = "none";
                 sessionIDpopupContent.style.animation = "fadeOut 300ms";
-			    setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+		setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
                 var timeSpentOnSite = getTimeSpentOnSite();
                 startCounting();
-                document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-                document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+"&push=WTTdtsU0&showdirector&ovb=10000&trb=10000&quality=1&cleandirector&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&chatbutton=0&noscreenshare&nofileshare&disablehotkeys&nosettings&nohangupbutton&hidesolo&novice";   
-                 }   
-    }         
+		loadNinja ();
+		}   
+	}         
 
   			
 //hide live session window when user clicks off (only once logged in though)
 window.onclick = function(event) {
-    if (event.target == blackout || event.target == popupGroup && sessionFile != null) {
-    blackout.style.animation = "fadeOut 300ms ease-out";
-    setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 300);}
-    }
+	if (event.target == blackout || event.target == popupGroup && sessionFile != null) {
+	blackout.style.animation = "fadeOut 300ms ease-out";
+	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 300);}
+	}
     
     
 //session duration clock   
@@ -123,115 +109,108 @@ var timer;
 var timerStart;
 
 function getTimeSpentOnSite(){
-    timeSpentOnSite = parseInt(sessionStorage.getItem('timeSpentOnSite'));
-    timeSpentOnSite = isNaN(timeSpentOnSite) ? 0 : timeSpentOnSite;
-    return timeSpentOnSite;
+	timeSpentOnSite = parseInt(sessionStorage.getItem('timeSpentOnSite'));
+	timeSpentOnSite = isNaN(timeSpentOnSite) ? 0 : timeSpentOnSite;
+	return timeSpentOnSite;
 }
 
 function startCounting(){
-    timerStart = Date.now();
-    timer = setInterval(function(){
-        timeSpentOnSite = getTimeSpentOnSite()+(Date.now()-timerStart);
-        sessionStorage.setItem('timeSpentOnSite',timeSpentOnSite);
-        timerStart = parseInt(Date.now());
+	timerStart = Date.now();
+	timer = setInterval(function(){
+		timeSpentOnSite = getTimeSpentOnSite()+(Date.now()-timerStart);
+		sessionStorage.setItem('timeSpentOnSite',timeSpentOnSite);
+		timerStart = parseInt(Date.now());
         // Convert to seconds
-      var milliseconds = timeSpentOnSite % 1000;
-     var seconds = Math.floor((timeSpentOnSite / 1000) % 60);
-     var minutes = Math.floor((timeSpentOnSite / (60 * 1000)) % 60);
-     var hours = Math.floor((timeSpentOnSite / (60 * 60 * 1000)) % 24);
+		var milliseconds = timeSpentOnSite % 1000;
+		var seconds = Math.floor((timeSpentOnSite / 1000) % 60);
+		var minutes = Math.floor((timeSpentOnSite / (60 * 1000)) % 60);
+		var hours = Math.floor((timeSpentOnSite / (60 * 60 * 1000)) % 24);
+		
+		hours = (hours < 10) ? "0" + hours : hours;
+		minutes = (minutes < 10) ? "0" + minutes : minutes;
+		seconds = (seconds < 10) ? "0" + seconds : seconds;
         
-        
-        
-        hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-        
-document.getElementById("clock").innerHTML = ( hours + ":" +minutes + ":" + seconds);
-
-    },1000);
-}
+		document.getElementById("clock").innerHTML = ( hours + ":" +minutes + ":" + seconds);
+		},1000);
+	}
      			
-//if there are no URL parameters then validate input of session ID
-//Live Session ID check
-    //replace lowercase letters with uppercase, make sure no funny characters
-	let digitValidate = function(ele){
-		console.log(ele.value);
-		ele.value = ele.value.replace(/[^0-9a-zA-Z]/g,'');
-		}
+//Session ID field entry, force upper caase, restrict to alpha-numeric
+const input = document.querySelector('[autocomplete=one-time-code');
+input.addEventListener('input', () => input.style.setProperty('--_otp-digit', input.selectionStart));
 
-    //if valid input move to next input box
-	let tabChange = function(val){
-		let ele = document.querySelectorAll('input');
-		if (ele[val-1].value != '') {
-			ele[val].focus()
-			}
-		else if (ele[val-1].value == '') {
-			ele[val-2].focus()
-			}   
+function onlyAlphabets(e, t) {
+	var regexp = new RegExp(/^[a-zA-Z0-9]*$/);
+	if (window.event) {
+		keynum = e.keyCode;
 		}
+	else if (e.which) {
+		keynum = e.which;
+		}
+	var test = regexp.test(String.fromCharCode(keynum));
+	return test;
+	}
+
+//submit session ID if user hits enter key
+let inputSessionID = document.getElementById("sessionIDInput");
+input.addEventListener("keypress", function(event) {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		document.getElementById("submitSessionID").click();
+		}
+	});
    
-    
-//validates the session ID
-    //on submit, check there are no blank (no value) fields
-	function validateSessionID(){
-		let v1 = document.forms ["sessionIDCode"]["v1"].value;
-		let v2 = document.forms ["sessionIDCode"]["v2"].value;
-		let v3 = document.forms ["sessionIDCode"]["v3"].value;
-		let v4 = document.forms ["sessionIDCode"]["v4"].value;
-		let v5 = document.forms ["sessionIDCode"]["v5"].value;
-		let v6 = document.forms ["sessionIDCode"]["v6"].value;
+//validates the session ID when the user submits a correctly formatted value as above
+//on submit, check there are 6 values in the field
+function validateSessionID(){
+	let v1 = document.forms ["sessionIDCode"]["sessionIDInput"].value;
+	//if there are less than 6 characters shake the box and clear it
+	if (v1.length < 6) {
+		popupWindow.style.animation = "shake 500ms";
+		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
+		document.forms["sessionIDCode"]["sessionIDInput"].focus();
+		return false;
+		}
+	else {
+		sessionFile = v1;
+		}
         
-    //if there are empty fields shake the box and clear it
-		if (!v1 || !v2 || !v3 || !v4 || !v5 || !v6) {
-  			popupWindow.style.animation = "shake 500ms";
-			setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
-            		document.forms["sessionIDCode"]["v1"].focus();
-			return false;
-			    }
-            	else {
-               		sessionFile = v1+v2+v3+v4+v5+v6;
-           		 }
+	//check to see if the session ID entered exists
+	//done synchronous to make sure we get the file before checking
+	const request = new XMLHttpRequest();
+	request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
+	request.send(null);
 
-        
-//check to see if the session ID entered exists
-    //done synchronous to make sure we get the file before checking
-            const request = new XMLHttpRequest();
-            request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
-            request.send(null);
-    //if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
-            if (request.status === 200) {
-    //          alert ("session exists");
-                blackout.style.animation = "fadeOut 300ms";
-			    setTimeout ( function () {blackout.style.animation = "none"; blackout.style.display = "none";}, 300);
+	//if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
+	if (request.status === 200) {
+		blackout.style.animation = "fadeOut 300ms";
+		setTimeout ( function () {blackout.style.animation = "none"; blackout.style.display = "none";}, 300);
                 sessionIDpopupContent.style.animation = "fadeOut 300ms";
-			    setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+		setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+
                 //start session duration counter
                 var timeSpentOnSite = getTimeSpentOnSite();
                 startCounting();
-    //load session ninja   
-        document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-        document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+"&push=WTTdtsU0&showdirector&ovb=10000&trb=10000&quality=1&cleandirector&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&chatbutton=0&noscreenshare&nofileshare&disablehotkeys&nosettings&nohangupbutton&hidesolo&novice";   
 
-         return false;
+		//load session ninja   
+		document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+		document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+"&push=WTTdtsU0&showdirector&ovb=10000&trb=10000&quality=1&cleandirector&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&chatbutton=0&noscreenshare&nofileshare&disablehotkeys&nosettings&nohangupbutton&hidesolo&novice";   
+		return false;
                 }
-    //and the sessionID does not match the file on server
-            else {
+	//and the sessionID does not match the file on server
+	else {
                 popupWindow.style.animation = "shake 500ms";
-			    setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
-                document.forms["sessionIDCode"]["v1"].focus();
+		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
+                document.forms["sessionIDCode"]["submitSessionID"].focus();
                 return false;
                 } 
-            return false;
+	return false;
     } 
 
 function endSessionConfirm() {
-                blackout.style.display = "block";
-                confirmEndSession.style.animation = "fadeIn 300ms";
-			    setTimeout(function () { confirmEndSession.style.display = "block";}, 300);   
-    
-
-}
-    
+	blackout.style.display = "block";
+	confirmEndSession.style.animation = "fadeIn 300ms";
+	setTimeout(function () { confirmEndSession.style.display = "block";}, 300);   
+	}
     
 </script>
 </html>
