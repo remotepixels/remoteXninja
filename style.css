@@ -133,8 +133,9 @@ font:hover {
 @media only screen and (max-width: 1200px) {
 	.popupWindow {
 	padding: 0px;
-	margin: 10px auto;
-		Scale: 0.75;
+	top: -120px;
+	margin: 30px auto;
+		Scale: 0.5;
 		}
 	}
 

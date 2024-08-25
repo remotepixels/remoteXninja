@@ -51,7 +51,7 @@
 
 <!--popup window things-->
 <!--darken screen for popups-->
-	<div class="blackout" id="blackout" role="button">
+	<div class="blackout" id="blackout" role="button" onclick="fadeOutPopup()">
 
 <!--fade and slide in popup window-->
 		<div class="popupGroup" id="popupGroup"> 
@@ -180,11 +180,20 @@ liveSessionIcon.onclick = function() {
 	}
   			
 //hide live session window when user clicks off
-window.onclick = function(event) {
+/*window.onclick = function(event) {
 	if (event.target == blackout || event.target == popupGroup) {
 	blackout.style.animation = "fadeOut 300ms ease-out";
 	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; }, 300);}
 	}
+*/
+
+
+
+function fadeOutPopup() {
+	blackout.style.animation = "fadeOut 300ms ease-out";
+	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; }, 300);
+	}
+	
 
 //clock for top right of user session
 function startTime() {
