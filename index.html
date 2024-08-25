@@ -20,7 +20,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
     
-<body style="background-color: #2e2e2e;">
+<body>
 
 <!-- top navbar for portfolio-->
 	<div class="topnav" id="topnav">
@@ -38,13 +38,15 @@
 		<image src="images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
 		<div class="ninjaIcon" style="right: 300px;"> 
          		<a href="https://vdo.ninja" target="_blank" style="color: black;"> POWERED BY VDO.NINJA <img src="images/ninja.png" width="23" height="23"/> </a>
-        	</div>
+		</div>
         	<div id="clock" style="position: absolute; right: 226px; margin-right:0px; margin-top: -34px; font: 24px Arial; font-weight: 200;"></div>	
         	<div class="endSessionIcon" id="endSessionIcon" onclick="location.replace('https://remotepixels.app');" style="font: 14px Arial; font-weight: bold; text-align: center; margin-top: 2px;">LEAVE SESSION </div>
 	</div>
 		
 <!--load portfolio from behance-->
-	<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window" id="inset_window"></iframe>
+	<div class="portfolio-container">
+		<iframe src="https://remotepixels.myportfolio.com#view=FitH" class="portfolio" name="inset_window" id="inset_window"></iframe>
+	</div>
 
 <!--popup window things-->
 <!--darken screen for popups-->
@@ -106,9 +108,9 @@ if (user != "") {
 	cookieStoredName = user;
 	}
     
-//sets cookie with the users name (encodedStageName) and lets it expire in 24 hours (86400*1000 milisconds
+//sets cookie with the users name (encodedStageName) and lets it expire in 24 hours (86400*1000 millisconds)
 function setCookie(cname,cvalue) {
-	let expires = "expires=" + (new Date(Date.now()+ 30000)).toUTCString(); //set cookie for 30 seconds to test
+	let expires = "expires=" + (new Date(Date.now()+ 86400*1000).toUTCString()); //set cookie for 30 seconds to test
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 	return;
 	}
@@ -142,15 +144,16 @@ if  (query != 0) {
 	request.send(null);
 
 	if (request.status === 200) { //if the file exists
-	        if (cookieStoredName != "" && cookieStoredName != null) { 		//and if there is a cookie
-			sessionFile = sessionIDURL;
-			encodedStagename = cookieStoredName;     
+	        if (cookieStoredName != "" && cookieStoredName != null) { 		//and if there is a cookie 
         		document.getElementById("topnav").style.display = "none";
 			document.getElementById("subNav").style.display = "block";
+			sessionFile = sessionIDURL;
+			encodedStagename = cookieStoredName;   
+			setCookie("username", cookieStoredName);			//increment cookie for 24 hours
 			startTime ();
 			loadNinja ();
 			}
-		else { 		//if there is no cookie
+		else { 									//if there is no cookie
 			blackout.style.display = "block";
 			sessionIDpopupContent.style.animation = "fadeOut 300ms";
 			setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
@@ -159,7 +162,7 @@ if  (query != 0) {
 			sessionFile = sessionIDURL;
 			}
 		}
-	else {		//if the file does not exist
+	else {										//if the URL string supplied does not exist
 		blackout.style.animation = "fadeIn 500ms ease-out";
 		blackout.style.display = "block";
 		setTimeout(function () { blackout.style.animation = "none";}, 300);
@@ -247,19 +250,18 @@ function validateSessionID(){
 	request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
 	request.send(null);
 
-	if (request.status === 200) {
-        //if the sessionID entered matches the file on the server check if you've been here in the last 24 hours, if you have don't ask for a username and login automatically
-		if (cookieStoredName != "" && cookieStoredName != null) {
+	if (request.status === 200) {							 //if the sessionID entered matches the file on the server check if you've been here in the last 24 hours, if you have don't ask for a username and login automatically
+if (cookieStoredName != "" && cookieStoredName != null) {
 			blackout.style.animation = "fadeOut 500ms ease-out";
 			setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 500);    
 			document.getElementById("topnav").style.display = "none";
 			document.getElementById("subNav").style.display = "block";
+			setCookie("username", cookieStoredName);			//increment cookie for 24 hours
 			encodedStagename = cookieStoredName;
 			startTime (); 
 			loadNinja ();
 		}    
-		//if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
-		else {
+		else {									//if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
 			sessionIDpopupContent.style.animation = "fadeOut 300ms";
 			setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
 			askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
@@ -267,8 +269,7 @@ function validateSessionID(){
 			return false;
 			}
 		}
-	//and if the sessionID does not match the file on server shake the box to clear it
-	else {
+	else {										//and if the sessionID does not match the file on server shake the box to clear it
 		popupWindow.style.animation = "shake 500ms";
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
 		document.forms["sessionIDCode"]["sessionIDInput"].focus();
@@ -280,19 +281,19 @@ function validateSessionID(){
 //Check the username (stagename), make sure stage name isn't empty, then clean up the string so if any funny characters it doesn't screw up the rest
 function validateStageName(){
 	let varstageName = document.forms ["stageName"]["enterStageName"].value;
-        if (!varstageName) {
+        if (!varstageName) {								//if they try to submit an empty name shake the box and highlight the stage name field
 		popupWindow.style.animation = "shake 500ms";
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.forms["stageName"]["enterStageName"].focus(); }, 300);  
   		return false;
 		}
 	else {
-		let uri = document.forms ["stageName"]["enterStageName"].value;
+		let uri = document.forms ["stageName"]["enterStageName"].value;		//encode the name entered to a URI to escape any odd characters
 		encodedStagename = encodeURIComponent(uri);
 		blackout.style.animation = "fadeOut 500ms ease-out";
 		setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 500);        
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("subNav").style.display = "block";
-		setCookie("username", encodedStagename);
+		setCookie("username", encodedStagename);				//set a cookie for the next 24 hours
 		startTime ();
 		loadNinja ();
 		return false;
