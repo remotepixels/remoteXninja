@@ -28,7 +28,7 @@
 <body style="background-color: #2e2e2e;">
     
 	<div class="topnav" id="topnav">
-		<image src="images/icon.png" height="44" width="44" style="margin-top: 10px;"/>
+		<image src="../images/icon.png" height="44" width="44" style="margin-top: 10px;"/>
 		<!--<div class="ninjaIcon">  
          		<a href="https://vdo.ninja" target="_blank" style="color: black;"> POWERED BY VDO.NINJA <img src="../images/ninja.png" width="23" height="23"/> </a>
         	</div>-->
@@ -96,10 +96,11 @@ if  (query != 0) {
 		}   
 	}         
 
+//popup to confirm ending session
 endSessionIcon.onclick = function() {
 	blackout.style.animation = "fadeIn 500ms ease-out";
 	blackout.style.display = "block";
-confirmEndSession.style.display = "block";
+	confirmEndSession.style.display = "block";
 	setTimeout(function () { blackout.style.animation = "none";}, 300);
         document.forms["sessionIDCode"]["sessionIDInput"].focus();
 	}
@@ -198,10 +199,7 @@ function validateSessionID(){
                 //start session duration counter
                 var timeSpentOnSite = getTimeSpentOnSite();
                 startCounting();
-
-		//load session ninja   
-		document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-		document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+"&push=WTTdtsU0&showdirector&ovb=10000&trb=10000&quality=1&cleandirector&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&chatbutton=0&noscreenshare&nofileshare&disablehotkeys&nosettings&nohangupbutton&hidesolo&novice";   
+		loadNinja ();
 		return false;
                 }
 	//and the sessionID does not match the file on server
@@ -214,12 +212,11 @@ function validateSessionID(){
 	return false;
     } 
 
-function endSessionConfirm() {
-	blackout.style.display = "block";
-	confirmEndSession.style.animation = "fadeIn 300ms";
-	setTimeout(function () { confirmEndSession.style.display = "block";}, 300);   
-	}
-    
+function loadNinja() {
+		document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+		document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+"&push=WTTdtsU0&showdirector&ovb=10000&trb=10000&quality=1&cleandirector&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&chatbutton=0&noscreenshare&nofileshare&disablehotkeys&nosettings&nohangupbutton&hidesolo&novice";   
+		return false;
+}
 </script>
 </html>
 </html>
