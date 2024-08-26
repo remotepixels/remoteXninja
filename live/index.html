@@ -38,7 +38,7 @@
     
 		
 <!--load blank iframe, will be replaced with directors room when loged in-->
-<iframe src="blank.html" class="directorroom" name="inset_window" id="inset_window"></iframe>
+<iframe src="blank.html" class="directorroom" name="inset_window" id="inset_window" allowfullscreen=false></iframe>
 
 <!--darken screen for popups-->
 	<div class="blackout" id="blackout">
@@ -214,7 +214,7 @@ function validateSessionID(){
 
 function loadNinja() {
 		document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-		document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+"&label=Live&push=WTTdtsU0&showdirector&ovb=10000&trb=10000&quality=1&cleandirector&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&hidehome&hidetranslate&chatbutton=0&noscreenshare&nofileshare&disablehotkeys&nohangupbutton&hidesolo&nosettings&css=https://remotepixels.app/live/ninja.css&nohangupbutton";   
+		document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+"&label=Live&showdirector&mfps=25&nohub&nvb&ns&nospeakerbutton&moo&q&notify&hiddenscenebitrate=10000&margin=100&hands";   
 		return false;
 }
 </script>

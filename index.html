@@ -46,7 +46,7 @@
 		
 <!--load portfolio from behance-->
 	<div class="portfolio-container">
-		<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window" id="inset_window"></iframe>
+		<iframe src="https://remotepixels.myportfolio.com" class="portfolio" name="inset_window" id="inset_window" allowfullscreen=false></iframe>
 	</div>
 
 <!--popup window things-->
@@ -299,7 +299,7 @@ function validateStageName(){
 //load vdo.ninja client session with the sessionFile and the encodedStageName into the iframe with all parameters
 function loadNinja () {
 	document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label="+encodedStagename+"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&darkmode&noheader&hidehome&hidetranslate&autostart&easyexit&videodevice=0&audiodevice=1&miconly&miconlyoption&nopreview&broadcast&quality=0&margin=10&chroma=2e2e2e&hiddenscenebitrate=10000&signalmeter&chatbutton=0&nofileshare&nospeakerbutton&notify&disablehotkeys&cleanviewer&hideplaybutton&nosettings&novideobutton&nocontrols&showlist=1&sync=-200&css=https://remotepixels.app/ninja.css&nohangupbutton";   
+	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label="+encodedStagename+"&bc&ad=1&np&vd=0&hh&as&ee&cb=0&ns&nsb&nohub&cv&nofiles&miconly&hidetranslate&darkmode&chroma=2e2e2e&disablehotkeys&nocontrols&showlist=1&margin=10&sync=-200&css=https://remotepixels.app/ninja.css";   
         return false;
 	}
     
