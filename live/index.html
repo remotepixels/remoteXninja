@@ -1,23 +1,24 @@
 <html>
 <head>
 	<title>live.remotepixels.app</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
-    <meta http-equiv="Pragma" content="no-cache"/>
-    <meta http-equiv="Expires" content="0"/>
-    
+
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+	<meta name="msapplication-TileColor" content="#2e2e2e">
+	<meta name="theme-color" content="#2e2e2e">
+	<meta name="keywords" content="Gui Felix, Advertising, Visual Effects, Motion Graphics, Remote Pixels">
+	<meta name="robots" content="index, follow">
+	<meta name= "viewport" content= "width = device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+   
 	<link rel="apple-touch-icon" sizes="180x180" href="https://remotepixels.app/icons/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="https://remotepixels.app/icons/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="https://remotepixels.app/icons/favicon-16x16.png">
 	<link rel="manifest" href="https://remotepixels.app/icons/site.webmanifest">
 	<link rel="mask-icon" href="https://remotepixels.app/icons/safari-pinned-tab.svg" color="#5bbad5">
 	<link rel="shortcut icon" href="https://remotepixels.app/icons/favicon.ico">
-	<meta name="msapplication-TileColor" content="#da532c">
-	<meta name="theme-color" content="#ffffff">
 
-	<meta name="keywords" content="Gui Felix, Advertising, Visual Effects, Motion Graphics, Remote Pixels">
-	<meta name="robots" content="index, follow">
-    
-    <link rel="stylesheet" href="../style.css">
+	<link rel="stylesheet" href="../style.css">
 </head>
 
 <script type="text/javascript">  
@@ -27,12 +28,12 @@
 <body style="background-color: #2e2e2e;">
     
 	<div class="topnav" id="topnav">
-		<image src="../images/icon.png" height="44" width="44" style="margin-left:40px; margin-top: 10px;"/>
-		<div class="ninjaIcon" style="right: 350px;"> 
+		<image src="images/icon.png" height="44" width="44" style="margin-top: 10px;"/>
+		<!--<div class="ninjaIcon">  
          		<a href="https://vdo.ninja" target="_blank" style="color: black;"> POWERED BY VDO.NINJA <img src="../images/ninja.png" width="23" height="23"/> </a>
-        	</div>
-          	<div id="clock" style="position: absolute; right: 230px; margin-right:0px; margin-top: -33px; font: 24px Arial; font-weight: 200;"></div>	
-            	<div class="endSessionIcon" id="endSessionIcon" onclick="return endSessionConfirm();" style="font: 14px Arial; font-weight: bold; text-align: center;">END SESSION</div>
+        	</div>-->
+          	<div id="clock" class="clock"></div>	
+        	<div class="endSessionIcon" id="endSessionIcon" style="font: 14px Arial; font-weight: bold; text-align: center; margin-top: 2px;">END SESSION </div>
 	</div>
     
 		
@@ -54,7 +55,7 @@
 				    	<div class="popupTitle">Enter live session ID</div>
 	
 				    	<form id="sessionIDCode" name="sessionIDCode" onsubmit="return validateSessionID()" method="post" required>
- 					<input name=sessionIDInput id=sessionIDInput type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="6" style="margin-left:28px;" onkeypress="return onlyAlphabets(event,this);" oninput="this.value = this.value.toUpperCase()" tabindex="1">
+ 					<input name=sessionIDInput id=sessionIDInput type="text" autocomplete="one-time-code" maxlength="6" style="margin-left:28px;" onkeypress="return onlyAlphabets(event,this);" oninput="this.value = this.value.toUpperCase()" tabindex="1">
 					<br>
 					<input type="submit" id="submitSessionID" value="Next" class=button tabindex="2">
 				    	</form>
@@ -73,7 +74,7 @@
 <script type="text/javascript"> 
 //show popup    
 blackout.style.display = "block";
-document.forms["sessionIDCode"]["v1"].focus();
+document.forms["sessionIDCode"]["sessionIDInput"].focus();
     
 //check if an URL parameter is sent and process accordingly, skipping the session ID screen
 var sessionFile;
@@ -95,6 +96,13 @@ if  (query != 0) {
 		}   
 	}         
 
+endSessionIcon.onclick = function() {
+	blackout.style.animation = "fadeIn 500ms ease-out";
+	blackout.style.display = "block";
+confirmEndSession.style.display = "block";
+	setTimeout(function () { blackout.style.animation = "none";}, 300);
+        document.forms["sessionIDCode"]["sessionIDInput"].focus();
+	}
   			
 //hide live session window when user clicks off (only once logged in though)
 window.onclick = function(event) {
@@ -200,7 +208,7 @@ function validateSessionID(){
 	else {
                 popupWindow.style.animation = "shake 500ms";
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
-                document.forms["sessionIDCode"]["submitSessionID"].focus();
+                document.forms["sessionIDCode"]["sessionIDInput"].focus();
                 return false;
                 } 
 	return false;
