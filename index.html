@@ -57,17 +57,18 @@
 		<div class="popupGroup" id="popupGroup"> 
             
 <!--popup window, draws the white popup window-->
-			<div class="popupWindow" id="popupWindow">
+			<div class="popupWindow" id="popupWindow" onclick="event.stopPropagation()">
                 
 <!--popup window content : live session ID--> 
                			<div class="sessionIDpopupContent" id="sessionIDpopupContent")>
                     			<div class="popupIcon"><img src=images/icon_round_live.png></div>
 				    	<div class="popupTitle">Enter live session ID</div>
 					<form id="sessionIDCode" name="sessionIDCode" onsubmit="return validateSessionID()" method="post" required>
- 						<input name=sessionIDInput id=sessionIDInput type="text" autocomplete="one-time-code" maxlength="6" style="margin-left:28px;" onkeypress="return onlyAlphabets(event,this);" oninput="this.value = this.value.toUpperCase()" tabindex="1">
+ 						<input name=sessionIDInput id=sessionIDInput type="text" autocomplete="one-time-code" maxlength="6" style="margin-left:28px;" onkeypress="return onlyAlphabets(event,this);" oninput="this.value = this.value.toUpperCase()" tabindex="1">					
 						<br>
 						<input type="submit" id="submitSessionID" value="Next" class=button tabindex="2">
 				    	</form>
+					<div style="position: absolute; top: 280px; left: 430; width: 13px; height:130px; background-color: white; opacity: 1;"></div>
 			   	 </div>
              
 <!--popup window content : ask for a username--> 
@@ -169,8 +170,7 @@ if  (query != 0) {
 		document.forms["sessionIDCode"]["sessionIDInput"].focus();
 		}         
 	}  
-
-    
+   
 //popup live session window if the live button is clicked
 liveSessionIcon.onclick = function() {
 	blackout.style.animation = "fadeIn 500ms ease-out";
@@ -180,21 +180,11 @@ liveSessionIcon.onclick = function() {
 	}
   			
 //hide live session window when user clicks off
-/*window.onclick = function(event) {
-	if (event.target == blackout || event.target == popupGroup) {
-	blackout.style.animation = "fadeOut 300ms ease-out";
-	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; }, 300);}
-	}
-*/
-
-
-
 function fadeOutPopup() {
 	blackout.style.animation = "fadeOut 300ms ease-out";
 	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; }, 300);
 	}
 	
-
 //clock for top right of user session
 function startTime() {
 	const today = new Date();
@@ -208,8 +198,7 @@ function startTime() {
 function checkTime(i) {
         if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
         return i;
-        }  
-    
+        }    
     
 //Session ID field entry, force upper caase, restrict to alpha-numeric
 const input = document.querySelector('[autocomplete=one-time-code');
@@ -235,8 +224,7 @@ input.addEventListener("keypress", function(event) {
 		document.getElementById("submitSessionID").click();
 		}
 	});
-    
-    
+       
 //validates the session ID when the user submits a correctly formated value as above
 //on submit, check there are 6 values in the field
 function validateSessionID(){
@@ -316,7 +304,6 @@ function loadNinja () {
         return false;
 	}
     
-
 </script>
 </html>
 </html>

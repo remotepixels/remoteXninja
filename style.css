@@ -86,8 +86,6 @@ font:hover {
 		}
 	}
 
-
-
 .directorroom {
 	position: relative;
 	top: 0px;
@@ -103,7 +101,7 @@ font:hover {
 
 .blackout {
 	display: none;
-	z-index: 5;
+	z-index: 3;
 	position: fixed;
 	left: 0px;
 	top: 0px;
@@ -114,6 +112,7 @@ font:hover {
  	}
 
 .popupGroup {
+	z-index: 5;
 	position: relative;
 	animation: slideIn .3s linear;
 	}
@@ -134,6 +133,7 @@ font:hover {
 	.popupWindow {
 	padding: 0px;
 	top: -120px;
+	left: -30;
 	margin: 30px auto;
 		Scale: 0.5;
 		}
