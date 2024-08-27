@@ -4,40 +4,43 @@ body.darktheme{
 }
 
 @media screen
-.la-theater-masks:before {
-content: "\f2bd";
+	.la-theater-masks:before {
+	content: "\f2bd";
 }
+
 .la-theater-masks:before {
-content: "\f2bd";
-}
+	content: "\f2bd";
+	}
 
 .video-mute-state {
-top: 30px;
-right: 10px;
-position: absolute;
-color: white;
-border-radius: 2vh;
-background-color: #b11313;
-padding: 2px 2px 2px 1px;
-z-index: 2;
-scale: 1.5;
-}
+	top: 30px;
+	right: 10px;
+	position: absolute;
+	color: white;
+	border-radius: 2vh;
+	background-color: #b11313;
+	padding: 2px 2px 2px 1px;
+	z-index: 2;
+	scale: 1.5;
+	display:none;
+	}
 
 .signal-meter {
-width: 22px;
-height: 22px;
-position: absolute;
-right: 30px;
-top: 40px;
-font-size: 1.5em;
-z-index: 2;
-cursor: help;
-scale: 1.5;
+	width: 22px;
+	height: 22px;
+	position: absolute;
+	right: 30px;
+	top: 40px;
+	font-size: 1.5em;
+	z-index: 2;
+	cursor: help;
+	scale: 1.5;
+	display:none;
 }
 
 .holder {
-padding-top: 10px;
-	padding-bottom: 30px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .toggleSize {
