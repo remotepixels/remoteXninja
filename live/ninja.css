@@ -27,10 +27,6 @@ content: "\f2bd";
 	align-items: left;
 	justify-content: left;
 	flex-wrap: wrap;
-	bottom: 80px;
-	min-width: 50px;
-	cursor: grab;
-	scale: 125%;
 	padding: 2px;
 }
 
@@ -47,7 +43,6 @@ content: "\f2bd";
 	border-radius: 30px;
 	transition: border-radius 200ms ease-in-out;
 	box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
-	scale: 125%;
 }
 
 #subControlButtons div:hover {
