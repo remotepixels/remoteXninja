@@ -299,7 +299,7 @@ function validateStageName(){
 //load vdo.ninja client session with the sessionFile and the encodedStageName into the iframe with all parameters
 function loadNinja () {
 	document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label="+encodedStagename+"&bc&ad=1&np&vd=0&hh&as&ee&cb=0&ns&nsb&nohub&cv&nofiles&miconly&hidetranslate&darkmode&chroma=2e2e2e&disablehotkeys&nocontrols&showlist=1&margin=10&sync=-200&css=https://remotepixels.app/ninja.css";   
+	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label="+encodedStagename+"&bc&ad=1&np&vd=0&hh&as&ee&cb=0&cv&hpb&ns&nsb&nohub&hm&hidehome&controlbarspace&hiddenscenebitrate=10000&nofiles&miconly&hidetranslate&darkmode&chroma=2e2e2e&disablehotkeys&nocontrols&margin=10&showlist=1&sync=-200&css=https://remotepixels.app/ninja.css&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&dpi=2";   
         return false;
 	}
     
