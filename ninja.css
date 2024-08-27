@@ -13,9 +13,9 @@ body.darktheme{
 	}
 
 .video-mute-state {
-	top: 30px;
-	right: 10px;
 	position: absolute;
+	top: -20px;
+	right: 0px;
 	color: white;
 	border-radius: 2vh;
 	background-color: #b11313;
