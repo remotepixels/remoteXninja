@@ -11,6 +11,13 @@ content: "\f2bd";
 content: "\f2bd";
 }
 
+.holder {
+	top: 20px;
+	border-width: 20px;
+	border-radius: 10px;
+	padding-bottom: 60px;
+}
+
 .toggleSize {
 	font-size: 28px;
 	color: #a4a4a4;
