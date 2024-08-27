@@ -30,7 +30,7 @@ content: "\f2bd";
 	bottom: 80px;
 	min-width: 50px;
 	cursor: grab;
-	scale: 100%;
+	scale: 125%;
 	padding: 2px;
 }
 
@@ -47,65 +47,12 @@ content: "\f2bd";
 	border-radius: 30px;
 	transition: border-radius 200ms ease-in-out;
 	box-shadow: 1px 1px 3px rgba(0,0,0,0.05);
-	scale: 100%;
+	scale: 125%;
 }
 
 #subControlButtons div:hover {
 	background-color: var(--discord-grey-3);
 	border-radius: 40px;
-	scale: 120%;
-}
-
-#connectUsers {
-	float: right;
-	position: absolute;
-	max-width: 300px;
-	min-width: 300px;
-	max-height: 80%;
-	background-color: rgba(8, 9, 14, 0.53);
-	z-index: 5;
-	padding: 10px;
-	right: 20px;
-	bottom: 80px;
-	box-shadow: 2px 2px #313131;
-	border-radius: 12px;
-	border: 1px solid #707070;
-	opacity: 0.7;
-	color: white;
-	}
-
-.volume-control-userlist {
-	display: none;
-}
-
-.fullwindowButton {
-	transition: opacity 0.3s;
-	width: 0vh;
-	height: 0vh;
-	max-width: 0px;
-	max-height: 0px;
-	min-width: 0px;
-	min-height: 0px;
-	position: absolute;
-	font-display: none;
-	z-index: 6;
-	right: 4vh;
-	top: 4vh;
-	color: white;
-	cursor: pointer;
-}
-
-.fullwindowButtonimg {
-	user-select: none;
-	background-color:#0007;
-	width:4vh;
-}
-
-#closedList_connectUsers {
-	cursor: pointer;
-	color: #9d9d9d;
-	padding: 25;
-	margin: 2px 2px 0 0;
-	font-size: 200%;
+	scale: 125%;
 }
 
