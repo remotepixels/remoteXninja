@@ -72,6 +72,7 @@ font:hover {
 	border: none;
 	width: 100%;
 	height: 100vh;
+	background-color: #2e2e2e;
 	}
 
 .directorroom {
@@ -137,6 +138,11 @@ font:hover {
 	}
 
 .askNamePopupContent {
+	margin: auto;
+	display: none;
+	}
+
+.loadingPopup {
 	margin: auto;
 	display: none;
 	}

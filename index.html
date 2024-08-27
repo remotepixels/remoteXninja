@@ -73,13 +73,19 @@
 <!--popup window content : ask for a username--> 
 				<div class="askNamePopupContent" id="askNamePopupContent")>
 					<div class="popupIcon"><img src=images/icon_round_user.png></div>
-					<div class="popupTitle">Enter your stage name</div>
+					<div class="popupTitle">Enter your name</div>
 					<form id="stageName" name="stageName" action="" onsubmit="return validateStageName()" method="post" required>
 						<input class="enterStageName" type="text" maxlength=50 name=enterStageName>
-						<div class="popupTitle" style="font-size: 14px; margin-top: 6px; color: grey;"> * This name will be visible to other users.<p>If you wish to chat with others you must allow<br>microphone access when prompted.</div>   
+						<div class="popupTitle" style="font-size: 14px; margin-top: 6px; color: grey;"> * This name will be visible to other users.</div>   
 						<input type="submit" value="Join" class=button style="margin-top: 10px;">                            
 					</form>
-				</div>                    
+				</div> 
+
+				<div class="loadingPopup" id="loadingPopup" >
+					<div class="popupIcon"><img src=images/icon_round_connect.png></div>
+					<div class="popupTitle">Connecting...<p></div>
+					<div class="popupTitle" style="font-size: 18px; margin-top: 6px; color: grey;">You may be prompted to allow microphone access.*<p>*If you choose to Allow access,<br>you will be able to talk to the other participants.</div>
+				</div>                  
 			</div>
 		</div>
 	</div>
@@ -143,7 +149,7 @@ if  (query != 0) {
 	request.send(null);
 
 	if (request.status === 200) { //if the file exists
-	        if (cookieStoredName != "" && cookieStoredName != null) { 		//and if there is a cookie 
+	        if (cookieStoredName != "" && cookieStoredName != null) { 		//if there is a cookie 
         		document.getElementById("topnav").style.display = "none";
 			document.getElementById("subNav").style.display = "block";
 			sessionFile = sessionIDURL;
@@ -152,7 +158,7 @@ if  (query != 0) {
 			startTime ();
 			loadNinja ();
 			}
-		else { 									//if there is no cookie
+		else { 									//if there is no cookie ask for a username
 			blackout.style.display = "block";
 			sessionIDpopupContent.style.animation = "fadeOut 300ms";
 			setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
@@ -246,11 +252,12 @@ function validateSessionID(){
 	request.send(null);
 
 	if (request.status === 200) {							 //if the sessionID entered matches the file on the server check if you've been here in the last 24 hours, if you have don't ask for a username and login automatically
-if (cookieStoredName != "" && cookieStoredName != null) {
-			blackout.style.animation = "fadeOut 500ms ease-out";
-			setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 500);    
+		if (cookieStoredName != "" && cookieStoredName != null) {
+   
 			document.getElementById("topnav").style.display = "none";
 			document.getElementById("subNav").style.display = "block";
+//			document.getElementById("sessionIDpopupContent").style.display = "none";
+//			document.getElementById("loadingPopup").style.display = "block";
 			setCookie("username", cookieStoredName);			//increment cookie for 24 hours
 			encodedStagename = cookieStoredName;
 			startTime (); 
@@ -283,11 +290,11 @@ function validateStageName(){
 		}
 	else {
 		let uri = document.forms ["stageName"]["enterStageName"].value;		//encode the name entered to a URI to escape any odd characters
-		encodedStagename = encodeURIComponent(uri);
-		blackout.style.animation = "fadeOut 500ms ease-out";
-		setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 500);        
+		encodedStagename = encodeURIComponent(uri);     
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("subNav").style.display = "block";
+//		document.getElementById("askNamePopupContent").style.display = "none";
+//		document.getElementById("loadingPopup").style.display = "block";
 		setCookie("username", encodedStagename);				//set a cookie for the next 24 hours
 		startTime ();
 		loadNinja ();
@@ -299,10 +306,12 @@ function validateStageName(){
 //load vdo.ninja client session with the sessionFile and the encodedStageName into the iframe with all parameters
 function loadNinja () {
 	document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label="+encodedStagename+"&bc&ad=1&np&vd=0&hh&as&ee&cb=0&cv&hpb&ns&nsb&nohub&hm&hidehome&controlbarspace&hiddenscenebitrate=10000&nofiles&miconly&hidetranslate&darkmode&chroma=2e2e2e&disablehotkeys&nocontrols&margin=10&showlist=1&sync=-200&css=https://remotepixels.app/ninja.css&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&signalmeter";   
+	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+"&label="+encodedStagename+"&bc&ad=1&np&vd=0&hh&as&ee&cb=0&cv&hpb&ns&nsb&nohub&hm&hidehome&controlbarspace&hiddenscenebitrate=10000&nofiles&miconly&hidetranslate&darkmode&chroma=2e2e2e&disablehotkeys&nocontrols&margin=10&showlist=1&sync=-200&css=https://remotepixels.app/ninja.css&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico&signalmeter"; 
+
+	blackout.style.animation = "fadeOut 500ms ease-out";
+	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 300); 
         return false;
 	}
-    
 </script>
 </html>
 </html>
