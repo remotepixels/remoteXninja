@@ -302,8 +302,7 @@ font:hover {
 		opacity: 0;
 	}
 	.topnav {
-		height: 20px;
-		/*opacity: 0;*/
+		height: 0px;
 		}
 	.navbar {
 		top: 5px;
