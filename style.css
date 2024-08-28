@@ -293,6 +293,18 @@ font:hover {
 	}
 }
 
+@media (orientation: landscape) {
+	.topnav {
+		opacity: 0;
+		}
+	}
+
+@media (orientation: portrait) {
+	.topnav {
+		opacity: 1;
+		}
+	}
+
 :where([autocomplete=one-time-code]) {
   --otp-digits: 6;
   --otp-ls: 2ch;
