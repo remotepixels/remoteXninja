@@ -300,7 +300,7 @@ font:hover {
 	.siteIcon {
 		margin-top: 10px;
 		opacity: 0;
-	}
+		}	
 	.topnav {
 		height: 0px;
 		}
@@ -313,6 +313,7 @@ font:hover {
 	.siteIcon {
 		margin-top: 10px;
 		opacity: 1;
+		}
 	.topnav {
 		opacity: 1;
 		}
