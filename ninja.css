@@ -72,13 +72,17 @@
 	width:4vh;
 }
 
+.tile {
+  margin-top: 10vh!important;
+  max-height: 90vh!important;
+}
+
 .video-label {
-	color: #8e8e8e;
-  bottom: 2vh;
-	left: 50%;
-	transform: translateX(-20%);
-  background: rgba(0, 0, 0, .8);
-	pointer-events:none;
-	border-radius: 0px;
-	font-size: 3em;
+	bottom:unset;
+	top:0;
+	text-align:middle;
+	left:unset;
+	background:unset;
+	text-shadow : 0 0 10px #035;
+	font-size: 7vh!important;
 }
