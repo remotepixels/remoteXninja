@@ -72,17 +72,27 @@
 	width:4vh;
 }
 
+.container_holder_video {
+	max-height:135px!important;
+	height:135px!important;
+	
+}
 .tile {
-  margin-top: 10vh!important;
-  max-height: 90vh!important;
+  margin-top: 0vh!important;
+  max-height: 100vh!important;
 }
 
 .video-label {
-	bottom:unset;
-	top:0;
-	text-align:middle;
-	left:unset;
-	background:unset;
-	text-shadow : 0 0 10px #035;
-	font-size: 7vh!important;
+	font: Arial; 
+	font-size: 20px!important;
+	font-weight: 400; 
+	overflow:visible!important;
+	background-color:#ffffff;
+	line-height:0.5;
+	position:absolute!important;
+	text-align: center!important;
+	margin:auto!important;
+	width:100%;
+	top:120px;
+	color: #d4d4d4;
 }
