@@ -72,16 +72,6 @@
 	width:4vh;
 }
 
-.container_holder_video {
-	max-height:135px!important;
-	height:135px!important;
-	
-}
-.tile {
-  margin-top: 0vh!important;
-  max-height: 100vh!important;
-}
-
 .video-label {
 	font: Arial; 
 	font-size: 20px!important;
