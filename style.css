@@ -36,7 +36,7 @@ iframe {
 	}
 .navbar {
 	position: fixed;
-	top: 10px;
+	top: 12px;
 	right: 0px;
 	}
 .liveSessionIcon {
@@ -48,7 +48,7 @@ iframe {
 	width: 45px;
 	height: 10px;
 	top: -2px;
-	right: 5px;
+	right: 10px;
 	color: #C94326;
 	background-color: #ffffff;
 	text-decoration: none;
@@ -196,8 +196,11 @@ font:hover {
 .directorroom {
 	position: relative;
 	width: 100%;
-	height: 100%;
-	margin-top: 60px;
+	height:calc(100% - 40px);
+	border:0px;
+	margin:0px;
+	padding:0px;
+	top:40px;
 	}
 
 /*popup for session ID and username*/
