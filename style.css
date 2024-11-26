@@ -36,8 +36,8 @@ iframe {
 	}
 .navbar {
 	position: fixed;
-	top: 5px;
-	right: 12px;
+	top: 10px;
+	right: 0px;
 	}
 .liveSessionIcon {
 	position: absolute;
@@ -46,14 +46,14 @@ iframe {
 	text-align: center; 
 	display: none;
 	width: 45px;
-	height: 15px;
-	top: -6px;
-	right: 7px;
+	height: 10px;
+	top: -2px;
+	right: 5px;
 	color: #C94326;
 	background-color: #ffffff;
 	text-decoration: none;
 	border-radius:12px;
-	padding: 5px;
+	padding: 2px 2px 8px 2px;
 	border: 1px solid #C94326;
 	Cursor: pointer;
 	-moz-animation: pulse 2s infinite;
@@ -334,47 +334,32 @@ font:hover {
 	}
 
 /*browser orientation setups for responsive design*/
-@media (orientation: landscape) {
-	.portfolio {
-  		position: relative;
+
+@media (orientation: landscape) and (width <= 932px) {
+	.portfolioIFrame {
+  		position: absolute!important;
 		z-index: 1;
-		margin-top: 54;
+		top:-40px;
   		width: 100%;
 		height:100%;
   		background: #fefefe;
 		}
-	.popupWindow {
-		Scale: 1;
-		}
-	.endSessionIcon {
-		top: 14px;
-	}
-}
-@media (orientation: landscape) and (width <= 947px) {
-	.portfolio {
-  		position: relative;
-		z-index: 1;
-		margin-top: -25px;
-  		width: 100%;
-		height:100%;
-  		background: #fefefe;
-		}
-	.clock {
-		opacity: 0;
-		}
+	.site-header {
+        padding: 0px!important;
+    }
 	.ninjaIcon {
 		opacity: 0;
 		}	
 	}
 @media (orientation: landscape) and (height <= 300px) {
-	.portfolio {
-  		position: relative;
-		z-index: 1;
-		margin-top: -4px;
-  		width: 100%;
-		height:100%;
-  		background: #fefefe;
-		}
+.portfolioIFrame {
+	position: absolute;
+	top: -40px;
+	border:0;
+	width: 100%;
+	height: calc(100% - 40px);
+	background-color: #ededed;
+	}
 	.popupWindow {
 		Scale: 0.5;
 		}
@@ -397,9 +382,9 @@ font:hover {
 		}
 	}
 @media (orientation: portrait) {
-	.portfolio {
+	.portfolioIFrame {
 		z-index: 1;
-		top: 40px;
+		top: -40px;
   		width: 100%;
 		height:100%;
   		background: #fefefe;
@@ -407,12 +392,29 @@ font:hover {
 	.ninjaIcon:hover {
 		opacity: 0;
 	}
-	.clock {
-		opacity: 0;
-		}
+
 	.ninjaIcon {
 		opacity: 0;
 		}
+	.mainIFrame {
+	width:calc(100% - 5px);
+	height:calc(100% - 5px);
+	border:0px;
+	margin:0px;
+	padding-left:0px;
+	position:fixed;
+	top:40px;
+	left:5px;
+	background-image: linear-gradient(-45deg, #0d0d0d, #222222);
+	border-radius:12px;
+	display:block;
+}
+.chatIFrame {
+	z-index:2;
+	height:180;
+	top:-142;
+	display:none;
+}
 	}
 
 /*animation*/
