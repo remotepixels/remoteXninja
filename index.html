@@ -40,7 +40,7 @@
 
 <!-- top navbar for live session -->    
 	<div class="topnav" id="subNav" style="background-color: #000000 ;display: none;">
-		<img src="images/icon.png" height="44" width="44" class="siteIcon" id="siteIcon"/>
+		<img src="images/icon.png" height="30" width="30" class="siteIcon" id="siteIcon"/>
 		<div class="ninjaIcon"> 
          		<a href="https://vdo.ninja" target="_blank" class="vdoninjatext"> Powered by<br>VDO.NINJA 
 					<img  class="vdoninjacat" src="images/ninja.png" width="23" height="23"/> </a>
@@ -83,7 +83,7 @@
 				<div class="askNamePopupContent" id="askNamePopupContent">
 					<div class="popupTitle">Enter your name</div>
 					<form id="stageName" name="stageName" onsubmit="return validateStageName()" method="post" required>
-						<input class="enterStageName" type="text" maxlength=50 name=enterStageName>
+						<input class="enterStageName" type="text" maxlength=9 name=enterStageName>
 						<div class=subtext>Your browser may prompt you for microphone and camera acces, if you accept you will be able to talk to the other participants.</div>   
 						<input type="submit" value="connect" class=button>                            
 					</form>
@@ -263,7 +263,7 @@ function validateSessionID(){
 	request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
 	request.send(null);
 
-	if (request.status === 200) {							 //if the sessionID entered matches the file on the server check if you've been here in the last 24 hours, if you have don't ask for a username and login automatically
+	if (request.status === 200) {	//if the sessionID entered matches the file on the server check if you've been here in the last 24 hours, if you have don't ask for a username and login automatically
 		if (cookieStoredName != "" && cookieStoredName != null) {
    
 			document.getElementById("topnav").style.display = "none";
@@ -275,7 +275,7 @@ function validateSessionID(){
 			startTime (); 
 			loadNinja ();
 		}    
-		else {									//if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
+		else {			//if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
 			sessionIDpopupContent.style.animation = "fadeOut 300ms";
 			setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
 			askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
@@ -283,7 +283,7 @@ function validateSessionID(){
 			return false;
 			}
 		}
-	else {										//and if the sessionID does not match the file on server shake the box to clear it
+	else {							//and if the sessionID does not match the file on server shake the box to clear it
 		popupWindow.style.animation = "shake 500ms";
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
 		document.forms["sessionIDCode"]["sessionIDInput"].focus();
@@ -335,8 +335,8 @@ function loadNinja () {
 		"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
 		"&cover"+	//make video cover space
 		"&ad=0"+	//auto select audio source to 1, often microphone
-		"&rounded=50"+
-		"&mirror=2"+
+		"&rounded=50"+	//makes videos round
+		"&mirror=2"+	//mirrors guest videos
 		"&scale=25"+	//scales incoming video to quarter size
 		"&st=6"+	//show audio only sources as coloured circles with fiest letter of name
 		"&meterstyle=2"+	//round highlight over person talking
@@ -350,7 +350,7 @@ function loadNinja () {
 		"&nohub"+	//hide hangup button
 		"&hm+"+	//hide vdo ninja menu
 		"&hidehome"+	//hide vdo ninja home page
-		"&hiddenscenebitrate=100"+	//should be set by director but
+		"&hiddenscenebitrate=100"+	//should be set by director but make as low as possible
 		"&roombitrate=100"+
 		"&transparent"+	//makes bg transparent
 		"&nofiles"+	//no file share button
@@ -366,7 +366,6 @@ function loadNinja () {
 	//set sources for main frame
 	var mainFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
 		"&view=RemotePixels_"+sessionFile+"_mainFeed"+ //shows only the directors main feed on left
-//		"&scenetype=3&order=1"+
 		"&nopush"+ //don't show up in other views
 		"&bc"+	//broadcast mode, only shows director no other guests videos
 		"&solo"+	//solos view only show the master stream
@@ -374,35 +373,14 @@ function loadNinja () {
 		"&ad=0"+	//disable audio for frame
 		"&vd=0"+	//disable video device for frame
 		"&hideplaybutton"+	//hides big play button if autoplay is disabled
-//		"&np"+	//no preview, turns off self preview
-//		"&hh"+	//hide vdo ninja header
 		"&as"+	//autostart, skips the camera microphone selection screen
-//		"&ee"+	//easy exit
-//		"&cb=0"+	//chat button 0 turns off
 		"&cv"+	//clean viewer
-//		"&hpb"+	//hide play button
-//		"&ns"+	//no settings and no screenshare
-//		"&nsb"+	//hide speaker button
-//		"&nohub"+	//hide hangup button
-//		"&hm+"+	//hide vdo ninja menu
-//		"&hidehome"+	//hide vdo ninja home page
-//		"&controlbarspace"+	//adds space at bottom for control asr
-		"&hiddenscenebitrate=3500"+	//should be set by director but
-		"&roombitrate=3500"+
+		"&poster=images/bg_bars.png"+	//hide play button
+		"&hiddenscenebitrate=5000"+	//should be set by director but
+		"&roombitrate=5000"+
 		"&transparent"+	//makes bg transparent
-//		"&nofiles"+	//no file share button
-//		"&miconly"+	//connects via microphone only
-//		"&hidetranslate"+	//hides translate menu
-//		"&darkmode"+	//
-//		"&chroma=2e2e2e"+ //sets background colour
-//		"&disablehotkeys"+	//no hotkeys
-//		"&nocontrols"+	//hides video player controls
-//		"&margin=10"+	//add margin of x pixels around video
-		"&showlist=0"+	//show hidden guest list
 		"&sync=-200"+	//fix sync about 4 frames, a bit flakey
-		"&signalmeter"+ //adds signal meter
-//		"&css=https://remotepixels.app/ninja.css"+	//load style sheet
-//		"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico"+	//favourite icon 
+		"&css=https://remotepixels.app/ninjastream.css"+	//load style sheet
 		""; 
 	
 	//create the chat iframe
@@ -451,5 +429,29 @@ function loadNinja () {
 //	"&controlbarspace"+	//adds space at bottom for control asr
 //	"&miconly"+	//connects via microphone only
 //	"&chroma=2e2e2e"+ //sets background colour
+	
+//unused parameters for main feed
+//	"&scenetype=3&order=1"+
+//	"&np"+	//no preview, turns off self preview
+//	"&hh"+	//hide vdo ninja header
+//	"&ee"+	//easy exit
+//	"&cb=0"+	//chat button 0 turns off
+//	"&ns"+	//no settings and no screenshare
+//	"&nsb"+	//hide speaker button
+//	"&nohub"+	//hide hangup button
+//	"&hm+"+	//hide vdo ninja menu
+//	"&hidehome"+	//hide vdo ninja home page
+//	"&controlbarspace"+	//adds space at bottom for control asr
+//	"&nofiles"+	//no file share button
+//	"&miconly"+	//connects via microphone only
+//	"&hidetranslate"+	//hides translate menu
+//	"&darkmode"+	//
+//	"&chroma=2e2e2e"+ //sets background colour
+//	"&disablehotkeys"+	//no hotkeys
+//	"&nocontrols"+	//hides video player controls
+//	"&margin=10"+	//add margin of x pixels around video
+//	"&showlist=0"+	//show hidden guest list
+//	"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico"+	//favourite icon 
+//	"&signalmeter"+ //adds signal meter
 	
 </script>

@@ -96,7 +96,6 @@
 	border-style: solid;
 	top:4px!important;
 	left:4px!important;
-	/* z-index: +33!important; */!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;
 }
 
 .container_holder_video{
@@ -107,8 +106,7 @@
 	top:0px!important;
 	margin-top:2px!important;
 	overflow:hidden!important;
-	
-}
+	}
 
 .container_holder_video:hover {
 	background-color: #ffffff0f!important;
