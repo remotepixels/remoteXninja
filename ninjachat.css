@@ -9,8 +9,7 @@
 	align-items: left;
 	justify-content: left;
 	flex-wrap: wrap;
-	bottom: 0px!important;
-	left: -10px!important;
+	bottom: 0px;
 	min-width: 100px;
 	cursor: default;
 	scale: 100%;
@@ -37,16 +36,6 @@
 	background-color: var(--discord-grey-3);
 	border-radius: 20px;
 	scale: 120%;
-}
-
-@media only screen and (max-width: 1200px) {
-	#subControlButtons {
-	left: 7px;
-	}
-	#connectUsers {
-	max-width: 100px;
-	min-width: 100px;
-	}
 }
 
 .fullwindowButton {
@@ -110,7 +99,7 @@
 
 .container_holder_video:hover {
 	background-color: #ffffff0f!important;
-		border-radius:10px!important;
+	border-radius:10px!important;
 	}
 
 video {
@@ -173,6 +162,7 @@ video[data-speaking="2"] {
 #popupSelector_user_settings {
 	display:none!important;
 }
+
 #canvas {
 		border-radius:50px!important;	
 }
@@ -229,4 +219,39 @@ scale:1.3;
 	overflow:hidden;
 	z-index: 5;
 	cursor: help;
+}
+
+/*portrait orientation for iphones etc*/
+@media (orientation: landscape) {
+	#subControlButtons {
+		display: inline;
+		position: absolute;
+		pointer-events: auto;
+		border: #ff00004f 1px solid;
+		border-radius: 10px;
+		align-items: left;
+		justify-content: left;
+		flex-wrap: wrap;
+		bottom: -9px!important;
+		right: -10px ;
+		min-width: 80px;
+		cursor: default;
+		scale: 85%;
+		padding: 1px;
+	}
+	.holder {
+		scale:0.9;
+	}
+	.container_holder_video{
+		display:inline-block!important;
+		position:relative!important;
+		width:96px!important;
+		left:2px!important;
+		top:0px!important;
+		height:96px!important;
+		margin-top:2px!important;
+	}
+	.video-label{
+		display:none;
+	}	
 }
