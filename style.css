@@ -14,7 +14,7 @@ iframe {
 	position:absolute;
 	display:block;
 }
-/*nabar styles including live, end icons*/
+
 .topnav {
 	z-index: 2;
 	position: fixed;
@@ -26,6 +26,12 @@ iframe {
  	overflow: hidden;
 	box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.35);
 	}
+.navbar {
+	position: fixed;
+	top: 12px;
+	right: 0px;
+	}
+
 .siteIcon {
 	position: fixed;
 	top:5;
@@ -34,11 +40,7 @@ iframe {
 	height:30px;
 	opacity: 1;
 	}
-.navbar {
-	position: fixed;
-	top: 12px;
-	right: 0px;
-	}
+
 .liveSessionIcon {
 	position: absolute;
 	font: 14px Arial; 
@@ -65,30 +67,8 @@ iframe {
 	color: white;
 	}	
 
-.endSessionIcon {
-	font: 14px Arial; 
-	font-weight: bold; 
-	text-align: center; 
-    display: inline;
-    position: absolute;
-    width: 88px;
-	height: 15px;
-	top: 11px;
-	right: 7px;
-	color: #901a00;
-	text-decoration: none;
-	border-radius:12px;
-	padding: 5px;
-	border: 1px solid #c42300;
-	Cursor: pointer;
-	}
-.endSessionIcon:hover {
-	background-color: #c42300;
-	color: white;
-	}
-
 .clock {
-	position: absolute;
+	position: relative;
 	text-align: center; 
 	left:calc(100% - 105px);
 	width:85px;
@@ -98,6 +78,19 @@ iframe {
 	padding: 3px 5px 2px 5px;
 	border: 1px solid #ffffff4d;
 	background-color: #000000;
+	font: 18px Arial;
+	font-weight: 100;
+	Cursor: default;
+	}
+.sessionDuration {
+	position: relative;
+	text-align: center; 
+	left:calc(100% - 230px);
+	width:85px;
+	top:8px;
+	color: #797979;
+	border-radius:10px;
+	padding: 3px 5px 2px 5px;
 	font: 18px Arial;
 	font-weight: 100;
 	Cursor: default;
@@ -166,7 +159,6 @@ font:hover {
 	height: calc(100% - 40px);
 	background-color: #ededed;
 	}
-
 .mainIFrame {
 	width:calc(100% - 115px);
 	height:calc(100% - 45px);
@@ -326,19 +318,9 @@ font:hover {
 	margin-bottom: 5;
 }
 
-.loadingPopup {
-	margin: auto;
-	display: none;
-	}
-
-.confirmEndSession {
-	margin: auto;
-	display: none;
-	}
-
 /*browser orientation setups for responsive design*/
-
 @media (orientation: landscape) and (height <= 300px) {
+/*this orientation should never happen but who knows right?*/
 .portfolioIFrame {
 		position: absolute;
 		top: -40px;
@@ -368,6 +350,7 @@ font:hover {
 		top:0px;
 		}
 	}
+
 @media (orientation: portrait) {
 	.portfolioIFrame {
 		z-index: 1;
@@ -379,7 +362,6 @@ font:hover {
 	.ninjaIcon:hover {
 		opacity: 0;
 	}
-
 	.mainIFrame {
 		width:calc(100% - 5px);
 		height:calc(100% - 150px);
@@ -393,7 +375,6 @@ font:hover {
 		border-radius:12px;
 		display:block;
 	}
-	
 	.chatIFrame {
 		z-index:2;
 		height:100;
