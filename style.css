@@ -150,7 +150,7 @@ font:hover {
 	Cursor: pointer;
 	}
 
-/*main frames, portfolio, director view, main room*/
+
 .portfolioIFrame {
 	position: absolute;
 	top: 40px;
@@ -168,13 +168,14 @@ font:hover {
 	position:fixed;
 	top:40px;
 	left:5px;
-	background-image: linear-gradient(-45deg, #0d0d0d, #222222);
+	background-image: linear-gradient(-45deg, #ffffff, #222222);
 	border-radius:12px;
 	display:block;
+	z-index:0;
 }
 .chatIFrame {
-	width:100px;
-	height:calc(100% - 40px);
+	width:400px;
+	height:100%;
 	border:0px;
 	margin:0px;
 	padding:0px;
@@ -182,9 +183,12 @@ font:hover {
 	right:5px;
 	border-radius:10px;
 	position:fixed;
-	display:inline;
-	background-image: linear-gradient(180deg, #222222, #0d0d0d);
+	z-index:5;
+	overflow:auto;
+	background-color: #00000000;
+	
 }
+
 .directorroom {
 	position: relative;
 	width: 100%;
@@ -193,7 +197,8 @@ font:hover {
 	margin:0px;
 	padding:0px;
 	top:40px;
-	}
+}
+
 
 /*popup for session ID and username*/
 .blackout {
@@ -277,7 +282,6 @@ font:hover {
 	border-radius:20px;
 	font: 20px Arial; 
 	font-weight: 100;
-/*	transition-duration: 0.2s;*/
 	Cursor: pointer;
 	}
 .button:hover {
@@ -319,8 +323,8 @@ font:hover {
 }
 
 /*browser orientation setups for responsive design*/
-@media (orientation: landscape) and (height <= 300px) {
-/*this orientation should never happen but who knows right?*/
+/*@media (orientation: landscape) and (height <= 300px) {
+this orientation should never happen but who knows right?
 .portfolioIFrame {
 		position: absolute;
 		top: -40px;
@@ -349,49 +353,38 @@ font:hover {
 		height:100%;
 		top:0px;
 		}
-	}
-@media (orientation: landscape) and (width <= 934px) {
-/*this orientation should never happen but who knows right?*/
-.portfolioIFrame {
-		position: absolute;
-		top: -40px;
-		border:0;
-		width: 100%;
-		height: calc(100% - 40px);
-		background-color: #ededed;
-	}
+}
+*/
 
-
-	}
 @media (orientation: portrait) {
 	.portfolioIFrame {
 		z-index: 1;
-  		width: 100%;
+		width: 100%;
 		height:100%;
-  		background: #fefefe;
+		background: #fefefe;
 		}
 	.ninjaIcon:hover {
 		opacity: 0;
 	}
 	.mainIFrame {
-		width:calc(100% - 5px);
+		width:calc(100% - 10px);
 		height:calc(100% - 150px);
-		border:0px;
-		margin:0px;
-		padding-left:0px;
-		position:fixed;
-		top:40px;
-		left:5px;
-		background-image: linear-gradient(-45deg, #0d0d0d, #222222);
-		border-radius:12px;
-		display:block;
-	}
+	}	
 	.chatIFrame {
-		z-index:2;
-		height:100;
-		top:calc(100% - 105px);
-		width:calc(100% - 5px);
+		width:calc(100% - 10px);
 		left:5px;
+	}
+}
+
+
+@media (orientation: landscape) and (width <= 912px) {
+.portfolioIFrame {
+		position: absolute;
+		top: -80px;
+		border:0;
+		width: 100%;
+		height: calc(100% + 40px);
+		background-color: #ededed;
 	}
 }
 

@@ -120,7 +120,7 @@ if (user != "") {
    
 //sets cookie with the users name (encodedStageName) and lets it expire in 24 hours (86400*1000 millisconds)
 function setCookie(cname,cvalue) {
-	let expires = "expires=" + (new Date(Date.now()+ 86400*1000).toUTCString()); //set cookie for 30 seconds to test
+	let expires = "expires=" + (new Date(Date.now() + 86400*1000).toUTCString());
 	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 	return;
 	}
@@ -163,7 +163,7 @@ if  (query != 0) {
 			startTime ();
 			loadNinja ();
 			}
-		else { 									//if there is no cookie ask for a username
+		else {	//if there is no cookie ask for a username
 			blackout.style.display = "block";
 			sessionIDpopupContent.style.animation = "fadeOut 300ms";
 			setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
@@ -172,7 +172,7 @@ if  (query != 0) {
 			sessionFile = sessionIDURL;
 			}
 		}
-	else {										//if the URL string supplied does not exist
+	else {		//if the URL string supplied does not exist
 		blackout.style.animation = "fadeIn 500ms ease-out";
 		blackout.style.display = "block";
 		setTimeout(function () { blackout.style.animation = "none";}, 300);
@@ -264,8 +264,8 @@ function validateSessionID(){
    
 			document.getElementById("topnav").style.display = "none";
 			document.getElementById("subNav").style.display = "block";
-//			document.getElementById("sessionIDpopupContent").style.display = "none";
-//			document.getElementById("loadingPopup").style.display = "block";
+			//document.getElementById("sessionIDpopupContent").style.display = "none";
+			//document.getElementById("loadingPopup").style.display = "block";
 			setCookie("username", cookieStoredName);			//increment cookie for 24 hours
 			encodedStagename = cookieStoredName;
 			startTime (); 
@@ -294,15 +294,13 @@ function validateStageName(){
         if (!varstageName) {								//if they try to submit an empty name shake the box and highlight the stage name field
 		popupWindow.style.animation = "shake 500ms";
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.forms["stageName"]["enterStageName"].focus(); }, 300);  
-  		return false;
+		return false;
 		}
 	else {
 		let uri = document.forms ["stageName"]["enterStageName"].value;		//encode the name entered to a URI to escape any odd characters
 		encodedStagename = encodeURIComponent(uri);     
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("subNav").style.display = "block";
-//		document.getElementById("askNamePopupContent").style.display = "none";
-//		document.getElementById("loadingPopup").style.display = "block";
 		setCookie("username", encodedStagename);				//set a cookie for the next 24 hours
 		startTime ();
 		loadNinja ();
@@ -333,7 +331,9 @@ function loadNinja () {
 		"&ad=0"+	//auto select audio source to 1, often microphone
 		"&rounded=50"+	//makes videos round
 		"&mirror=2"+	//mirrors guest videos
-		"&scale=25"+	//scales incoming video to quarter size
+		//"&scale=0.25"+	//scales incoming video to quarter size
+		"&viewheight=100&viewwidth=100"+	//sets incoming video to px size (very low res)
+		"&safemode"+	//loads camera in simplist way
 		"&st=6"+	//show audio only sources as coloured circles with fiest letter of name
 		"&meterstyle=2"+	//round highlight over person talking
 		"&hh"+	//hide vdo ninja header
@@ -357,7 +357,9 @@ function loadNinja () {
 		"&showlist=0"+	//show hidden guest list
 		"&signalmeter"+ //adds signal meter
 		"&animate"+	//videos animate around when people join or leave
-//		"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
+		"&hands"+	//adds raise hand button
+		"&mono"+	//set audio to mono and reduces bitrate
+		//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
 		"&css=https://remotepixels.app/ninjachat.css"+	//load style sheet
 		""; 
 
@@ -377,7 +379,9 @@ function loadNinja () {
 		"&totalroombitrate=10000,5000"+
 		"&transparent"+	//makes bg transparent
 		"&sync=-200"+	//fix sync about 4 frames, a bit flakey
-	//	"&css=https://remotepixels.app/ninjastream.css"+	//load style sheet
+		"&buffer=500"+	//adds a xms buffer
+		"&showlist=0"+	//hides the hidden viewr list
+		//"&css=https://remotepixels.app/ninjastream.css"+	//load style sheet
 		""; 
 	
 	//create the chat iframe
@@ -396,13 +400,12 @@ function loadNinja () {
 		var iframeContainer = document.createElement("div");
 		iframeContainer.appendChild(iframe);
 		document.getElementById("mainIFrame").appendChild(iframeContainer);
-	},3000);
-
-
+		},1000);
+	
 	blackout.style.animation = "fadeOut 500ms ease-out";
 	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 300); 
-        return false;
-	}
+    return false;
+}
 	
 //	unused parameters for chat view
 //	"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico"+	//favourite icon 
