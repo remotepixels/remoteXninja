@@ -187,7 +187,7 @@ function loadNinja() {
 	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+
 		"&push=RemotePixels_"+sessionFile+"_mainFeed"+
 		//"&label=Main feed"+	//sets livestream as label for director connection
-		//"&diretor"+	//join as director
+		"&diretor"+	//join as director
 		//"&hm"+	//hides menu
 		"&showdirector"+	//shows director interface
 		"&novice"+	//simplyfy director layout
@@ -201,10 +201,12 @@ function loadNinja() {
 		"&cleandirector"+	//hides link generator in diretor room
 		"&darkmode"+	
 		"&hidetranslate"+	//hide translate
-		"&showconnections"+	//show total number of connections
+		"&signalmeter"+	//add signal meter
+		"&maxviewers=12"+ //maximum amount of viewers
+		//"&showconnections"+	//show total number of connections
 		"&chunked=5000"+	//chunked custom codec 5mbps
-		"&buffer=500"+	//chunked codec buffer in ms
-		"&retransmit"+	//will transimit between peers, maybe
+		"&buffer=250"+	//chunked codec buffer in ms
+		//"&retransmit"+	//will transimit between peers, maybe
 		//"&queue"+ 	//adds quests to queue, director must approve each to let them in
 		"";
 		return false;
