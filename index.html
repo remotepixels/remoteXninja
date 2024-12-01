@@ -328,7 +328,8 @@ function loadNinja () {
 		"&quality=3"+	//set camera quality to lowest possible, about 360p
 		"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
 		"&cover"+	//make video cover space
-		"&ad=0"+	//auto select audio source to 1, often microphone
+		"&ad=1"+
+		"&vd=1"+	//auto select audio source to 1, often microphone
 		"&rounded=50"+	//makes videos round
 		"&mirror=2"+	//mirrors guest videos
 		//"&scale=0.25"+	//scales incoming video to quarter size
@@ -355,7 +356,7 @@ function loadNinja () {
 		"&disablehotkeys"+	//no hotkeys
 		"&nocontrols"+	//hides video player controls
 		"&showlist=0"+	//show hidden guest list
-		"&signalmeter"+ //adds signal meter
+		//"&signalmeter"+ //adds signal meter
 		"&animate"+	//videos animate around when people join or leave
 		"&hands"+	//adds raise hand button
 		"&mono"+	//set audio to mono and reduces bitrate
@@ -380,7 +381,7 @@ function loadNinja () {
 		"&transparent"+	//makes bg transparent
 		//"&chunked=5000"	//try chunked codec? set by director
 		"&sync=-200"+	//fix sync about 4 frames, a bit flakey
-		"&buffer=500"+	//adds a xms buffer  set by director
+		//"&buffer=500"+	//adds a xms buffer  set by director
 		"&showlist=0"+	//hides the hidden viewr list
 		//"&css=https://remotepixels.app/ninjastream.css"+	//load style sheet
 		""; 
