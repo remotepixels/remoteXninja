@@ -1,6 +1,6 @@
 body {	
 	margin:0;
-	background-color: #000000;
+	background-color: #252525;
 	width:100%;
 	height:100%;
 	overflow: hidden;	
@@ -52,10 +52,10 @@ iframe {
 	top: -2px;
 	right: 10px;
 	color: #C94326;
-	background-color: #ffffff;
+	/*background-color: #ffffff;*/
 	text-decoration: none;
 	border-radius:12px;
-	padding: 2px 2px 8px 2px;
+	padding: 3px 2px 8px 3px;
 	border: 1px solid #C94326;
 	Cursor: pointer;
 	-moz-animation: pulse 2s infinite;
@@ -168,19 +168,20 @@ font:hover {
 	position:fixed;
 	top:40px;
 	left:5px;
-	background-image: linear-gradient(-45deg, #ffffff, #222222);
+	background-color: #171717;
 	border-radius:12px;
 	display:block;
 	z-index:0;
 }
+
 .chatIFrame {
-	width:400px;
+	width:calc(100% - 10px);
 	height:100%;
 	border:0px;
 	margin:0px;
 	padding:0px;
 	top:40px;
-	right:5px;
+	left:5px;
 	border-radius:10px;
 	position:fixed;
 	z-index:5;
@@ -370,10 +371,6 @@ this orientation should never happen but who knows right?
 		width:calc(100% - 10px);
 		height:calc(100% - 150px);
 	}	
-	.chatIFrame {
-		width:calc(100% - 10px);
-		left:5px;
-	}
 }
 
 
