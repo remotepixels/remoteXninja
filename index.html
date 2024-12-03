@@ -1,4 +1,6 @@
+<!DOCTYPE html>
 <html lang=en>
+
 <head>
 	<title>remotepixels.app</title>
 
@@ -14,7 +16,8 @@
 	<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
+	<meta name="viewport" content="minimal-ui">
+	
 	<link rel="apple-touch-icon" sizes="180x180" href="https://remotepixels.app/icons/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="https://remotepixels.app/icons/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="https://remotepixels.app/icons/favicon-16x16.png">
@@ -80,8 +83,12 @@
 					<div class="popupTitle">Enter your name</div>
 					<form id="stageName" name="stageName" onsubmit="return validateStageName()" method="post" required>
 						<input class="enterStageName" type="text" maxlength=11 name=enterStageName>
-						<div class=subtext>Your browser may prompt you for microphone and camera acces, if you accept you will be able to talk to the other participants.</div>   
-						<input type="submit" value="connect" class=button>                            
+						<img src="icons/icon-notice.png" style="display:inline-block; position:relative; top:10px; left:80px;">
+						<div class=popupTitle style="display:inline-block; position:relative; left:80px; top:0px;">Notice!</div>
+						<div class=subtext>Your browser may prompt you for microphone and camera access.<p>
+							If you deny access other participants will not be able to hear or see you.<p>
+							You can modify microphone and camera settings later via the settings gear.</div>   
+						<input type="submit" value="join" class=button>                            
 					</form>
 				</div>                 
 			</div>
@@ -137,9 +144,9 @@ function getCookie(cname) {
 	}
 
 //check if an URL parameter is supplied
-//if an url parameter is valid and there is a cookie then login automatically
-//if an url parameter is valid and there is no cookie then ask for a username
+//if an url parameter is valid and there is a cookie then skip session input and go straight to username prompt
 //if an url parameter is not valid then pop up the session ID prompt
+//this is duplicated code, really need to sort this out
 let query = location.search;
 if  (query != 0) {
 	let sessionIDURL = query.slice(1);
@@ -147,34 +154,31 @@ if  (query != 0) {
 	request.open("GET", "https://remotepixels.app/Alive"+sessionIDURL+".txt", false); // `false` makes the request synchronous
 	request.send(null);
 
-	if (request.status === 200) { //if the file exists
-	        if (cookieStoredName != "" && cookieStoredName != null) { 		//if there is a cookie 
-        		document.getElementById("topnav").style.display = "none";
-			document.getElementById("subNav").style.display = "block";
-			sessionFile = sessionIDURL;
-			encodedStagename = cookieStoredName;   
-			setCookie("username", cookieStoredName);			//increment cookie for 24 hours
-			startTime ();
-			loadNinja ();
-			}
-		else {	//if there is no cookie ask for a username
-			blackout.style.display = "block";
-			sessionIDpopupContent.style.animation = "fadeOut 300ms";
-			setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
-			askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
-			setTimeout(function () { askNamePopupContent.style.display = "block"; document.forms["stageName"]["enterStageName"].focus();}, 300);
-			sessionFile = sessionIDURL;
-			}
+	if (request.status === 200) {	
+		if (cookieStoredName == "" || cookieStoredName == null) {
+			cookieStoredName = "";
 		}
-	else {		//if the URL string supplied does not exist
+		
+		sessionIDpopupContent.style.animation = "fadeOut 300ms";
+		setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+		blackout.style.animation = "fadeIn 500ms ease-out";
+		blackout.style.display = "block";
+		askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
+		setTimeout(function () {popupWindow.style.height = "380px";
+								askNamePopupContent.style.display = "block";
+								document.forms["stageName"]["enterStageName"].value = cookieStoredName;
+								document.forms["stageName"]["enterStageName"].focus()
+							   },300);
+	}
+	//if the URL string supplied does not exist fade in seesion id box
+	else {		
 		blackout.style.animation = "fadeIn 500ms ease-out";
 		blackout.style.display = "block";
 		setTimeout(function () { blackout.style.animation = "none";}, 300);
 		document.forms["sessionIDCode"]["sessionIDInput"].focus();
-		document.forms["sessionIDCode"]["sessionIDInput"].focus();
 		}         
 	}  
-   
+
 //popup live session window if the live button is clicked
 function clickLiveSession() {
 	blackout.style.animation = "fadeIn 500ms ease-out";
@@ -231,8 +235,9 @@ input.addEventListener("keypress", function(event) {
 		document.getElementById("submitSessionID").click();
 		}
 	});
-       
-//validates the session ID when the user submits a correctly formated value as above
+
+//if no session ID supplied on the url, ask for session ID and valid it
+//validates the session ID when the user submits a correctly formated value
 //on submit, check there are 6 values in the field
 function validateSessionID(){
 	let v1 = document.forms ["sessionIDCode"]["sessionIDInput"].value;
@@ -253,27 +258,27 @@ function validateSessionID(){
 	request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
 	request.send(null);
 
-	if (request.status === 200) {	//if the sessionID entered matches the file on the server check if you've been here in the last 24 hours, if you have don't ask for a username and login automatically
-		if (cookieStoredName != "" && cookieStoredName != null) {
-   
-			document.getElementById("topnav").style.display = "none";
-			document.getElementById("subNav").style.display = "block";
-			//document.getElementById("sessionIDpopupContent").style.display = "none";
-			//document.getElementById("loadingPopup").style.display = "block";
-			setCookie("username", cookieStoredName);			//increment cookie for 24 hours
-			encodedStagename = cookieStoredName;
-			startTime (); 
-			loadNinja ();
-		}    
-		else {			//if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
-			sessionIDpopupContent.style.animation = "fadeOut 300ms";
-			setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
-			askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
-			setTimeout(function () { askNamePopupContent.style.display = "block"; document.forms["stageName"]["enterStageName"].focus();}, 300);
-			return false;
-			}
+	//if the sessionID entered matches the file on the server check if you've been here in the last 24 hours
+	//if you have auto fill username from cookie and ask to join
+	if (request.status === 200) {	
+		if (cookieStoredName == "" || cookieStoredName == null) {
+			cookieStoredName ="";
 		}
-	else {							//and if the sessionID does not match the file on server shake the box to clear it
+		
+		sessionIDpopupContent.style.animation = "fadeOut 300ms";
+		setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+		askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
+		setTimeout(function () {popupWindow.style.height = "380px";
+								askNamePopupContent.style.display = "block";
+								document.forms["stageName"]["enterStageName"].value = cookieStoredName;
+								document.forms["stageName"]["enterStageName"].focus()
+							   },300);
+		return false;
+	}
+	
+	//if the incorrect session id is entered
+	//shake the box to clear it
+	else {							
 		popupWindow.style.animation = "shake 500ms";
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
 		document.forms["sessionIDCode"]["sessionIDInput"].focus();

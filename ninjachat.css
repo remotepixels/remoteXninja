@@ -1,3 +1,4 @@
+/*	main control bar costimisations	*/
 #subControlButtons {
 	display:inline-flex!important;
 	position: fixed!important;
@@ -42,7 +43,7 @@
 	color: white!important;
 	scale: 110%;
 }
-.flipcamerabutton {
+#flipcamerabutton {
 	display:none!important;
 }
 .toggleSize {
@@ -57,6 +58,7 @@
     background-color: #3100c3 !important;
 }	
 
+/*	hide fullscreen ions	*/
 .fullwindowButton {
 	transition: opacity 0.3s;
 	width: 0vh;
@@ -79,10 +81,12 @@
 	width:4vh;
 }
 
+/*	hide right clik context menu	*/
 .context-menu--active {
     display: none !important;
 }
 
+/*	customize user preview and display including signal and mute icons	*/
 .holder {
 	position: relative!important;
 	width: 90px!important;
@@ -153,7 +157,7 @@ video {
 	padding-top:0px!important;
 	opacity:1;
 }
-
+/*
 video[data-speaking="0"] {
 	transition: opacity .25s ease-in-out, background-size 0.5s ease;
 }
@@ -167,19 +171,69 @@ video[data-speaking="2"] {
 	background-size: var(--video-background-image-size-screaming, var(--video-background-image-size));
 	transition: background-size 0.5s ease;
 }
+*/
+.video-mute-state {
+scale:1.3;
+    top: 2;
+    right: 2;
+    position: absolute;
+    color: #e0e0e0;
+    border-radius: 20px;
+	border:1px;
+	border-style:solid;
+    background-color: #840000;
+    padding: 2px 2px 2px 2px;
+    z-index: 2;
+	box-shadow: 0px 0px 10px rgb(0 0 0);
+}
+.video-meter-2{
+	padding:0;
+	display:block;
+	width:100%;
+	height:100%;
+	min-width:10px;
+	min-height:10px;
+	top: 0;
+	right: 0;
+	background-color:unset;
+	background-image: radial-gradient(#ffffff00 0%, #ffffff 100%);
+	position:absolute;
+	border-radius: 50px;
+	pointer-events:none;
+	border: 1px #757575 solid;
+	z-Index: 2;
+	transition-property: opacity;
+	transition-duration: 0.5s;
 
+}
+.signal-meter{
+	width: 26px;
+	height: 26px;
+	position: absolute;
+	left: 0px;
+	padding:2px;
+	top: 62px;
+	border-radius: 50px;
+	pointer-events:none;
+	border: 1px #00555e solid;
+	background-color: #000000;
+	font-size: 20px;
+	color:#3d3d3d!important;
+	overflow:hidden;
+	z-index: 5;
+	cursor: help;
+}
+
+/*	customize setting menu flyout	*/
 #advancedOptionsGeneral {
 	display:none!important;
 }
-
 #popupSelector_user_settings {
 	display:none!important;
 }
-
 #canvas {
 		border-radius:0px!important;	
 }
-
 #popupSelector {
 	-webkit-backdrop-filter: blur(15px);
 	backdrop-filter: blur(10px);
@@ -190,7 +244,6 @@ video[data-speaking="2"] {
 	padding:0 10 0 20px;
 	box-shadow: 0px 0px 20px #00000082;
 }
-
 .toggleSettings {
 	margin-left: 0px;
 	margin-top: 0px;
@@ -257,58 +310,7 @@ i.las.la-chevron-right {
 	color: white!important;
 }
 
-.video-mute-state {
-scale:1.3;
-    top: 2;
-    right: 2;
-    position: absolute;
-    color: #e0e0e0;
-    border-radius: 20px;
-	border:1px;
-	border-style:solid;
-    background-color: #840000;
-    padding: 2px 2px 2px 2px;
-    z-index: 2;
-	box-shadow: 0px 0px 10px rgb(0 0 0);
-}
-.video-meter-2{
-	padding:0;
-	display:block;
-	width:100%;
-	height:100%;
-	min-width:10px;
-	min-height:10px;
-	top: 0;
-	right: 0;
-	background-color:unset;
-	background-image: radial-gradient(#ffffff00 0%, #ffffff 100%);
-	position:absolute;
-	border-radius: 50px;
-	pointer-events:none;
-	border: 1px #757575 solid;
-	z-Index: 2;
-	transition-property: opacity;
-	transition-duration: 0.5s;
-
-}
-.signal-meter{
-	width: 26px;
-	height: 26px;
-	position: absolute;
-	left: 0px;
-	padding:2px;
-	top: 62px;
-	border-radius: 50px;
-	pointer-events:none;
-	border: 1px #00555e solid;
-	background-color: #000000;
-	font-size: 20px;
-	color:#3d3d3d!important;
-	overflow:hidden;
-	z-index: 5;
-	cursor: help;
-}
-
+/*	portrait layout	*/
 @media (orientation:portrait) {
 	.container_holder_video {
 		position:relative!important;
