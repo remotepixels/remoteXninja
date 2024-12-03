@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+	<title>remotepixels.app</title>
+
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+	<meta http-equiv="Pragma" content="no-cache"/>
+	<meta http-equiv="Expires" content="0"/>
+	<meta name="msapplication-TileColor" content="#2e2e2e">
+	<meta name="theme-color" content="#2e2e2e">
+	<meta name="keywords" content="Gui Felix, Advertising, Visual Effects, Motion Graphics, Remote Pixels">
+	<meta name="robots" content="index, follow">
+	<meta name= "viewport" content= "width = device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />   
+	<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="viewport" content="minimal-ui">
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="https://remotepixels.app/icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://remotepixels.app/icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://remotepixels.app/icons/favicon-16x16.png">
+	<link rel="manifest" href="https://remotepixels.app/icons/site.webmanifest">
+	<link rel="mask-icon" href="https://remotepixels.app/icons/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="https://remotepixels.app/icons/favicon.ico">
+
+	<link rel="stylesheet" href="https://remotepixels.app/style.css">
+</head>
+    
+<body>
+
+<!-- top navbar for portfolio-->
+	<div class="topnav" id="topnav">
+		<img src="icons/favicon-32x32.png" class="siteIcon"/>
+		<div class="navbar">
+			<a href="https://remotepixels.myportfolio.com" target="portfolioIFrame" style="margin-right: 14px;">WORK</a>  
+			<a href="https://remotepixels.myportfolio.com/copy-of-work" target="portfolioIFrame" style="margin-right: 14px;">BTS</a> 
+			<a href="https://remotepixels.myportfolio.com/contact" target="portfolioIFrame" style="margin-right: 75px;">CONTACT</a> 
+			<div class="liveSessionIcon" id="liveSessionIcon" onclick="clickLiveSession()">LIVE</div>
+		</div>
+	</div>
+
+<!-- top navbar for live session -->    
+	<div class="topnav" id="subNav" style="background-color: #000000 ;display: none;">
+		<img src="icons/favicon-32x32.png" height="30" width="30" class="siteIcon" id="siteIcon"/>
+		<div class="ninjaIcon"><a href="https://vdo.ninja" target="_blank" class="vdoninjatext">Powered by<br>VDO.NINJA</a></div>
+		<div id="clock" class="clock"></div>	
+	</div>
+		
+<!--load portfolio from behance-->
+	<div>
+<!--		<iframe title="portfolioIFrame" src="/live/blank.html" class="portfolioIFrame" name="portfolioIFrame" id="portfolioIFrame" allowfullscreen=false></iframe> -->
+		<iframe title="portfolioIFrame" src="https://remotepixels.myportfolio.com" class="portfolioIframe" name="portfolioIFrame" id="portfolioIFrame" allowfullscreen=false></iframe>
+	</div>
+
+<!--frames for chat and live stream-->
+	<div id="chatIFrame" class="chatIFrame" style="display:none"></div>
+	<div id="mainIFrame" class="mainIFrame" style="display:none"></div>
+	
+<!--popup window things-->
+<!--darken screen for popups-->
+	<div class="blackout" id="blackout" role="button" onclick="fadeOutPopup()" style="display:none;">
+
+<!--fade and slide in popup window-->
+		<div class="popupGroup" id="popupGroup"> 
+            
+<!--popup window, draws the white popup window-->
+			<div class="popupWindow" id="popupWindow" onclick="event.stopPropagation()">
+                
+<!--popup window content : live session ID--> 
+				<div id="sessionIDpopupContent">	
+					<div class="popupTitle">Enter live<br>session ID</div>
+					<form id="sessionIDCode" name="sessionIDCode" onsubmit="return validateSessionID()" method="post" required>
+						<input name=sessionIDInput id=sessionIDInput type="text" autocomplete="one-time-code" maxlength="6" onkeypress="return onlyAlphabets(event,this);" oninput="this.value = this.value.toUpperCase()" tabindex="1">
+						<br>
+						<input type="submit" id="submitSessionID" value="continue" class=button tabindex="2">
+				    </form>
+				</div>
+             
+<!--popup window content : ask for a username--> 
+				<div class="askNamePopupContent" id="askNamePopupContent">
+					<div class="popupTitle">Enter your name</div>
+					<form id="stageName" name="stageName" onsubmit="return validateStageName()" method="post" required>
+						<input class="enterStageName" type="text" maxlength=11 name=enterStageName>
+						<img src="icons/icon-notice.png" style="display:inline-block; position:relative; top:10px; left:80px;">
+						<div class=popupTitle style="display:inline-block; position:relative; left:80px; top:0px;">Notice!</div>
+						<div class=subtext>Your browser may prompt you for microphone and camera access.<p>
+							If you deny access other participants will not be able to hear or see you.<p>
+							You can modify microphone and camera settings later via the settings gear.</div>   
+						<input type="submit" value="join" class=button>                            
+					</form>
+				</div>                 
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<script type="text/javascript">  
+var cookieStoredName;    
+var sessionFile;
+var encodedStagename;
+      
+//check if there is a live session otherwise hide live session button
+//using fetch so done asynchronously while loading page
+fetch("https://remotepixels.app/Alive.txt")
+	.then( response => {
+	if (response.ok) {
+		liveSessionIcon.style.display = "inline";
+	}
+	return;
+	})
+
+//cookie bits
+//checks if cookie exists and stores the value in cookieStoredName
+let user = getCookie("username");
+if (user != "") {
+	cookieStoredName = user;
+	}
+   
+//sets cookie with the users name (encodedStageName) and lets it expire in 24 hours (86400*1000 millisconds)
+function setCookie(cname,cvalue) {
+	let expires = "expires=" + (new Date(Date.now() + 86400*1000).toUTCString());
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+	return;
+	}
+
+//read cookie username value
+function getCookie(cname) {
+	let name = cname + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let ca = decodedCookie.split(';');
+	for(let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+			}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+			}
+		}
+  	return "";
+	}
+
+//check if an URL parameter is supplied
+//if an url parameter is valid and there is a cookie then skip session input and go straight to username prompt
+//if an url parameter is not valid then pop up the session ID prompt
+//this is duplicated code, really need to sort this out
+let query = location.search;
+if  (query != 0) {
+	let sessionIDURL = query.slice(1);
+	const request = new XMLHttpRequest();
+	request.open("GET", "https://remotepixels.app/Alive"+sessionIDURL+".txt", false); // `false` makes the request synchronous
+	request.send(null);
+
+	if (request.status === 200) {	
+		if (cookieStoredName == "" || cookieStoredName == null) {
+			cookieStoredName = "";
+		}
+		
+		sessionIDpopupContent.style.animation = "fadeOut 300ms";
+		setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+		blackout.style.animation = "fadeIn 500ms ease-out";
+		blackout.style.display = "block";
+		askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
+		setTimeout(function () {popupWindow.style.height = "380px";
+								askNamePopupContent.style.display = "block";
+								document.forms["stageName"]["enterStageName"].value = cookieStoredName;
+								document.forms["stageName"]["enterStageName"].focus()
+							   },300);
+	}
+	//if the URL string supplied does not exist fade in seesion id box
+	else {		
+		blackout.style.animation = "fadeIn 500ms ease-out";
+		blackout.style.display = "block";
+		setTimeout(function () { blackout.style.animation = "none";}, 300);
+		document.forms["sessionIDCode"]["sessionIDInput"].focus();
+		}         
+	}  
+
+//popup live session window if the live button is clicked
+function clickLiveSession() {
+	blackout.style.animation = "fadeIn 500ms ease-out";
+	blackout.style.display = "block";
+	setTimeout(function () { blackout.style.animation = "none";}, 300);
+        document.forms["sessionIDCode"]["sessionIDInput"].focus();
+	}
+  			
+//hide live session window when user clicks off
+function fadeOutPopup() {
+	blackout.style.animation = "fadeOut 300ms ease-out";
+	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; }, 300);
+	}
+	
+//clock for top right of user session
+function startTime() {
+	const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+	        let s = today.getSeconds();
+        m = checkTime(m);
+	    h = checkTime(h);
+		    s = checkTime(s);
+        document.getElementById('clock').innerHTML =  h + ":" + m + ":" +s ;
+        setTimeout(startTime, 1000);
+	}
+
+function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+        }    
+    
+//Session ID field entry, force upper caase, restrict to alpha-numeric
+const input = document.querySelector('[autocomplete=one-time-code');
+input.addEventListener('input', () => input.style.setProperty('--_otp-digit', input.selectionStart));
+
+function onlyAlphabets(e, t) {
+	var regexp = new RegExp(/^[a-zA-Z0-9]*$/);
+	if (window.event) {
+		keynum = e.keyCode;
+		}
+	else if (e.which) {
+		keynum = e.which;
+		}
+	var test = regexp.test(String.fromCharCode(keynum));
+	return test;
+	}
+
+//submit session ID if user hits enter key
+let inputSessionID = document.getElementById("sessionIDInput");
+input.addEventListener("keypress", function(event) {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		document.getElementById("submitSessionID").click();
+		}
+	});
+
+//if no session ID supplied on the url, ask for session ID and valid it
+//validates the session ID when the user submits a correctly formated value
+//on submit, check there are 6 values in the field
+function validateSessionID(){
+	let v1 = document.forms ["sessionIDCode"]["sessionIDInput"].value;
+	//if there are less than 6 characters shake the box and clear it
+	if (v1.length < 6) {
+		popupWindow.style.animation = "shake 500ms";
+		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
+		document.forms["sessionIDCode"]["sessionIDInput"].focus();
+		return false;
+		}
+	else {
+		sessionFile = v1;
+		}
+        
+	//check to see if the session ID entered exists
+	//done synchronous to make sure we get the file before checking
+	const request = new XMLHttpRequest();
+	request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
+	request.send(null);
+
+	//if the sessionID entered matches the file on the server check if you've been here in the last 24 hours
+	//if you have auto fill username from cookie and ask to join
+	if (request.status === 200) {	
+		if (cookieStoredName == "" || cookieStoredName == null) {
+			cookieStoredName ="";
+		}
+		
+		sessionIDpopupContent.style.animation = "fadeOut 300ms";
+		setTimeout ( function () {sessionIDpopupContent.style.animation = "none"; sessionIDpopupContent.style.display = "none";}, 300);
+		askNamePopupContent.style.animation = "fadeIn 300ms ease-out";
+		setTimeout(function () {popupWindow.style.height = "380px";
+								askNamePopupContent.style.display = "block";
+								document.forms["stageName"]["enterStageName"].value = cookieStoredName;
+								document.forms["stageName"]["enterStageName"].focus()
+							   },300);
+		return false;
+	}
+	
+	//if the incorrect session id is entered
+	//shake the box to clear it
+	else {							
+		popupWindow.style.animation = "shake 500ms";
+		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
+		document.forms["sessionIDCode"]["sessionIDInput"].focus();
+		return false;
+                } 
+	return false;
+	} 
+        
+//Check the username (stagename), make sure stage name isn't empty, then clean up the string
+function validateStageName(){
+	let varstageName = document.forms ["stageName"]["enterStageName"].value;
+        if (!varstageName) {								//if they try to submit an empty name shake the box and highlight the stage name field
+		popupWindow.style.animation = "shake 500ms";
+		setTimeout ( function () {popupWindow.style.animation = "none"; document.forms["stageName"]["enterStageName"].focus(); }, 300);  
+		return false;
+		}
+	else {
+		let uri = document.forms ["stageName"]["enterStageName"].value;		//encode the name entered to a URI to escape any odd characters
+		encodedStagename = encodeURIComponent(uri);     
+		document.getElementById("topnav").style.display = "none";
+		document.getElementById("subNav").style.display = "block";
+		setCookie("username", encodedStagename);				//set a cookie for the next 24 hours
+		startTime ();
+		loadNinja ();
+		return false;
+		}
+	return false;
+}
+    
+//load vdo.ninja client session with the sessionFile and the encodedStageName into the iframe with all parameters
+function loadNinja () {
+	//delete the portfolio frame
+	var frame = document.getElementById("portfolioIFrame");
+	frame.parentNode.removeChild(frame);
+	
+	//turn on other frames for live session and dull back icon
+	document.getElementById("siteIcon").style.opacity = "0.4";
+	document.getElementById("chatIFrame").style.display="inline-block";
+	document.getElementById("mainIFrame").style.display="inline-block";
+
+	//set sources for chat frame
+	var chatFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
+		"&exclude=RemotePixels_"+sessionFile+"_mainFeed"+	//do not show the main feed
+		"&label="+encodedStagename+ //sets label to guests name they entered earlier
+		"&showlabels"+//show the usernames
+		"&quality=3"+	//set camera quality to lowest possible, about 360p
+		"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
+		"&cover"+	//make video cover space
+		//"&ad=1"+
+		"&vdo=1"+	//auto select audio source to 1, often microphone
+		"&rounded=50"+	//makes videos round
+		"&mirror=2"+	//mirrors guest videos
+		//"&scale=0.5"+	//scales incoming video to quarter size
+		"&viewwidth=160&viewheight=90"+	//sets incoming video to px size (very low res)
+		"&safemode"+	//loads camera in simplist way
+		"&st=6"+	//show audio only sources as coloured circles with fiest letter of name
+		"&meterstyle=2"+	//round highlight over person talking
+		"&hh"+	//hide vdo ninja header
+		"&as"+	//autostart skips the camera microphone selection screen
+		"&ee"+	//easy exit
+		"&cb=0"+	//chat button 0 turns off
+		"&cv"+	//clean viewer
+		"&hpb"+	//hide play button
+		"&nsb"+	//hide speaker button
+		"&nohub"+	//hide hangup button
+		"&hm"+	//hide vdo ninja menu
+		"&hidehome"+	//hide vdo ninja home page
+		"&hiddenscenebitrate=300"+	//should be set by director but make as low as possible
+		"&totalroombitrate=300"+
+		"&transparent"+	//makes bg transparent
+		"&nofiles"+	//no file share button
+		"&hidetranslate"+	//hides translate menu
+		"&darkmode"+	//
+		"&disablehotkeys"+	//no hotkeys
+		"&nocontrols"+	//hides video player controls
+		"&showlist=0"+	//show hidden guest list
+		//"&signalmeter"+ //adds signal meter
+		//"&animate"+	//videos animate around when people join or leave
+		"&hands"+	//adds raise hand button
+		"&mono"+	//set audio to mono and reduces bitrate
+		//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
+		"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
+		""; 
+
+	//set sources for main frame
+	var mainFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
+		"&view=RemotePixels_"+sessionFile+"_mainFeed"+ //shows only the directors main feed on left
+		"&nopush"+ //don't show up in other views
+		"&bc"+	//broadcast mode, only shows director no other guests videos
+		"&solo"+	//solos view only show the master stream
+		"&cleanputput"+	//remove all interface bits
+		"&ad=0"+	//disable audio for frame
+		"&vd=0"+	//disable video device for frame
+		"&hideplaybutton"+	//hides big play button if autoplay is disabled
+		"&as"+	//autostart, skips the camera microphone selection screen
+		"&cv"+	//clean viewer
+		"&hiddenscenebitrate=10000"+	//should be set by director but
+		"&totalroombitrate=30000,10000"+
+		"&transparent"+	//makes bg transparent
+		//"&chunked=8000"	//try chunked codec? set by director
+		"&sync=-200"+	//fix sync about 4 frames, a bit flakey
+		"&buffer=500"+	//adds a xms buffer  set by director
+		"&showlist=0"+	//hides the hidden viewr list
+		//"&css=https://remotepixels.app/ninjastream.css"+	//load style sheet
+		""; 
+	
+	//create the chat iframe
+	var iframe = document.createElement("iframe");
+	iframe.allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+	iframe.src = chatFeed;
+	var iframeContainer = document.createElement("div");
+	iframeContainer.appendChild(iframe);
+	document.getElementById("chatIFrame").appendChild(iframeContainer);
+	
+//create the main stream frame (have to pause for a few secs)
+	setTimeout(function(){
+		var iframe = document.createElement("iframe");
+		iframe.allow = "autoplay;fullscreen;";
+		iframe.src = mainFeed;
+		var iframeContainer = document.createElement("div");
+		iframeContainer.appendChild(iframe);
+		document.getElementById("mainIFrame").appendChild(iframeContainer);
+		},5000);
+	
+	blackout.style.animation = "fadeOut 500ms ease-out";
+	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 300); 
+    return false;
+}
+	
+//	unused parameters for chat view
+//	"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico"+	//favourite icon 
+//	"&sync=-200"+	//fix sync about 4 frames, a bit flakey
+//	"&structure"+	//makes aspect ratio square and forces video to fit aspect ratio
+//	"&structure"+	//makes aspect ratio square and forces video to fit aspect ratio
+//	"&forceviewerlandscape"+
+//	"&waitimage=https%3A%2F%2Fwww.remotepixels.app%2Fimages%2Ficon_round_user.png"+
+//	"&activespeaker=2"+	//show who is speaking mixed together
+//	"&activespeakerdelay=500"+	//ms delay when switching to activespeaker
+//	"&animated"+	//animate videos coming in set to off if messy
+//	"&fakeguests=3"+	//add fake guests
+//	"&bc"+	//broadcast mode, only shows director no other guests videos
+//	"&np"+	//no preview, turns off self preview
+//	"&vd=1"+	//auto select video device 0 is usually camera
+//	"&nomirror"+//dissables mirror state
+//	"&border=1"+
+//	"&bordercolor=2f2f2f"+
+//	"&margin=10"+
+//	"&ns"+	//no settings and no screenshare
+//	"&controlbarspace"+	//adds space at bottom for control asr
+//	"&miconly"+	//connects via microphone only
+//	"&chroma=2e2e2e"+ //sets background colour
+	
+//unused parameters for main feed
+//	"&scenetype=3&order=1"+
+//	"&np"+	//no preview, turns off self preview
+//	"&hh"+	//hide vdo ninja header
+//	"&ee"+	//easy exit
+//	"&cb=0"+	//chat button 0 turns off
+//	"&ns"+	//no settings and no screenshare
+//	"&nsb"+	//hide speaker button
+//	"&nohub"+	//hide hangup button
+//	"&hm+"+	//hide vdo ninja menu
+//	"&hidehome"+	//hide vdo ninja home page
+//	"&controlbarspace"+	//adds space at bottom for control asr
+//	"&nofiles"+	//no file share button
+//	"&miconly"+	//connects via microphone only
+//	"&hidetranslate"+	//hides translate menu
+//	"&darkmode"+	//
+//	"&chroma=2e2e2e"+ //sets background colour
+//	"&disablehotkeys"+	//no hotkeys
+//	"&nocontrols"+	//hides video player controls
+//	"&margin=10"+	//add margin of x pixels around video
+//	"&showlist=0"+	//show hidden guest list
+//	"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico"+	//favourite icon 
+//	"&signalmeter"+ //adds signal meter
+	
+</script>
