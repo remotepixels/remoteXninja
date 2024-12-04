@@ -11,13 +11,13 @@
 	<meta name="theme-color" content="#2e2e2e">
 	<meta name="keywords" content="Gui Felix, Advertising, Visual Effects, Motion Graphics, Remote Pixels">
 	<meta name="robots" content="index, follow">
-	<meta name= "viewport" content= "width = device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<meta name="mobile-web-app-capable" content="yes" />   
+	<meta name="viewport" content= "width = device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 	<meta name="viewport" content="minimal-ui">
-	
+	<meta name="viewport" content="height<1024, minimal-ui”>
+
 	<link rel="apple-touch-icon" sizes="180x180" href="https://remotepixels.app/icons/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="https://remotepixels.app/icons/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="https://remotepixels.app/icons/favicon-16x16.png">
@@ -25,7 +25,7 @@
 	<link rel="mask-icon" href="https://remotepixels.app/icons/safari-pinned-tab.svg" color="#5bbad5">
 	<link rel="shortcut icon" href="https://remotepixels.app/icons/favicon.ico">
 
-	<link rel="stylesheet" href="https://remotepixels.app/style.css">
+	<link rel="stylesheet" href="style.css">
 </head>
     
 <body>
@@ -101,7 +101,12 @@
 var cookieStoredName;    
 var sessionFile;
 var encodedStagename;
-      
+
+//scroll to hide menubar on ios
+setTimeout(function () {
+  window.scrollTo(0, 1);
+}, 1000);
+
 //check if there is a live session otherwise hide live session button
 //using fetch so done asynchronously while loading page
 fetch("https://remotepixels.app/Alive.txt")
@@ -345,20 +350,19 @@ function loadNinja () {
 		"&nopush"+ //don't show up in other views
 		"&bc"+	//broadcast mode, only shows director no other guests videos
 		"&solo"+	//solos view only show the master stream
-		"&cleanputput"+	//remove all interface bits
+		"&cleanoutput"+	//remove all interface bits
 		"&ad=0"+	//disable audio for frame
 		"&vd=0"+	//disable video device for frame
 		"&hideplaybutton"+	//hides big play button if autoplay is disabled
 		"&as"+	//autostart, skips the camera microphone selection screen
 		"&cv"+	//clean viewer
 		"&hiddenscenebitrate=10000"+	//should be set by director but
-		"&totalroombitrate=30000,5000"+
+		"&totalscenetrate=10000"+	//maximum bitrate for the main stream
+		"&scale=100"+	//do not scale video
 		"&transparent"+	//makes bg transparent
-		//"&chunked=8000"	//try chunked codec? set by director
 		"&sync=-200"+	//fix sync about 4 frames, a bit flakey
 		"&buffer=500"+	//adds a xms buffer  set by director
 		"&showlist=0"+	//hides the hidden viewr list
-		//"&css=https://remotepixels.app/ninjastream.css"+	//load style sheet
 		""; 
 	
 	//create the chat iframe
@@ -369,18 +373,18 @@ function loadNinja () {
 	iframeContainer.appendChild(iframe);
 	document.getElementById("chatIFrame").appendChild(iframeContainer);
 	
-//create the main stream frame (have to pause for a few secs)
+	//create the main stream frame (have to pause for a few secs)
 	setTimeout(function(){
 		var iframe = document.createElement("iframe");
-		iframe.allow = "autoplay;fullscreen;";
+		iframe.allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
 		iframe.src = mainFeed;
 		var iframeContainer = document.createElement("div");
 		iframeContainer.appendChild(iframe);
 		document.getElementById("mainIFrame").appendChild(iframeContainer);
-		},5000);
+		},1000);
 	
-	blackout.style.animation = "fadeOut 500ms ease-out";
-	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none";}, 300); 
+	blackout.style.display = "none";
+	return false;
 }
 	
 //	unused parameters for chat view

@@ -181,6 +181,8 @@ font:hover {
 	
 }
 
+
+/*directors room styles*/
 .directorroom {
 	background-color: dimgrey;
 	width: 100%;
@@ -191,6 +193,21 @@ font:hover {
 	top:40px;
 }
 
+#header {
+    width: 100%;
+    padding: 10px;
+    background-color: #212121;
+    color: #FFF;
+    -webkit-app-region: drag;
+    filter: grayscale(1);
+}
+#guestFeeds {
+    border-radius: 10px;
+}
+
+.directorsgrid .vidcon {
+    border-radius: 5px;
+}
 
 /*popup for session ID and username*/
 .blackout {
