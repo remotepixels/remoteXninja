@@ -184,7 +184,7 @@ function validateSessionID(){
 } 
 
 function loadNinja() {
-	document.getElementById("inset_window").allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;midi;autoplay;camera;microphone;fullscreen;";
+	document.getElementById("inset_window").allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
 	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+
 		"&push=RemotePixels_"+sessionFile+"_mainFeed"+
 		//"&label=MAIN_VIDEO_FEED"+	//sets livestream as label for director connection

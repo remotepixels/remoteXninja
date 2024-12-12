@@ -11,7 +11,6 @@
 	<meta name="theme-color" content="#2e2e2e">
 	<meta name="keywords" content="Gui Felix, Advertising, Visual Effects, Motion Graphics, Remote Pixels">
 	<meta name="robots" content="index, follow">
-	<meta name="viewport" content= "width = device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -49,7 +48,7 @@
 <!--load portfolio from behance-->
 	<div>
 <!--		<iframe title="portfolioIFrame" src="/live/blank.html" class="portfolioIFrame" name="portfolioIFrame" id="portfolioIFrame" allowfullscreen=false></iframe> -->
-		<iframe title="portfolioIFrame" src="https://remotepixels.myportfolio.com" class="portfolioIFrame" name="portfolioIFrame" id="portfolioIFrame" allowfullscreen=false></iframe>
+		<iframe title="portfolioIFrame" src="https://remotepixels.myportfolio.com" class="portfolioIFrame" name="portfolioIFrame" id="portfolioIFrame" allowfullscreen="false" referrerpolicy="no-referrer" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>
 	</div>
 
 <!--frames for chat and live stream-->
@@ -292,23 +291,22 @@ function validateStageName(){
 		let frame = document.getElementById("portfolioIFrame");
 		frame.parentNode.removeChild(frame);
 	
-		alert (encodedUserName + " " +sessionFile);
 		//set sources for chat frame
 		let chatFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
 			"&exclude=RemotePixels_"+sessionFile+"_mainFeed"+	//do not show the main feed
 			"&label="+encodedUserName+ //sets label to guests name they entered earlier
-			"&showlabels"+//show the usernames
+			"&showlabels"+	//show the usernames
 			"&quality=3"+	//set camera quality to lowest possible, about 360p
 			"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
 			"&cover"+	//make video cover space
-			"&videobitrate=100"+
+			"&videobitrate=10"+
 			//"&ad=1"+	//autoselect audio device
-			//"&vdo=1"+	//auto select audio source to 1, often microphone
-			"&rounded=50"+	//makes videos round
+			"&vdo=1"+	//auto select camera
+			"&rounded=100"+	//makes videos round
 			"&mirror=2"+	//mirrors guest videos
 			"&viewwidth=160&viewheight=90"+	//sets incoming video to px size (very low res)
-			//"&safemode"+	//loads camera in simplist way
-			"&st=6"+	//show audio only sources as coloured circles with fiest letter of name
+			"&safemode"+	//loads camera in simplist way
+			"&st=6"+	//show audio only sources as coloured circles with first letter of name
 			"&meterstyle=2"+	//round highlight over person talking
 			"&hh"+	//hide vdo ninja header
 			//"&as"+	//autostart skips the camera microphone selection screen
@@ -318,7 +316,6 @@ function validateStageName(){
 			"&hpb"+	//hide play button
 			"&nsb"+	//hide speaker button
 			"&nohub"+	//hide hangup button
-			"&hm"+	//hide vdo ninja menu
 			"&hidehome"+	//hide vdo ninja home page
 			//"&hiddenscenebitrate=300"+	//should be set by director but make as low as possible
 			//"&totalroombitrate=300"+
@@ -334,18 +331,18 @@ function validateStageName(){
 			"&hands"+	//adds raise hand button
 			//"&mono"+	//set audio to mono and reduces bitrate
 			//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
-			//"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
-		" "; 
+			"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
+		""; 
 
 		//set sources for main frame
 		var mainFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
 			"&view=RemotePixels_"+sessionFile+"_mainFeed"+ //shows only the directors main feed on left
 			"&nopush"+ //don't show up in other views
-			//"&bc"+	//broadcast mode, only shows director no other guests videos
-			//"&solo"+	//solos view only show the master stream
+			"&bc"+	//broadcast mode, only shows director no other guests videos
+			"&solo"+	//solos view only show the master stream
 			"&cleanoutput"+	//remove all interface bits
-			//"&ad=0"+	//disable audio for frame
-			//"&vd=0"+	//disable video device for frame
+			"&ad=0"+	//disable audio for frame
+			"&vd=0"+	//disable video device for frame
 			"&hideplaybutton"+	//hides big play button if autoplay is disabled
 			"&as"+	//autostart, skips the camera microphone selection screen
 			"&cv"+	//clean viewer
@@ -357,11 +354,11 @@ function validateStageName(){
 			"&sync=-200"+	//fix sync about 4 frames, a bit flakey
 			"&buffer=500"+	//adds a xms buffer  set by director
 			"&showlist=0"+	//hides the hidden viewr list
-			" "; 
+			""; 
 	
 		//create the chat iframe
 		var iframe = document.createElement("iframe");
-		iframe.allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+		iframe.allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;allow-same-origin;allow-forms;allow-modals;allow-scripts;";
 		iframe.src = chatFeed;
 		var iframeContainer = document.createElement("div");
 		iframeContainer.appendChild(iframe);
@@ -370,163 +367,13 @@ function validateStageName(){
 		//create the main stream frame (have to pause for a few secs)
 		setTimeout(function(){
 			var iframe = document.createElement("iframe");
-			iframe.allow = "autoplay;";
+			iframe.allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
 			iframe.src = mainFeed;
 			var iframeContainer = document.createElement("div");
 			iframeContainer.appendChild(iframe);
 			document.getElementById("mainIFrame").appendChild(iframeContainer);
-			},2000);
+			},1000);
 		}
 		return false;
 }
- 
-
-
-/*
-//load vdo.ninja client session with the sessionFile and the encodedStageName into the iframe with all parameters
-function loadNinja () {
-	//delete the portfolio frame
-	var frame = document.getElementById("portfolioIFrame");
-	frame.parentNode.removeChild(frame);
-	
-	//turn on other frames for live session and dull back icon
-	document.getElementById("siteIcon").style.opacity = "0.4";
-	document.getElementById("chatIFrame").style.display="inline-block";
-	document.getElementById("mainIFrame").style.display="inline-block";
-
-	//set sources for chat frame
-	var chatFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
-		"&exclude=RemotePixels_"+sessionFile+"_mainFeed"+	//do not show the main feed
-		"&label="+encodedStagename+ //sets label to guests name they entered earlier
-		"&showlabels"+//show the usernames
-		"&quality=3"+	//set camera quality to lowest possible, about 360p
-		"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
-		"&cover"+	//make video cover space
-		"&videobitrate=100"+
-		//"&ad=1"+	//autoselect audio device
-		//"&vdo=1"+	//auto select audio source to 1, often microphone
-		"&rounded=50"+	//makes videos round
-		"&mirror=2"+	//mirrors guest videos
-		"&viewwidth=160&viewheight=90"+	//sets incoming video to px size (very low res)
-		//"&safemode"+	//loads camera in simplist way
-		"&st=6"+	//show audio only sources as coloured circles with fiest letter of name
-		"&meterstyle=2"+	//round highlight over person talking
-		"&hh"+	//hide vdo ninja header
-		//"&as"+	//autostart skips the camera microphone selection screen
-		"&ee"+	//easy exit
-		"&cb=0"+	//chat button 0 turns off
-		"&cv"+	//clean viewer
-		"&hpb"+	//hide play button
-		"&nsb"+	//hide speaker button
-		"&nohub"+	//hide hangup button
-		"&hm"+	//hide vdo ninja menu
-		"&hidehome"+	//hide vdo ninja home page
-		//"&hiddenscenebitrate=300"+	//should be set by director but make as low as possible
-		//"&totalroombitrate=300"+
-		"&transparent"+	//makes bg transparent
-		"&nofiles"+	//no file share button
-		"&hidetranslate"+	//hides translate menu
-		"&darkmode"+	//
-		"&disablehotkeys"+	//no hotkeys
-		"&nocontrols"+	//hides video player controls
-		"&showlist=0"+	//show hidden guest list
-		//"&signalmeter"+ //adds signal meter
-		//"&animate"+	//videos animate around when people join or leave
-		"&hands"+	//adds raise hand button
-		//"&mono"+	//set audio to mono and reduces bitrate
-		//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
-//		"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
-		""; 
-
-	//set sources for main frame
-	var mainFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
-		"&view=RemotePixels_"+sessionFile+"_mainFeed"+ //shows only the directors main feed on left
-		"&nopush"+ //don't show up in other views
-		//"&bc"+	//broadcast mode, only shows director no other guests videos
-		//"&solo"+	//solos view only show the master stream
-		"&cleanoutput"+	//remove all interface bits
-		//"&ad=0"+	//disable audio for frame
-		//"&vd=0"+	//disable video device for frame
-		"&hideplaybutton"+	//hides big play button if autoplay is disabled
-		"&as"+	//autostart, skips the camera microphone selection screen
-		"&cv"+	//clean viewer
-		"&videobitrate=10000"+
-		//"&hiddenscenebitrate=10000"+	//should be set by director but
-		//"&totalscenetrate=10000"+	//maximum bitrate for the main stream
-		"&scale=100"+	//do not scale video
-		"&transparent"+	//makes bg transparent
-		"&sync=-200"+	//fix sync about 4 frames, a bit flakey
-		"&buffer=500"+	//adds a xms buffer  set by director
-		"&showlist=0"+	//hides the hidden viewr list
-		""; 
-	
-	//create the chat iframe
-	var iframe = document.createElement("iframe");
-	iframe.allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-	iframe.src = chatFeed;
-	var iframeContainer = document.createElement("div");
-	iframeContainer.appendChild(iframe);
-	document.getElementById("chatIFrame").appendChild(iframeContainer);
-
-	//create the main stream frame (have to pause for a few secs)
-	setTimeout(function(){
-		var iframe = document.createElement("iframe");
-		iframe.allow = "autoplay;";
-		iframe.src = mainFeed;
-		var iframeContainer = document.createElement("div");
-		iframeContainer.appendChild(iframe);
-		document.getElementById("mainIFrame").appendChild(iframeContainer);
-		},2000);
-	
-	blackout.style.display = "none";
-//	return false;
-}
-	*/
-//	unused parameters for chat view
-//	"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico"+	//favourite icon 
-//	"&sync=-200"+	//fix sync about 4 frames, a bit flakey
-//	"&structure"+	//makes aspect ratio square and forces video to fit aspect ratio
-//	"&structure"+	//makes aspect ratio square and forces video to fit aspect ratio
-//	"&forceviewerlandscape"+
-//	"&waitimage=https%3A%2F%2Fwww.remotepixels.app%2Fimages%2Ficon_round_user.png"+
-//	"&activespeaker=2"+	//show who is speaking mixed together
-//	"&activespeakerdelay=500"+	//ms delay when switching to activespeaker
-//	"&animated"+	//animate videos coming in set to off if messy
-//	"&fakeguests=3"+	//add fake guests
-//	"&bc"+	//broadcast mode, only shows director no other guests videos
-//	"&np"+	//no preview, turns off self preview
-//	"&vd=1"+	//auto select video device 0 is usually camera
-//	"&nomirror"+//dissables mirror state
-//	"&border=1"+
-//	"&bordercolor=2f2f2f"+
-//	"&margin=10"+
-//	"&ns"+	//no settings and no screenshare
-//	"&controlbarspace"+	//adds space at bottom for control asr
-//	"&miconly"+	//connects via microphone only
-//	"&chroma=2e2e2e"+ //sets background colour
-	
-//unused parameters for main feed
-//	"&scenetype=3&order=1"+
-//	"&np"+	//no preview, turns off self preview
-//	"&hh"+	//hide vdo ninja header
-//	"&ee"+	//easy exit
-//	"&cb=0"+	//chat button 0 turns off
-//	"&ns"+	//no settings and no screenshare
-//	"&nsb"+	//hide speaker button
-//	"&nohub"+	//hide hangup button
-//	"&hm+"+	//hide vdo ninja menu
-//	"&hidehome"+	//hide vdo ninja home page
-//	"&controlbarspace"+	//adds space at bottom for control asr
-//	"&nofiles"+	//no file share button
-//	"&miconly"+	//connects via microphone only
-//	"&hidetranslate"+	//hides translate menu
-//	"&darkmode"+	//
-//	"&chroma=2e2e2e"+ //sets background colour
-//	"&disablehotkeys"+	//no hotkeys
-//	"&nocontrols"+	//hides video player controls
-//	"&margin=10"+	//add margin of x pixels around video
-//	"&showlist=0"+	//show hidden guest list
-//	"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico"+	//favourite icon 
-//	"&signalmeter"+ //adds signal meter
-	
 </script>

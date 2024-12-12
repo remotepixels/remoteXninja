@@ -1,4 +1,78 @@
-/*	main control bar costimisations	*/
+/*camera selection screen customizations */
+.darktheme .card {
+	background-color:#0d0d0d!important
+        ;
+}
+
+.container-inner {
+	background-color: #0d0d0d!important
+        ;
+}
+
+.previewWebcam {
+	width: 240px;
+	height: 240px;
+    object-fit: cover;
+	opacity: 1;
+	animation: fadeIn 0.2s;
+	border-radius: 1000px!important;
+	border-width: 2px!important;
+	border-color: grey!important;
+	border-style: solid;
+}
+
+#gowebcam:enabled {
+	background: #6633ff!important;
+	color: rgb(255, 255, 255)!important;
+	font-weight: bold !important;
+	animation: pulsate 2s ease-out infinite;
+	border-radius: 10px;
+	}
+
+#gowebcam {
+	font-size: 110%;
+	background-color: gainsboro!important;
+	color: black!important;
+	cursor: pointer;
+	margin: 20px;
+	padding: 10px 50px;
+	border-radius: 10px;
+}
+
+#videoMenu {
+	padding: 8px 8px 8px 10px;
+    width:450px;
+	vertical-align: middle;
+	text-align: left;
+	margin-top: 0px;
+	border-radius: 10px;
+}
+
+#videoSourceSelect{
+    width: 300px!important;
+    padding: 4 4 4 40px!important;
+}
+#audioMenu {
+    width:450px;
+	margin: 15px 0 0 0;
+	border-radius: 10px;
+}
+.multiselect-contents{
+    width:420px!important;
+}
+#headphonesDiv {
+	width: 450px;
+	padding: 4 4 4 11px;
+	border-radius: 10px;
+    
+}
+
+.startupWarning {
+    display: none!important;
+}
+
+
+/*	main control bar custimisations	*/
 #subControlButtons {
 	display:inline-flex!important;
 	position: fixed!important;
@@ -308,6 +382,7 @@ i.las.la-chevron-right {
 	FONT-WEIGHT: 400;
     position: relative;
     padding: 2px 10px 2px 10px !important;
+    margin: 10 12 0 10px!important;
     border-radius: 5px!important;
     top: -1px!important;
 	color:black!important;
