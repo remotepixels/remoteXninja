@@ -13,10 +13,8 @@
 	<meta name="robots" content="index, follow">
 	<meta name="viewport" content= "width = device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-	<meta name="viewport" content="minimal-ui">
-	<meta name="viewport" content="height<1024, minimal-ui”>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="https://remotepixels.app/icons/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="https://remotepixels.app/icons/favicon-32x32.png">
@@ -25,7 +23,7 @@
 	<link rel="mask-icon" href="https://remotepixels.app/icons/safari-pinned-tab.svg" color="#5bbad5">
 	<link rel="shortcut icon" href="https://remotepixels.app/icons/favicon.ico">
 
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://remotepixels.app/style.css">
 </head>
     
 <body>
@@ -42,7 +40,7 @@
 	</div>
 
 <!-- top navbar for live session -->    
-	<div class="topnav" id="subNav" style="background-color: #000000 ;display: none;">
+	<div class="topnav" id="subNav" style="background-color: #101010 ;display: none;">
 		<img src="icons/favicon-32x32.png" class="siteIcon" id="siteIcon"/>
 		<div class="ninjaIcon"><a href="https://vdo.ninja" target="_blank" class="vdoninjatext">Powered by<br>VDO.NINJA</a></div>
 		<div id="clock" class="clock"></div>	
@@ -100,12 +98,26 @@
 <script type="text/javascript">  
 var cookieStoredName;    
 var sessionFile;
-var encodedStagename;
 
+//interface bits, popups, hide navigation bar etc
 //scroll to hide menubar on ios
 setTimeout(function () {
   window.scrollTo(0, 1);
 }, 1000);
+
+//popup live session window if the live button is clicked
+function clickLiveSession() {
+	blackout.style.animation = "fadeIn 500ms ease-out";
+	blackout.style.display = "block";
+	setTimeout(function () { blackout.style.animation = "none";}, 300);
+        document.forms["sessionIDCode"]["sessionIDInput"].focus();
+	}
+  			
+//hide live session window when user clicks off
+function fadeOutPopup() {
+	blackout.style.animation = "fadeOut 300ms ease-out";
+	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; }, 300);
+	}
 
 //check if there is a live session otherwise hide live session button
 //using fetch so done asynchronously while loading page
@@ -124,13 +136,6 @@ if (user != "") {
 	cookieStoredName = user;
 	}
    
-//sets cookie with the users name (encodedStageName) and lets it expire in 24 hours (86400*1000 millisconds)
-function setCookie(cname,cvalue) {
-	let expires = "expires=" + (new Date(Date.now() + 86400*1000).toUTCString());
-	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-	return;
-	}
-
 //read cookie username value
 function getCookie(cname) {
 	let name = cname + "=";
@@ -155,24 +160,11 @@ if  (query != 0) {
 	let sessionIDURL = query.slice(1);
 	sessionFile = encodeURIComponent(sessionIDURL); 
 	blackout.style.display = "block";
+
 	checkSessionFile ();
 }
 
-//popup live session window if the live button is clicked
-function clickLiveSession() {
-	blackout.style.animation = "fadeIn 500ms ease-out";
-	blackout.style.display = "block";
-	setTimeout(function () { blackout.style.animation = "none";}, 300);
-        document.forms["sessionIDCode"]["sessionIDInput"].focus();
-	}
-  			
-//hide live session window when user clicks off
-function fadeOutPopup() {
-	blackout.style.animation = "fadeOut 300ms ease-out";
-	setTimeout(function () { blackout.style.animation = "none"; blackout.style.display = "none"; }, 300);
-	}
-	
-//clock for top right of user session
+//clock for top right of window
 function startTime() {
 	const today = new Date();
         let h = today.getHours();
@@ -185,6 +177,7 @@ function startTime() {
         setTimeout(startTime, 1000);
 	}
 
+//clock check if and add zero in front of numbers < 10
 function checkTime(i) {
         if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
         return i;
@@ -221,6 +214,7 @@ input.addEventListener("keypress", function(event) {
 function validateSessionID(){
 	let v1 = document.forms ["sessionIDCode"]["sessionIDInput"].value;
 	sessionFile = encodeURIComponent(v1); 
+
 	checkSessionFile ();
 	return false;
 }
@@ -228,7 +222,7 @@ function validateSessionID(){
 //checks the sessionID to the file on the server, if it exists then ask for a username, if not shake the box start over
 function checkSessionFile () {	
 	if (sessionFile.length == 6) {
-		//alert(sessionFile);
+
 		//check to see if the session ID entered exists
 		//done synchronous to make sure we get the file before checking
 		const request = new XMLHttpRequest();
@@ -252,13 +246,14 @@ function checkSessionFile () {
 					document.forms["stageName"]["enterStageName"].focus()
 					},300);
 		}
+		//if session id doesn't exist then shake the box and clear
 		else {							
 			popupWindow.style.animation = "shake 500ms";
 			setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
 			document.forms["sessionIDCode"]["sessionIDInput"].focus();
 		} 
 	} 
-	
+	//if session id length is less than 6 shake the box and reset, don't waste time checking
 	else {
 		popupWindow.style.animation = "shake 500ms";
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
@@ -266,7 +261,9 @@ function checkSessionFile () {
 	}
 }
 	  
-//Check the username (stagename), make sure stage name isn't empty, then clean up the string
+//if the session id checks out when user enters a name
+//check the username (stagename), make sure it isn't empty, then clean up the string
+//set a cookie and start the session
 function validateStageName(){
 	let varstageName = document.forms ["stageName"]["enterStageName"].value;
 	//if they try to submit an empty name shake the box and highlight the stage name field
@@ -275,20 +272,117 @@ function validateStageName(){
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.forms["stageName"]["enterStageName"].focus(); }, 300);  
 		return false;
 		}
-	//encode the name entered to a URI to escape any odd characters
+	//encode the name entered to a URI to escape any odd characters set cookie for next 24 hours
 	else {
 		let uri = document.forms ["stageName"]["enterStageName"].value;		
-		encodedStagename = encodeURIComponent(uri);     
+		let encodedUserName = encodeURIComponent(uri);     
+		let expires = "expires=" + (new Date(Date.now() + 86400*1000).toUTCString());
+		document.cookie = "username=" + encodedUserName + ";" + expires + ";path=/";
+
+		//swap navigation bars, add clock and load vdoninja
+		startTime ();
+		blackout.style.display = "none";
 		document.getElementById("topnav").style.display = "none";
 		document.getElementById("subNav").style.display = "block";
-		//set a cookie for the next 24 hours
-		setCookie("username", encodedStagename);				
-		startTime ();
-		loadNinja ();
-		return false;
+		document.getElementById("siteIcon").style.opacity = "0.4";
+		document.getElementById("chatIFrame").style.display="inline-block";
+		document.getElementById("mainIFrame").style.display="inline-block";
+
+		//delete the portfolio iframe
+		let frame = document.getElementById("portfolioIFrame");
+		frame.parentNode.removeChild(frame);
+	
+		alert (encodedUserName + " " +sessionFile);
+		//set sources for chat frame
+		let chatFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
+			"&exclude=RemotePixels_"+sessionFile+"_mainFeed"+	//do not show the main feed
+			"&label="+encodedUserName+ //sets label to guests name they entered earlier
+			"&showlabels"+//show the usernames
+			"&quality=3"+	//set camera quality to lowest possible, about 360p
+			"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
+			"&cover"+	//make video cover space
+			"&videobitrate=100"+
+			//"&ad=1"+	//autoselect audio device
+			//"&vdo=1"+	//auto select audio source to 1, often microphone
+			"&rounded=50"+	//makes videos round
+			"&mirror=2"+	//mirrors guest videos
+			"&viewwidth=160&viewheight=90"+	//sets incoming video to px size (very low res)
+			//"&safemode"+	//loads camera in simplist way
+			"&st=6"+	//show audio only sources as coloured circles with fiest letter of name
+			"&meterstyle=2"+	//round highlight over person talking
+			"&hh"+	//hide vdo ninja header
+			//"&as"+	//autostart skips the camera microphone selection screen
+			"&ee"+	//easy exit
+			"&cb=0"+	//chat button 0 turns off
+			"&cv"+	//clean viewer
+			"&hpb"+	//hide play button
+			"&nsb"+	//hide speaker button
+			"&nohub"+	//hide hangup button
+			"&hm"+	//hide vdo ninja menu
+			"&hidehome"+	//hide vdo ninja home page
+			//"&hiddenscenebitrate=300"+	//should be set by director but make as low as possible
+			//"&totalroombitrate=300"+
+			"&transparent"+	//makes bg transparent
+			"&nofiles"+	//no file share button
+			"&hidetranslate"+	//hides translate menu
+			"&darkmode"+	//
+			"&disablehotkeys"+	//no hotkeys
+			"&nocontrols"+	//hides video player controls
+			"&showlist=0"+	//show hidden guest list
+			//"&signalmeter"+ //adds signal meter
+			//"&animate"+	//videos animate around when people join or leave
+			"&hands"+	//adds raise hand button
+			//"&mono"+	//set audio to mono and reduces bitrate
+			//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
+			//"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
+		" "; 
+
+		//set sources for main frame
+		var mainFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
+			"&view=RemotePixels_"+sessionFile+"_mainFeed"+ //shows only the directors main feed on left
+			"&nopush"+ //don't show up in other views
+			//"&bc"+	//broadcast mode, only shows director no other guests videos
+			//"&solo"+	//solos view only show the master stream
+			"&cleanoutput"+	//remove all interface bits
+			//"&ad=0"+	//disable audio for frame
+			//"&vd=0"+	//disable video device for frame
+			"&hideplaybutton"+	//hides big play button if autoplay is disabled
+			"&as"+	//autostart, skips the camera microphone selection screen
+			"&cv"+	//clean viewer
+			"&videobitrate=10000"+
+			//"&hiddenscenebitrate=10000"+	//should be set by director but
+			//"&totalscenetrate=10000"+	//maximum bitrate for the main stream
+			"&scale=100"+	//do not scale video
+			"&transparent"+	//makes bg transparent
+			"&sync=-200"+	//fix sync about 4 frames, a bit flakey
+			"&buffer=500"+	//adds a xms buffer  set by director
+			"&showlist=0"+	//hides the hidden viewr list
+			" "; 
+	
+		//create the chat iframe
+		var iframe = document.createElement("iframe");
+		iframe.allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+		iframe.src = chatFeed;
+		var iframeContainer = document.createElement("div");
+		iframeContainer.appendChild(iframe);
+		document.getElementById("chatIFrame").appendChild(iframeContainer);
+
+		//create the main stream frame (have to pause for a few secs)
+		setTimeout(function(){
+			var iframe = document.createElement("iframe");
+			iframe.allow = "autoplay;";
+			iframe.src = mainFeed;
+			var iframeContainer = document.createElement("div");
+			iframeContainer.appendChild(iframe);
+			document.getElementById("mainIFrame").appendChild(iframeContainer);
+			},2000);
 		}
+		return false;
 }
-    
+ 
+
+
+/*
 //load vdo.ninja client session with the sessionFile and the encodedStageName into the iframe with all parameters
 function loadNinja () {
 	//delete the portfolio frame
@@ -308,17 +402,17 @@ function loadNinja () {
 		"&quality=3"+	//set camera quality to lowest possible, about 360p
 		"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
 		"&cover"+	//make video cover space
-		//"&ad=1"+
-		"&vdo=1"+	//auto select audio source to 1, often microphone
+		"&videobitrate=100"+
+		//"&ad=1"+	//autoselect audio device
+		//"&vdo=1"+	//auto select audio source to 1, often microphone
 		"&rounded=50"+	//makes videos round
 		"&mirror=2"+	//mirrors guest videos
-		//"&scale=0.5"+	//scales incoming video to quarter size
 		"&viewwidth=160&viewheight=90"+	//sets incoming video to px size (very low res)
-		"&safemode"+	//loads camera in simplist way
+		//"&safemode"+	//loads camera in simplist way
 		"&st=6"+	//show audio only sources as coloured circles with fiest letter of name
 		"&meterstyle=2"+	//round highlight over person talking
 		"&hh"+	//hide vdo ninja header
-		"&as"+	//autostart skips the camera microphone selection screen
+		//"&as"+	//autostart skips the camera microphone selection screen
 		"&ee"+	//easy exit
 		"&cb=0"+	//chat button 0 turns off
 		"&cv"+	//clean viewer
@@ -327,8 +421,8 @@ function loadNinja () {
 		"&nohub"+	//hide hangup button
 		"&hm"+	//hide vdo ninja menu
 		"&hidehome"+	//hide vdo ninja home page
-		"&hiddenscenebitrate=300"+	//should be set by director but make as low as possible
-		"&totalroombitrate=300"+
+		//"&hiddenscenebitrate=300"+	//should be set by director but make as low as possible
+		//"&totalroombitrate=300"+
 		"&transparent"+	//makes bg transparent
 		"&nofiles"+	//no file share button
 		"&hidetranslate"+	//hides translate menu
@@ -339,25 +433,26 @@ function loadNinja () {
 		//"&signalmeter"+ //adds signal meter
 		//"&animate"+	//videos animate around when people join or leave
 		"&hands"+	//adds raise hand button
-		"&mono"+	//set audio to mono and reduces bitrate
+		//"&mono"+	//set audio to mono and reduces bitrate
 		//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
-		"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
+//		"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
 		""; 
 
 	//set sources for main frame
 	var mainFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
 		"&view=RemotePixels_"+sessionFile+"_mainFeed"+ //shows only the directors main feed on left
 		"&nopush"+ //don't show up in other views
-		"&bc"+	//broadcast mode, only shows director no other guests videos
-		"&solo"+	//solos view only show the master stream
+		//"&bc"+	//broadcast mode, only shows director no other guests videos
+		//"&solo"+	//solos view only show the master stream
 		"&cleanoutput"+	//remove all interface bits
-		"&ad=0"+	//disable audio for frame
-		"&vd=0"+	//disable video device for frame
+		//"&ad=0"+	//disable audio for frame
+		//"&vd=0"+	//disable video device for frame
 		"&hideplaybutton"+	//hides big play button if autoplay is disabled
 		"&as"+	//autostart, skips the camera microphone selection screen
 		"&cv"+	//clean viewer
-		"&hiddenscenebitrate=10000"+	//should be set by director but
-		"&totalscenetrate=10000"+	//maximum bitrate for the main stream
+		"&videobitrate=10000"+
+		//"&hiddenscenebitrate=10000"+	//should be set by director but
+		//"&totalscenetrate=10000"+	//maximum bitrate for the main stream
 		"&scale=100"+	//do not scale video
 		"&transparent"+	//makes bg transparent
 		"&sync=-200"+	//fix sync about 4 frames, a bit flakey
@@ -372,21 +467,21 @@ function loadNinja () {
 	var iframeContainer = document.createElement("div");
 	iframeContainer.appendChild(iframe);
 	document.getElementById("chatIFrame").appendChild(iframeContainer);
-	
+
 	//create the main stream frame (have to pause for a few secs)
 	setTimeout(function(){
 		var iframe = document.createElement("iframe");
-		iframe.allow = "document-domain;encrypted-media;sync-xhr;usb;web-share;cross-origin-isolated;accelerometer;midi;geolocation;autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+		iframe.allow = "autoplay;";
 		iframe.src = mainFeed;
 		var iframeContainer = document.createElement("div");
 		iframeContainer.appendChild(iframe);
 		document.getElementById("mainIFrame").appendChild(iframeContainer);
-		},1000);
+		},2000);
 	
 	blackout.style.display = "none";
-	return false;
+//	return false;
 }
-	
+	*/
 //	unused parameters for chat view
 //	"&favicon=https%3A%2F%2Fremotepixels.app%2Ficons%2Ffavicon.ico"+	//favourite icon 
 //	"&sync=-200"+	//fix sync about 4 frames, a bit flakey
