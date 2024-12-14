@@ -187,7 +187,7 @@ function loadNinja() {
 	document.getElementById("inset_window").allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
 	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+
 		"&push=RemotePixels_"+sessionFile+"_mainFeed"+
-		//"&label=MAIN_VIDEO_FEED"+	//sets livestream as label for director connection
+		"&label=EDITOR"+	//sets livestream as label for director connection
 		"&hidehome"+	//hide vdo ninja homepage	
 		"&director"+	//join as director
 		"&preview"+	//forces self preview for clients
@@ -196,17 +196,21 @@ function loadNinja() {
 		"&wc"+	//disables screenshare use &webcam2 to show share your camera screen
 		"&novice"+	//simplyfy director layout
 		"&hidesolo"+	//hide solo links
-		"&chatbutton=0"+	//no chat button
+		//"&chatbutton=0"+	//no chat button
 		"&notify"+	// notify when people join
 		"&ovb=20000"+	//outbound video bitrate (obs stream)
-		"&trb=20000"+	//total room bit rate
-		"&quality=0"+	//720p set to 0 for 1080p
+		"&trb=30000"+	//total room bit rate
+		"&hiddenscenebitrate=30000"+	//should be set by director but make as low as possible
+		"&quality=0"+	//1 720p set to 0 for 1080p
 		"&cleandirector"+	//hides link generator in diretor room
 		"&darkmode"+	
 		"&nohub"+	//hide hangup button
 		"&nsb"+	//hide speaker button
 		"&hidetranslate"+	//hide translate
 		"&signalmeter"+	//add signal meter
+		"&agc=0"+	//turns off auto gain control
+		"&denoise=0"+	//turns off denoiser
+		"&ab=128"+	//constant audio bitrate of 24kbps
 		//"&maxviewers=12"+
 		"&chroma=1e1e1e"+	//set bg color
 		//"&queue"+ 	//adds quests to queue, director must approve each to let them in

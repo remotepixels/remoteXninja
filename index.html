@@ -43,6 +43,7 @@
 		<img src="icons/favicon-32x32.png" class="siteIcon" id="siteIcon"/>
 		<div class="ninjaIcon"><a href="https://vdo.ninja" target="_blank" class="vdoninjatext">Powered by<br>VDO.NINJA</a></div>
 		<div id="clock" class="clock"></div>	
+		<div id="exitSessionIcon" class="exitSessionIcon" onclick="window.location.href = 'http://www.google.com'">EXIT</div>
 	</div>
 		
 <!--load portfolio from behance-->
@@ -299,7 +300,7 @@ function validateStageName(){
 			"&quality=3"+	//set camera quality to lowest possible, about 360p
 			"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
 			"&cover"+	//make video cover space
-			"&videobitrate=10"+
+			"&videobitrate=100"+
 			//"&ad=1"+	//autoselect audio device
 			"&vdo=1"+	//auto select camera
 			"&rounded=100"+	//makes videos round
@@ -311,7 +312,7 @@ function validateStageName(){
 			"&hh"+	//hide vdo ninja header
 			//"&as"+	//autostart skips the camera microphone selection screen
 			"&ee"+	//easy exit
-			"&cb=0"+	//chat button 0 turns off
+			//"&cb=0"+	//chat button 0 turns off
 			"&cv"+	//clean viewer
 			"&hpb"+	//hide play button
 			"&nsb"+	//hide speaker button
@@ -328,7 +329,7 @@ function validateStageName(){
 			"&showlist=0"+	//show hidden guest list
 			//"&signalmeter"+ //adds signal meter
 			//"&animate"+	//videos animate around when people join or leave
-			"&hands"+	//adds raise hand button
+			//"&hands"+	//adds raise hand button
 			//"&mono"+	//set audio to mono and reduces bitrate
 			//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
 			"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
@@ -351,8 +352,8 @@ function validateStageName(){
 			//"&totalscenetrate=10000"+	//maximum bitrate for the main stream
 			"&scale=100"+	//do not scale video
 			"&transparent"+	//makes bg transparent
-			"&sync=-200"+	//fix sync about 4 frames, a bit flakey
-			"&buffer=500"+	//adds a xms buffer  set by director
+			//"&sync=-200"+	//fix sync about 4 frames, a bit flakey
+			"&buffer=1000"+	//adds a xms buffer  set by director
 			"&showlist=0"+	//hides the hidden viewr list
 			""; 
 	

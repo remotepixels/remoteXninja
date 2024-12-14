@@ -100,23 +100,25 @@
 
 }
 #subControlButtons div {
-	width:45px!important;
-	height:45px!important;
-	margin:2px!important;
-	padding:0px!important;
-	border-radius: 40px!important;
-	border: #525252 1px solid!important;
-	box-shadow: 0!important;
-	opacity:0.5;
-}
+        width: 45px!important;
+        height: 45px!important;
+        margin: 2px!important;
+        padding: 0px!important;
+        border-radius: 40px!important;
+        border: #525252 1px solid!important;
+        box-shadow: 0!important;
+        opacity: 0.5;
+    
+    }
 
 #subControlButtons div:hover {
-	background-color: #4f4f4f;
-	border: #b7b7b7 1px solid!important;
-	color: white!important;
-	opacity:1;
-	scale: 110%;
-}
+        background-color: #4f4f4f;
+        border: #b7b7b7 1px solid!important;
+        color: white!important;
+        opacity: 1;
+        scale: 110%;
+    
+    }
 #flipcamerabutton {
 	display:none!important;
 }
@@ -131,6 +133,68 @@
 .raisedHand {
     background-color: #3100c3 !important;
 }	
+
+.las.la-comment-alt:before{
+        content: "\f381";
+}
+.las.la-comment-dots:before {
+        content: "\f381";
+}
+.la-comments:before {
+    content: "\f381";
+    color:#fff;
+    background-color: #20f!important;
+    border-radius:30px;
+    padding:10px!important;
+    border: #b7b7b7 1px solid!important;
+}
+.notification {
+    display: inline-block!important;
+    color: #fff;
+    background-color: #fff!important;
+    
+}
+
+#chatbutton:hover {
+    border-color:#000000!important;
+background-color:#121314!important;
+opacity: 1!important;
+scale: 100%!important;
+    padding:10px!important;
+}
+
+#chatNotification {
+    display:none!important;
+    background-color: #fff!important;
+}
+
+#popOutChat{
+    display:none;
+}
+
+#chatModule{
+    position:fixed;
+    top:-80px;
+    left:5px;
+    height:20px;
+    
+}
+#chatBody{
+    position:relative;
+    top:90px;
+	-webkit-backdrop-filter: blur(15px);
+	backdrop-filter: blur(10px);
+	background:#dddddd57!important;
+	padding:0 10 0 10px;
+	box-shadow: 0px 0px 20px #00000082;
+}
+#chatInput { 
+    display:none;
+}
+.chatBarInputButton {
+    display:none;
+}
+
 
 /*	hide fullscreen ions	*/
 .fullwindowButton {
@@ -155,7 +219,7 @@
 	width:4vh;
 }
 
-/*	hide right clik context menu	*/
+/*	hide right click context menu	*/
 .context-menu--active {
     display: none !important;
 }
