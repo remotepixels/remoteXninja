@@ -188,7 +188,7 @@ font:hover {
 }
 
 .chatIFrame {
-	width:calc(100w - 5px);
+	width:calc(100vw - 5px);
 	height:100%;
 	border:0px;
 	margin:0px;
