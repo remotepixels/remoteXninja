@@ -294,7 +294,7 @@ function validateStageName(){
 	
 		//set sources for chat frame
 		let chatFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
-			"&exclude=RemotePixels_"+sessionFile+"_mainFeed"+	//do not show the main feed
+			//"&exclude=RemotePixels_"+sessionFile+"_mainFeed"+	//do not show the main feed
 			"&label="+encodedUserName+ //sets label to guests name they entered earlier
 			"&showlabels"+	//show the usernames
 			"&quality=3"+	//set camera quality to lowest possible, about 360p
@@ -321,14 +321,14 @@ function validateStageName(){
 			//"&hiddenscenebitrate=300"+	//should be set by director but make as low as possible
 			//"&totalroombitrate=300"+
 			"&transparent"+	//makes bg transparent
-			"&nofiles"+	//no file share button
+			//"&nofiles"+	//no file share button
 			"&hidetranslate"+	//hides translate menu
 			"&darkmode"+	//
 			"&disablehotkeys"+	//no hotkeys
 			"&nocontrols"+	//hides video player controls
 			"&showlist=0"+	//show hidden guest list
 			//"&signalmeter"+ //adds signal meter
-			//"&animate"+	//videos animate around when people join or leave
+			"&animate"+	//videos animate around when people join or leave
 			//"&hands"+	//adds raise hand button
 			//"&mono"+	//set audio to mono and reduces bitrate
 			//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
