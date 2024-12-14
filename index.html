@@ -39,7 +39,7 @@
 	</div>
 
 <!-- top navbar for live session -->    
-	<div class="topnav" id="subNav" style="background-color: #101010 ;display: none;">
+	<div class="topnav" id="subNav" style="background-color: #191919 ;display: none;">
 		<img src="icons/favicon-32x32.png" class="siteIcon" id="siteIcon"/>
 		<div class="ninjaIcon"><a href="https://vdo.ninja" target="_blank" class="vdoninjatext">Powered by<br>VDO.NINJA</a></div>
 		<div id="clock" class="clock"></div>	
@@ -294,7 +294,7 @@ function validateStageName(){
 	
 		//set sources for chat frame
 		let chatFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
-			//"&exclude=RemotePixels_"+sessionFile+"_mainFeed"+	//do not show the main feed
+			"&exclude=RemotePixels_"+sessionFile+"_mainFeed"+	//do not show the main feed
 			"&label="+encodedUserName+ //sets label to guests name they entered earlier
 			"&showlabels"+	//show the usernames
 			"&quality=3"+	//set camera quality to lowest possible, about 360p
@@ -338,14 +338,14 @@ function validateStageName(){
 		//set sources for main frame
 		var mainFeed = "https://remotepixels.github.io/remotepixels.app/?room=RemotePixels_"+sessionFile+
 			"&view=RemotePixels_"+sessionFile+"_mainFeed"+ //shows only the directors main feed on left
-			"&nopush"+ //don't show up in other views
-			"&bc"+	//broadcast mode, only shows director no other guests videos
+			//"&nopush"+ //don't show up in other views
+			//"&bc"+	//broadcast mode, only shows director no other guests videos
 			"&solo"+	//solos view only show the master stream
 			"&cleanoutput"+	//remove all interface bits
-			"&ad=0"+	//disable audio for frame
-			"&vd=0"+	//disable video device for frame
+			//"&ad=0"+	//disable audio for frame
+			//"&vd=0"+	//disable video device for frame
 			"&hideplaybutton"+	//hides big play button if autoplay is disabled
-			"&as"+	//autostart, skips the camera microphone selection screen
+			//"&as"+	//autostart, skips the camera microphone selection screen
 			"&cv"+	//clean viewer
 			"&videobitrate=10000"+
 			//"&hiddenscenebitrate=10000"+	//should be set by director but
