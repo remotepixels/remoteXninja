@@ -29,10 +29,9 @@
 
 <!-- top navbar for live session -->    
 	<div class="topnav" id="subNav" style="background-color: #191919 ;">
-		<img src="icons/favicon-32x32.png" class="siteIcon" id="siteIcon"/>
+		<img src="../icons/favicon-32x32.png" class="siteIcon" id="siteIcon" style="opacity:0.4;"/>
 		<div class="ninjaIcon"><a href="https://vdo.ninja" target="_blank" class="vdoninjatext">Powered by<br>VDO.NINJA</a></div>
 		<div id="clock" class="clock"></div>	
-		<div id="exitSessionIcon" class="exitSessionIcon" onclick="window.location.href = 'http://www.google.com'">EXIT</div>
 	</div>
 		
 <!--loadblank framee-->
@@ -42,7 +41,7 @@
 	
 <!--popup window things-->
 <!--darken screen for popups-->
-	<div class="blackout" id="blackout" role="button" onclick="fadeOutPopup()" style="display:none;">
+	<div class="blackout" id="blackout" role="button">
 
 <!--fade and slide in popup window-->
 		<div class="popupGroup" id="popupGroup"> 
@@ -88,7 +87,7 @@ var sessionFile;
 setTimeout(function () {
   window.scrollTo(0, 1);
 }, 1000);
-
+/*
 //popup live session window if the live button is clicked
 function clickLiveSession() {
 	blackout.style.animation = "fadeIn 500ms ease-out";
@@ -112,7 +111,7 @@ fetch("https://remotepixels.app/sessions/_live.txt")
 	}
 	return;
 	})
-
+*/
 //cookie bits
 //checks if cookie exists and stores the value in cookieStoredName
 let user = getCookie("username");
@@ -266,11 +265,7 @@ function validateStageName(){
 		//swap navigation bars, add clock and load vdoninja
 		startTime ();
 		blackout.style.display = "none";
-		document.getElementById("topnav").style.display = "none";
-		document.getElementById("subNav").style.display = "block";
 		document.getElementById("siteIcon").style.opacity = "0.4";
-		document.getElementById("chatIFrame").style.display="inline-block";
-		document.getElementById("mainIFrame").style.display="inline-block";
 
 		//set sources for main frame
 		document.getElementById("inset_window").allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
@@ -284,9 +279,8 @@ function validateStageName(){
 		"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
 		"&cover"+	//make video cover space
 		"&videobitrate=100"+
-		//"&ad=1"+	//autoselect audio device
+		"&ad=1"+	//autoselect audio device
 		"&vdo=1"+	//auto select camera
-		"&rounded=100"+	//makes videos round
 		"&mirror=2"+	//mirrors guest videos
 		"&viewwidth=160&viewheight=90"+	//sets incoming video to px size (very low res)
 		"&safemode"+	//loads camera in simplist way
@@ -294,17 +288,13 @@ function validateStageName(){
 		"&meterstyle=2"+	//round highlight over person talking
 
 		"&preview"+	//forces self preview for clients
-		"&showdirector"+	//shows director interface
-		"&device=1"+	//select default audio and video device
+		"&showdirector"+	//shows director in scenes
+		//"&device=1"+	//select default audio and video device
 		//"&wc"+	//disables screenshare use &webcam2 to show share your camera screen
 		"&novice"+	//simplyfy director layout
 		"&hidesolo"+	//hide solo links
 		//"&chatbutton=0"+	//no chat button
 		"&notify"+	// notify when people join
-		//"&ovb=20000"+	//outbound video bitrate (obs stream)
-		//"&trb=30000"+	//total room bit rate
-		//"&hiddenscenebitrate=30000"+	//should be set by director but make as low as possible
-		//"&quality=0"+	//1 720p set to 0 for 1080p
 		"&cleandirector"+	//hides link generator in diretor room
 		"&darkmode"+	
 		"&nohub"+	//hide hangup button
@@ -316,7 +306,6 @@ function validateStageName(){
 		//"&ab=128"+	//constant audio bitrate of 24kbps
 		//"&maxviewers=12"+
 		"&chroma=191919"+	//set bg color
-		//"&codirector="+sessionFile+	//allow co-directors and set the password to same session (not ideal but for now whatever) 
 		//"&queue"+ 	//adds quests to queue, director must approve each to let them in
 		"&css=https%3A%2F%2Fremotepixels.app%2Fninjadirector.css"+	//css
 		"";

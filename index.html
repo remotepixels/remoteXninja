@@ -121,7 +121,7 @@ function fadeOutPopup() {
 
 //check if there is a live session otherwise hide live session button
 //using fetch so done asynchronously while loading page
-fetch("https://remotepixels.app/sessions/_live.txt")
+fetch("https://remotepixels.app/sessions/ilive.txt")
 	.then( response => {
 	if (response.ok) {
 		liveSessionIcon.style.display = "inline";
