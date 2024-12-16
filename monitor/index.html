@@ -27,34 +27,18 @@
     
 <body>
 
-<!-- top navbar for portfolio-->
-	<div class="topnav" id="topnav">
-		<img src="icons/favicon-32x32.png" class="siteIcon"/>
-		<div class="navbar">
-			<a href="https://remotepixels.myportfolio.com" target="portfolioIFrame" style="margin-right: 14px;">WORK</a>  
-			<a href="https://remotepixels.myportfolio.com/copy-of-work" target="portfolioIFrame" style="margin-right: 14px;">BTS</a> 
-			<a href="https://remotepixels.myportfolio.com/contact" target="portfolioIFrame" style="margin-right: 75px;">CONTACT</a> 
-			<div class="liveSessionIcon" id="liveSessionIcon" onclick="clickLiveSession()">LIVE</div>
-		</div>
-	</div>
-
 <!-- top navbar for live session -->    
-	<div class="topnav" id="subNav" style="background-color: #191919 ;display: none;">
+	<div class="topnav" id="subNav" style="background-color: #191919 ;">
 		<img src="icons/favicon-32x32.png" class="siteIcon" id="siteIcon"/>
 		<div class="ninjaIcon"><a href="https://vdo.ninja" target="_blank" class="vdoninjatext">Powered by<br>VDO.NINJA</a></div>
 		<div id="clock" class="clock"></div>	
 		<div id="exitSessionIcon" class="exitSessionIcon" onclick="window.location.href = 'http://www.google.com'">EXIT</div>
 	</div>
 		
-<!--load portfolio from behance-->
+<!--loadblank framee-->
 	<div>
-<!--		<iframe title="portfolioIFrame" src="/live/blank.html" class="portfolioIFrame" name="portfolioIFrame" id="portfolioIFrame" allowfullscreen=false></iframe> -->
-		<iframe title="portfolioIFrame" src="https://remotepixels.myportfolio.com" class="portfolioIFrame" name="portfolioIFrame" id="portfolioIFrame" allowfullscreen="false" referrerpolicy="no-referrer" sandbox="allow-same-origin allow-scripts allow-forms"></iframe>
+		<iframe title="directorroom" class="directorroom" name="inset_window" id="inset_window" allowfullscreen=false></iframe>
 	</div>
-
-<!--frames for chat and live stream-->
-	<div id="chatIFrame" class="chatIFrame" style="display:none"></div>
-	<div id="mainIFrame" class="mainIFrame" style="display:none"></div>
 	
 <!--popup window things-->
 <!--darken screen for popups-->
@@ -288,92 +272,54 @@ function validateStageName(){
 		document.getElementById("chatIFrame").style.display="inline-block";
 		document.getElementById("mainIFrame").style.display="inline-block";
 
-		//delete the portfolio iframe
-		let frame = document.getElementById("portfolioIFrame");
-		frame.parentNode.removeChild(frame);
-	
-		//set sources for chat frame
-		let chatFeed = "https://remotepixels.github.io/remotepixels.app/?room=RPXL_"+sessionFile+
-			"&exclude=RPXL_"+sessionFile+"_Main_Feed"+	//do not show the main feed
-			"&label="+encodedUserName+ //sets label to guests name they entered earlier
-			"&showlabels"+	//show the usernames
-			"&quality=3"+	//set camera quality to lowest possible, about 360p
-			"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
-			"&cover"+	//make video cover space
-			"&videobitrate=100"+
-			//"&ad=1"+	//autoselect audio device
-			"&vdo=1"+	//auto select camera
-			"&rounded=100"+	//makes videos round
-			"&mirror=2"+	//mirrors guest videos
-			"&viewwidth=160&viewheight=90"+	//sets incoming video to px size (very low res)
-			"&safemode"+	//loads camera in simplist way
-			"&st=6"+	//show audio only sources as coloured circles with first letter of name
-			"&meterstyle=2"+	//round highlight over person talking
-			"&hh"+	//hide vdo ninja header
-			//"&as"+	//autostart skips the camera microphone selection screen
-			"&ee"+	//easy exit
-			//"&cb=0"+	//chat button 0 turns off
-			"&cv"+	//clean viewer
-			"&hpb"+	//hide play button
-			"&nsb"+	//hide speaker button
-			"&nohub"+	//hide hangup button
-			"&hidehome"+	//hide vdo ninja home page
-			//"&hiddenscenebitrate=300"+	//should be set by director but make as low as possible
-			//"&totalroombitrate=300"+
-			"&transparent"+	//makes bg transparent
-			//"&nofiles"+	//no file share button
-			"&hidetranslate"+	//hides translate menu
-			"&darkmode"+	//
-			"&disablehotkeys"+	//no hotkeys
-			"&nocontrols"+	//hides video player controls
-			"&showlist=0"+	//show hidden guest list
-			//"&signalmeter"+ //adds signal meter
-			"&animate"+	//videos animate around when people join or leave
-			//"&hands"+	//adds raise hand button
-			//"&mono"+	//set audio to mono and reduces bitrate
-			//"&queue"+	//when a guest joins a room they are added to queue and the direcot must let them in manually
-			"&css=https%3A%2F%2Fremotepixels.app%2Fninjachat.css"+	//load style sheet
-		""; 
-
 		//set sources for main frame
-		var mainFeed = "https://remotepixels.github.io/remotepixels.app/?room=RPXL_"+sessionFile+
-			"&view=RPXL_"+sessionFile+"_Main_Feed"+ //shows only the directors main feed on left
-			//"&nopush"+ //don't show up in other views
-			//"&bc"+	//broadcast mode, only shows director no other guests videos
-			"&solo"+	//solos view only show the master stream
-			"&cleanoutput"+	//remove all interface bits
-			//"&ad=0"+	//disable audio for frame
-			//"&vd=0"+	//disable video device for frame
-			"&hideplaybutton"+	//hides big play button if autoplay is disabled
-			//"&as"+	//autostart, skips the camera microphone selection screen
-			"&cv"+	//clean viewer
-			"&videobitrate=10000"+
-			//"&hiddenscenebitrate=10000"+	//should be set by director but
-			//"&totalscenetrate=10000"+	//maximum bitrate for the main stream
-			"&scale=100"+	//do not scale video
-			"&transparent"+	//makes bg transparent
-			//"&sync=-200"+	//fix sync about 4 frames, a bit flakey
-			"&buffer=1000"+	//adds a xms buffer  set by director
-			"&showlist=0"+	//hides the hidden viewr list
-			""; 
-	
-		//create the chat iframe
-		var iframe = document.createElement("iframe");
-		iframe.allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;allow-same-origin;allow-forms;allow-modals;allow-scripts;";
-		iframe.src = chatFeed;
-		var iframeContainer = document.createElement("div");
-		iframeContainer.appendChild(iframe);
-		document.getElementById("chatIFrame").appendChild(iframeContainer);
+		document.getElementById("inset_window").allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
+		document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RPXL_"+sessionFile+
+		"&label="+encodedUserName+	//sets livestream as label for director connection
+		"&codirector="+sessionFile+	//join as codirector
+		"&hidehome"+	//hide vdo ninja homepage	
+		"&showlabels"+	//show the usernames
 
-		//create the main stream frame (have to pause for a few secs)
-		setTimeout(function(){
-			var iframe = document.createElement("iframe");
-			iframe.allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-			iframe.src = mainFeed;
-			var iframeContainer = document.createElement("div");
-			iframeContainer.appendChild(iframe);
-			document.getElementById("mainIFrame").appendChild(iframeContainer);
-			},1000);
+		"&quality=3"+	//set camera quality to lowest possible, about 360p
+		"&webcam"+	//disables screenshare use &webcam2 to show share your camera screen
+		"&cover"+	//make video cover space
+		"&videobitrate=100"+
+		//"&ad=1"+	//autoselect audio device
+		"&vdo=1"+	//auto select camera
+		"&rounded=100"+	//makes videos round
+		"&mirror=2"+	//mirrors guest videos
+		"&viewwidth=160&viewheight=90"+	//sets incoming video to px size (very low res)
+		"&safemode"+	//loads camera in simplist way
+		"&st=6"+	//show audio only sources as coloured circles with first letter of name
+		"&meterstyle=2"+	//round highlight over person talking
+
+		"&preview"+	//forces self preview for clients
+		"&showdirector"+	//shows director interface
+		"&device=1"+	//select default audio and video device
+		//"&wc"+	//disables screenshare use &webcam2 to show share your camera screen
+		"&novice"+	//simplyfy director layout
+		"&hidesolo"+	//hide solo links
+		//"&chatbutton=0"+	//no chat button
+		"&notify"+	// notify when people join
+		//"&ovb=20000"+	//outbound video bitrate (obs stream)
+		//"&trb=30000"+	//total room bit rate
+		//"&hiddenscenebitrate=30000"+	//should be set by director but make as low as possible
+		//"&quality=0"+	//1 720p set to 0 for 1080p
+		"&cleandirector"+	//hides link generator in diretor room
+		"&darkmode"+	
+		"&nohub"+	//hide hangup button
+		"&nsb"+	//hide speaker button
+		"&hidetranslate"+	//hide translate
+		"&signalmeter"+	//add signal meter
+		//"&agc=0"+	//turns off auto gain control
+		//"&denoise=0"+	//turns off denoiser
+		//"&ab=128"+	//constant audio bitrate of 24kbps
+		//"&maxviewers=12"+
+		"&chroma=191919"+	//set bg color
+		//"&codirector="+sessionFile+	//allow co-directors and set the password to same session (not ideal but for now whatever) 
+		//"&queue"+ 	//adds quests to queue, director must approve each to let them in
+		"&css=https%3A%2F%2Fremotepixels.app%2Fninjadirector.css"+	//css
+		"";
 		}
 		return false;
 }

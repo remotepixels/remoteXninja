@@ -69,7 +69,7 @@ let query = location.search;
 if  (query != 0) {
 	let sessionID = query.slice(1);
 	const request = new XMLHttpRequest();
-	request.open("GET", "https://remotepixels.app/Alive"+sessionID+".txt", false); // `false` makes the request synchronous
+	request.open("GET", "https://remotepixels.app/sessions/"+sessionID+".txt", false); // `false` makes the request synchronous
 	request.send(null);
         
 	if (request.status === 200) {                //if file and session ID match then get rid of popup and start direcotr session and duration counter
@@ -144,7 +144,7 @@ input.addEventListener("keypress", function(event) {
 function validateSessionID(){
 	let v1 = document.forms ["sessionIDCode"]["sessionIDInput"].value;
 	//if there are less than 6 characters shake the box and clear it
-	if (v1.length < 6) {
+	if (v1.length != 6) {
 		popupWindow.style.animation = "shake 500ms";
 		setTimeout ( function () {popupWindow.style.animation = "none"; document.getElementById("sessionIDCode").reset();}, 300);
 		document.forms["sessionIDCode"]["sessionIDInput"].focus();
@@ -157,7 +157,7 @@ function validateSessionID(){
 	//check to see if the session ID entered exists
 	//done synchronous to make sure we get the file before checking
 	const request = new XMLHttpRequest();
-	request.open("GET", "https://remotepixels.app/Alive"+sessionFile+".txt", false); // `false` makes the request synchronous
+	request.open("GET", "https://remotepixels.app/sessions/"+sessionFile+".txt", false); // `false` makes the request synchronous
 	request.send(null);
 
 	//if the sessionID entered matches the file on the server fade out the sessionID and ask for a username
@@ -185,8 +185,8 @@ function validateSessionID(){
 
 function loadNinja() {
 	document.getElementById("inset_window").allow = "autoplay;camera;microphone;fullscreen;picture-in-picture;display-capture;";
-	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RemotePixels_"+sessionFile+
-		"&push=RemotePixels_"+sessionFile+"_mainFeed"+
+	document.getElementById("inset_window").src = "https://remotepixels.github.io/remotepixels.app/?director=RPXL_"+sessionFile+
+		"&push=RPXL_"+sessionFile+"_Main_Feed"+
 		"&label=EDIT"+	//sets livestream as label for director connection
 		"&hidehome"+	//hide vdo ninja homepage	
 		"&director"+	//join as director
@@ -213,6 +213,7 @@ function loadNinja() {
 		"&ab=128"+	//constant audio bitrate of 24kbps
 		//"&maxviewers=12"+
 		"&chroma=191919"+	//set bg color
+		"&codirector="+sessionFile+	//allow co-directors and set the password to same session (not ideal but for now whatever) 
 		//"&queue"+ 	//adds quests to queue, director must approve each to let them in
 		"&css=https%3A%2F%2Fremotepixels.app%2Fninjadirector.css"+	//css
 		"";
