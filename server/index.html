@@ -27,7 +27,7 @@
 	<div class="topnav" id="subNav" style="background-color: rgb(25, 25, 25);">
 		<img src="../icons/favicon-32x32.png" class="siteIcon" id="siteIcon" style="opacity:0.3;"/>
 		<div class="ninjaIcon"><a href="https://vdo.ninja" target="_blank" class="vdoninjatext">Powered by<br>VDO.NINJA</a></div>
-		<div id="clock" class="clock"></div>
+		<div id="clock" class="clock" style="left: calc(100% - 95px)!important;"></div>
 	</div>
     
 		
@@ -197,6 +197,7 @@ function loadNinja() {
 		"&novice"+	//simplyfy director layout
 		"&hidesolo"+	//hide solo links
 		"&chatbutton=0"+	//no chat button
+		"&mirror=2"+	//mirrors guest videos but not local videos
 		"&notify"+	// notify when people join
 		"&ovb=20000"+	//outbound video bitrate (obs stream)
 		"&trb=30000"+	//total room bit rate
